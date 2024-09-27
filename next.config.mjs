@@ -1,3 +1,4 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import { withContentlayer } from "next-contentlayer";
 
 /** @type {import('next').NextConfig} */
@@ -8,4 +9,4 @@ const nextConfig = {
 	},
 };
 
-export default withContentlayer(nextConfig);
+export default withPayload(withContentlayer(nextConfig));
