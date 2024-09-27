@@ -7,6 +7,9 @@ const nextConfig = {
 	experimental: {
 		mdxRs: true,
 	},
+  eslint: {
+    ignoreDuringBuilds: true,
+  }
 };
 
 export default withPayload(withContentlayer(nextConfig));

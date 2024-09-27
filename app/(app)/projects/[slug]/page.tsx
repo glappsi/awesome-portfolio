@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { allProjects } from "contentlayer/generated";
-import { Mdx } from "@/app/components/mdx";
+import { Mdx } from "../../components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
 import { ReportView } from "./view";
@@ -9,9 +9,9 @@ import { Redis } from "@upstash/redis";
 export const revalidate = 60;
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 const redis = Redis.fromEnv();
@@ -19,13 +19,13 @@ const redis = Redis.fromEnv();
 export async function generateStaticParams(): Promise<Props["params"][]> {
   return allProjects
     .filter((p) => p.published)
-    .map((p) => ({
+    .map((p) => (Promise.resolve({
       slug: p.slug,
-    }));
+    })));
 }
 
 export default async function PostPage({ params }: Props) {
-  const slug = params?.slug;
+  const slug = (await params)?.slug;
   const project = allProjects.find((project) => project.slug === slug);
 
   if (!project) {
