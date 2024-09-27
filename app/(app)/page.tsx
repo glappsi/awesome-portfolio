@@ -9,9 +9,10 @@ const navigation = [
   { name: "Contact", href: "/contact" },
 ];
 
+export const revalidate = 60;
+
 export default async function Home() {
   const heroPage = await getHeroPage();
-  console.log(heroPage);
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
