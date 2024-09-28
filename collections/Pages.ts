@@ -8,5 +8,11 @@ export const Pages: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'hero',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: false,
+    }
   ],
 }

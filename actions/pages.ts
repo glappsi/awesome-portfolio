@@ -9,7 +9,11 @@ export async function getHeroPage() {
     id: 1,
     collection: 'pages',
   }) as {
-    id: string;
+    id: number;
     title: string;
+    hero?: {
+      url: string;
+      alt: string;
+    }
   };
 }

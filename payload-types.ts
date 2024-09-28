@@ -88,6 +88,7 @@ export interface Media {
 export interface Page {
   id: number;
   title: string;
+  hero?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
