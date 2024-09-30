@@ -6,19 +6,19 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "chronark.com",
-    template: "%s | chronark.com",
+    default: "glappa.dev",
+    template: "%s | glappa.dev",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "Senior Web Developer and Frontend enthusiast",
   openGraph: {
-    title: "chronark.com",
+    title: "glappa.dev",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
-    url: "https://chronark.com",
-    siteName: "chronark.com",
+      "Senior Web Developer and Frontend enthusiast",
+    url: "https://glappa.dev",
+    siteName: "glappa.dev",
     images: [
       {
-        url: "https://chronark.com/og.png",
+        url: "https://glappa.dev/SEO.jpg",
         width: 1920,
         height: 1080,
       },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Chronark",
+    title: "Florian Glappa",
     card: "summary_large_image",
   },
   icons: {

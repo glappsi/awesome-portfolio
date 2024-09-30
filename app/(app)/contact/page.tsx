@@ -13,9 +13,9 @@ const socials = [
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:dev@chronark.com",
+		href: "mailto:glappa.js@gmail.com",
 		label: "Email",
-		handle: "dev@chronark.com",
+		handle: "glappa.js@gmail.com",
 	},
 	{
 		icon: <Github size={20} />,
