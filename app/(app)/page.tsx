@@ -1,8 +1,7 @@
-import payload from 'payload'
 import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
-import { getHeroPage } from '../../actions/pages';
+import { getHeroPage } from '@/actions';
 
 const navigation = [
   { name: "Projects", href: "/projects" },
