@@ -24,7 +24,6 @@ export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotF
   const parseHeroPageEffect = (projects: unknown) =>
     Effect.try({
       try() {
-        console.log('projects', JSON.stringify(projects));
         return projectListSchema.parse(projects);
       },
       catch(_error: unknown) {

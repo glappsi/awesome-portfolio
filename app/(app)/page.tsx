@@ -15,7 +15,7 @@ export default async function Home() {
         <img
           src={heroPage.hero.url}
           alt={heroPage.hero.alt}
-          className="h-[200px] mb-8 rounded-full border p-1"
+          className="h-[200px] w-[200px] mb-8 rounded-full border p-1"
         />
       )}
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
