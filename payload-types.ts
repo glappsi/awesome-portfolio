@@ -13,7 +13,12 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    tools: Tool;
+    categories: Category;
     pages: Page;
+    'blog-paragraphs': BlogParagraph;
+    blogs: Blog;
+    projects: Project;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -22,7 +27,7 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {};
-  locale: null;
+  locale: 'en';
   user: User & {
     collection: 'users';
   };
@@ -83,12 +88,77 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tools".
+ */
+export interface Tool {
+  id: number;
+  name: string;
+  displayName: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  name: string;
+  displayName: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
   id: number;
   title: string;
+  description?: string | null;
   hero?: (number | null) | Media;
+  type?: 'hero' | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-paragraphs".
+ */
+export interface BlogParagraph {
+  id: number;
+  headline: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogs".
+ */
+export interface Blog {
+  id: number;
+  title: string;
+  slug: string;
+  published?: boolean | null;
+  paragraphs?: (number | BlogParagraph)[] | null;
+  type?: 'tech' | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  description?: string | null;
+  published?: boolean | null;
+  start: string;
+  end?: string | null;
+  blog?: (number | null) | Blog;
+  categories?: (number | Category)[] | null;
+  tools?: (number | Tool)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -108,8 +178,28 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'tools';
+        value: number | Tool;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'blog-paragraphs';
+        value: number | BlogParagraph;
+      } | null)
+    | ({
+        relationTo: 'blogs';
+        value: number | Blog;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
       } | null);
   globalSlug?: string | null;
   user: {

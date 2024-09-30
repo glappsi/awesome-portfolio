@@ -14,9 +14,11 @@ export class PayloadPagesRepository implements IPagesRepository {
 
   async getHero(): Promise<Page> {
     const payload = await this._getPayload();
-    return await payload.findByID({
-      id: 1,
+    const pages = await payload.find({
+      type: 'hero',
       collection: 'pages',
-    }) as Page;
+    });
+    
+    return pages?.docs?.[0] as Page;
   }
 }

@@ -10,6 +10,11 @@ import {s3Storage} from '@payloadcms/storage-s3'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Tools } from './collections/Tools'
+import { Categories } from './collections/Categories'
+import { BlogParagraphs } from './collections/BlogParagraphs'
+import { Blogs } from './collections/Blogs'
+import { Projects } from './collections/Projects'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,7 +26,12 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages],
+  collections: [Users, Media, Tools, Categories, Pages, BlogParagraphs, Blogs, Projects],
+  localization: {
+    locales: ['en'],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
