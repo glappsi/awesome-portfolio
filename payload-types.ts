@@ -128,6 +128,9 @@ export interface Page {
 export interface BlogParagraph {
   id: number;
   headline: string;
+  content: {
+    [k: string]: unknown;
+  }[];
   updatedAt: string;
   createdAt: string;
 }

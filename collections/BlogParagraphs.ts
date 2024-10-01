@@ -8,6 +8,12 @@ export const BlogParagraphs: CollectionConfig = {
       type: 'text',
       required: true,
       localized: true,
+    },
+    {
+      name: 'content',
+      type: 'richText',
+      required: true,
+      localized: true,
     }
   ],
 }
