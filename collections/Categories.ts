@@ -15,4 +15,7 @@ export const Categories: CollectionConfig = {
       localized: true,
     },
   ],
+  admin: {
+    useAsTitle: 'name'
+  },
 }

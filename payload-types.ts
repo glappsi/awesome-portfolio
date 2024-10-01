@@ -127,7 +127,7 @@ export interface Page {
  */
 export interface BlogParagraph {
   id: number;
-  headline: string;
+  name: string;
   content: {
     [k: string]: unknown;
   }[];
@@ -143,6 +143,9 @@ export interface Blog {
   title: string;
   slug: string;
   published?: boolean | null;
+  author: string;
+  authorImage?: (number | null) | Media;
+  date: string;
   paragraphs?: (number | BlogParagraph)[] | null;
   type?: 'tech' | null;
   updatedAt: string;

@@ -4,7 +4,7 @@ export const BlogParagraphs: CollectionConfig = {
   slug: 'blog-paragraphs',
   fields: [
     {
-      name: 'headline',
+      name: 'name',
       type: 'text',
       required: true,
       localized: true,
@@ -16,4 +16,7 @@ export const BlogParagraphs: CollectionConfig = {
       localized: true,
     }
   ],
+  admin: {
+    useAsTitle: 'name',
+  },
 }

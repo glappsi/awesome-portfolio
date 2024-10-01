@@ -18,7 +18,30 @@ export const Blogs: CollectionConfig = {
     },
     {
       name: 'published',
+      defaultValue: false,
       type: 'checkbox',
+    },
+    {
+      name: 'author',
+      required: true,
+      type: 'text',
+    },
+    {
+      name: 'authorImage',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: false,
+    },
+    {
+      name: 'date',
+      required: true,
+      type: 'date',
+      admin: {
+        date: {
+          pickerAppearance: 'dayOnly',
+          displayFormat: 'd MMM yyy',
+        },
+      },
     },
     {
       name: 'paragraphs',
@@ -45,4 +68,7 @@ export const Blogs: CollectionConfig = {
       },
     },
   ],
+  admin: {
+    useAsTitle: 'slug'
+  }
 }

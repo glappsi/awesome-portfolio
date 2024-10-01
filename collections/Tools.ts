@@ -15,4 +15,7 @@ export const Tools: CollectionConfig = {
       localized: true,
     },
   ],
+  admin: {
+    useAsTitle: 'name'
+  },
 }
