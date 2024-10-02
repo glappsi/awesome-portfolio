@@ -16,10 +16,10 @@ module.exports = {
     			DEFAULT: {
     				css: {
     					'code::before': {
-    						content: '""'
+    						content: '"'
     					},
     					'code::after': {
-    						content: '""'
+    						content: '"'
     					}
     				}
     			},
@@ -45,7 +45,9 @@ module.exports = {
     			'fade-in': 'fade-in 3s ease-in-out forwards',
     			title: 'title 3s ease-out forwards',
     			'fade-left': 'fade-left 3s ease-in-out forwards',
-    			'fade-right': 'fade-right 3s ease-in-out forwards'
+    			'fade-right': 'fade-right 3s ease-in-out forwards',
+    			marquee: 'marquee var(--duration) infinite linear',
+    			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
     		},
     		keyframes: {
     			'fade-in': {
@@ -101,6 +103,22 @@ module.exports = {
     				'100%': {
     					'line-height': '100%',
     					opacity: '100%'
+    				}
+    			},
+    			marquee: {
+    				from: {
+    					transform: 'translateX(0)'
+    				},
+    				to: {
+    					transform: 'translateX(calc(-100% - var(--gap)))'
+    				}
+    			},
+    			'marquee-vertical': {
+    				from: {
+    					transform: 'translateY(0)'
+    				},
+    				to: {
+    					transform: 'translateY(calc(-100% - var(--gap)))'
     				}
     			}
     		},

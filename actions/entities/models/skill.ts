@@ -5,7 +5,7 @@ import { toolSchema } from './tool';
 export const skillSchema = z.object({
   id: z.number(),
   title: z.string(),
-  type: z.string(),
+  type: z.enum(['profession', 'soft']),
   categories: z.array(categorySchema),
   tools: z.array(toolSchema),
 });
