@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-export const Projects: CollectionConfig = {
-  slug: 'projects',
+export const CareerSteps: CollectionConfig = {
+  slug: 'career-steps',
   fields: [
     {
       name: 'title',
@@ -10,13 +10,14 @@ export const Projects: CollectionConfig = {
       localized: true,
     },
     {
+      name: 'company',
+      type: 'text',
+      required: true,
+    },
+    {
       name: 'description',
       type: 'textarea',
       localized: true,
-    },
-    {
-      name: 'published',
-      type: 'checkbox',
     },
     {
       name: 'start',
@@ -40,10 +41,10 @@ export const Projects: CollectionConfig = {
       },
     },
     {
-      name: 'blog',
+      name: 'projects',
       type: 'relationship',
-      relationTo: 'blogs',
-      hasMany: false,
+      relationTo: 'projects',
+      hasMany: true,
     },
     {
       name: 'categories',
@@ -58,7 +59,4 @@ export const Projects: CollectionConfig = {
       hasMany: true,
     }
   ],
-  admin: {
-    useAsTitle: 'title',
-  },
 }

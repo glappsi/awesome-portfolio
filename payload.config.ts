@@ -16,6 +16,9 @@ import { Categories } from './collections/Categories'
 import { BlogParagraphs } from './collections/BlogParagraphs'
 import { Blogs } from './collections/Blogs'
 import { Projects } from './collections/Projects'
+import { Skills } from './collections/Skills'
+import { CareerSteps } from './collections/CareerSteps'
+import { Profiles } from './collections/Profiles'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -27,7 +30,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Tools, Categories, Pages, BlogParagraphs, Blogs, Projects],
+  collections: [Users, Media, Tools, Categories, Pages, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles],
   localization: {
     locales: ['en'],
     defaultLocale: 'en',

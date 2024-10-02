@@ -1,4 +1,5 @@
 "use client";
+import clsx from 'clsx';
 import {
 	motion,
 	useMotionTemplate,
@@ -8,7 +9,7 @@ import {
 
 import { MouseEventHandler, PropsWithChildren } from "react";
 
-export const Card: React.FC<PropsWithChildren> = ({ children }) => {
+export const Card: React.FC<PropsWithChildren & {className?: string}> = ({ children, className }) => {
 	const mouseX = useSpring(0, { stiffness: 500, damping: 100 });
 	const mouseY = useSpring(0, { stiffness: 500, damping: 100 });
 
@@ -23,7 +24,7 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<div
 			onMouseMove={onMouseMove}
-			className="overflow-hidden relative duration-700 border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-zinc-600 "
+			className={clsx(className, 'overflow-hidden relative duration-700 border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-zinc-600')}
 		>
 			<div className="pointer-events-none">
 				<div className="absolute inset-0 z-0  transition duration-1000 [mask-image:linear-gradient(black,transparent)]" />
@@ -41,3 +42,17 @@ export const Card: React.FC<PropsWithChildren> = ({ children }) => {
 		</div>
 	);
 };
+
+export const CardHeadline: React.FC<PropsWithChildren & {className?: string}> = ({ children, className }) => {
+  return (<h2
+    className={clsx(className, 'mt-4 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display')}
+  >
+    {children}
+  </h2>);
+}
+
+export const CardDescription: React.FC<PropsWithChildren & {className?: string}> = ({ children, className }) => {
+  return (<p className={clsx(className, 'mt-4 leading-6 duration-150 text-zinc-400 group-hover:text-zinc-300')}>
+    {children}
+  </p>);
+}

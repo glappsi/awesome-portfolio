@@ -21,7 +21,7 @@ export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotF
     }
   });
 
-  const parseHeroPageEffect = (projects: unknown) =>
+  const parseProjectsEffect = (projects: unknown) =>
     Effect.try({
       try() {
         return projectListSchema.parse(projects);
@@ -31,5 +31,5 @@ export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotF
       },
     });
 
-  return program.pipe(Effect.flatMap(parseHeroPageEffect));
+  return program.pipe(Effect.flatMap(parseProjectsEffect));
 }

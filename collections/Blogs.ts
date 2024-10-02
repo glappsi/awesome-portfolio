@@ -47,10 +47,6 @@ export const Blogs: CollectionConfig = {
       name: 'paragraphs',
       type: 'relationship',
       relationTo: 'blog-paragraphs',
-      // TODO find how to display other fields as title in dropdown
-      // admin: {
-      //   useAsTitle: 'headline'
-      // },
       hasMany: true,
     },
     {
