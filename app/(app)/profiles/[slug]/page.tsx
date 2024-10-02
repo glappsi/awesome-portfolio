@@ -8,6 +8,7 @@ import { chunk, filter, flatMap, uniq } from 'lodash';
 import Marquee from '@/components/ui/marquee';
 import { CheckCircledIcon } from "@radix-ui/react-icons"
 import { getTranslations } from 'next-intl/server';
+import { Badge } from '@/components/ui/badge';
 
 type Props = {
   params: Promise<{
@@ -25,12 +26,11 @@ export default async function ProfilePage({
   const skillsPromise = getSkills();
   const careerStepsPromise = getCareerSteps();
   const [profile, skills, careerSteps] = await Promise.all([profilePromise, skillsPromise, careerStepsPromise]);
-  console.log(JSON.stringify(skills, null, 2));
+  console.log(JSON.stringify(careerSteps, null, 2));
 
   const profSkills = filter(skills, s => s.type === 'profession');
   const softSkills = filter(skills, s => s.type === 'soft');
   const skillTools = chunk(filter(uniq(flatMap(profSkills, skill => skill.tools).map(t => t.name))), 3);
-  console.log(skillTools);
   const skillCategories = filter(uniq(flatMap(skills, skill => skill.categories).map(t => t.displayName)));
 
   return (
@@ -85,12 +85,34 @@ export default async function ProfilePage({
               }>
               <CardHeadline>{t('professionalSkills')}</CardHeadline>
               <div className="flex flex-col gap-2">
-                  {profSkills.map((skill) => (
-                    <div className="flex gap-2 items-center" key={skill.id}>
-                      <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px]" />
-                      <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
-                    </div>
+                {profSkills.map((skill) => (
+                  <div className="flex gap-2 items-center" key={skill.id}>
+                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px]" />
+                    <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+
+          <div>
+            <Card
+              className="p-4 md:p-8"
+            >
+              <CardHeadline>{t('softSkills')}</CardHeadline>
+              <div className="flex flex-col gap-2">
+                {softSkills.map((skill) => (
+                  <div className="flex gap-2 items-center" key={skill.id}>
+                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px]" />
+                    <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
+                  </div>
+                ))}
+
+                <div className="flex gap-2 pt-4">
+                  {skillCategories.map((c) => (
+                    <Badge>#{c}</Badge>
                   ))}
+                </div>
               </div>
             </Card>
           </div>
