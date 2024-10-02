@@ -211,6 +211,7 @@ export interface Profile {
   slug: string;
   image?: (number | null) | Media;
   longitude?: number | null;
+  location?: string | null;
   latitude?: number | null;
   aboutMe?: string | null;
   updatedAt: string;

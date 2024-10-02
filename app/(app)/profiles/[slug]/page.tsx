@@ -2,6 +2,7 @@ import React from "react";
 import { getCareerSteps, getProfileBySlug, getSkills } from '@/actions';
 import { Navigation } from '../../components/nav';
 import { Card, CardDescription, CardHeadline } from '../../components/card';
+import Globe from '@/components/ui/globe';
 
 type Props = {
   params: Promise<{
@@ -18,7 +19,7 @@ export default async function ProfilePage({
   const skillsPromise = getSkills();
   const careerStepsPromise = getCareerSteps();
   const [profile, skills, careerSteps] = await Promise.all([profilePromise, skillsPromise, careerStepsPromise]);
-
+  console.log(JSON.stringify(profile, null, 2));
 
   return (
     <div className="relative pb-16">
@@ -40,6 +41,17 @@ export default async function ProfilePage({
               )}
             </Card>
           </div>
+          {!!(profile.latitude && profile.longitude) && (<div>
+            <Card className="aspect-square w-full">
+              {!!profile.location && (<CardDescription className="absolute bottom-[5px] right-[5px] z-10">{profile.location}</CardDescription>)}
+              <Globe 
+                className="absolute left-[-12.5%] top-[-25%] w-[150%] h-[150%]"
+                markers={[{
+                  location: [profile.latitude, profile.longitude],
+                  size: 0.1
+                }]}/>
+            </Card>
+          </div>)}
         </div>
       </div>
     </div>

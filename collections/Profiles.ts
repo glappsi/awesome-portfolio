@@ -29,6 +29,11 @@ export const Profiles: CollectionConfig = {
       },
     },
     {
+      name: 'location',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'latitude',
       type: 'number',
       admin: {

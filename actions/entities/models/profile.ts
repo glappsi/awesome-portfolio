@@ -4,8 +4,9 @@ export const profileSchema = z.object({
   id: z.number(),
   name: z.string(),
   slug: z.string(),
-  langitude: z.number().optional(),
+  latitude: z.number().optional(),
   longitude: z.number().optional(),
+  location: z.string().optional().nullable(),
   image: z.object({
     url: z.string(),
     alt: z.string(),
