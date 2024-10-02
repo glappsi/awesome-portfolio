@@ -46,7 +46,7 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
 
 export const CardHeadline: React.FC<PropsWithChildren & {className?: string}> = ({ children, className }) => {
   return (<h2
-    className={clsx(className, 'mt-4 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display')}
+    className={clsx(className, 'mb-4 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display')}
   >
     {children}
   </h2>);

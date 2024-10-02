@@ -7,6 +7,7 @@ import { Devicons } from '../../components/devicons';
 import { chunk, filter, flatMap, uniq } from 'lodash';
 import Marquee from '@/components/ui/marquee';
 import { CheckCircledIcon } from "@radix-ui/react-icons"
+import { getTranslations } from 'next-intl/server';
 
 type Props = {
   params: Promise<{
@@ -19,6 +20,7 @@ export const revalidate = 60;
 export default async function ProfilePage({
   params
 }: Props) {
+  const t = await getTranslations('ProfilePage');
   const profilePromise = getProfileBySlug((await params).slug);
   const skillsPromise = getSkills();
   const careerStepsPromise = getCareerSteps();
@@ -81,10 +83,11 @@ export default async function ProfilePage({
                   ))}
                 </div>
               }>
+              <CardHeadline>{t('professionalSkills')}</CardHeadline>
               <div className="flex flex-col gap-2">
                   {profSkills.map((skill) => (
                     <div className="flex gap-2 items-center" key={skill.id}>
-                      <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !2-[25px]" />
+                      <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px]" />
                       <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
                     </div>
                   ))}

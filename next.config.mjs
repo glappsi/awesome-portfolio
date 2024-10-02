@@ -1,15 +1,16 @@
 import { withPayload } from "@payloadcms/next/withPayload";
-import { withContentlayer } from "next-contentlayer";
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin(
+   './i18n/request.ts'
+);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-	experimental: {
-		mdxRs: true,
-	},
+	pageExtensions: ["js", "jsx", "ts", "tsx"],
   eslint: {
     ignoreDuringBuilds: true,
   }
 };
 
-export default withPayload(withContentlayer(nextConfig));
+export default withPayload(withNextIntl(nextConfig));
