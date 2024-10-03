@@ -2,7 +2,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { HomeIcon, CubeIcon, GitHubLogoIcon } from "@radix-ui/react-icons"
+import { HomeIcon, CubeIcon, PersonIcon } from "@radix-ui/react-icons"
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -13,34 +13,42 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Dock, DockIcon } from "@/components/ui/dock";
+import { filter } from 'lodash';
+import { useTranslations } from 'next-intl';
+import { Icon } from '@/components/ui/icon';
+import { Link as TLink } from '@/actions/entities/models/link';
 
 const DATA = {
-  navbar: [
-    { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/projects", icon: CubeIcon, label: "Projects" },
-  ],
-  contact: {
-    social: {
-      GitHub: {
-        name: "GitHub",
-        url: "https://github.com/glappsi",
-        icon: GitHubLogoIcon,
-      }
-    },
-  },
+  navbar: (profileSlug: string) => ([
+    { href: "/", icon: HomeIcon, label: "home" },
+    { href: `/profiles/${profileSlug}`, icon: PersonIcon, label: "profile" },
+    { href: "/projects", icon: CubeIcon, label: "projects" },
+  ]),
 };
 
-export const NavigationDock: React.FC = () => {
+export type NavigationProps = {
+  profileSlug: string;
+  links: Array<TLink>
+}
+
+export const NavigationDock: React.FC<NavigationProps> = ({
+  profileSlug,
+  links
+}) => {
+  const t = useTranslations('Navigation');
+  const redirects = filter(links, l => !!l.link);
+  const downloads = filter(links, l => !!l.download);
+
   return (
     <TooltipProvider>
       <Dock direction="middle">
-        {DATA.navbar.map((item) => (
+        {DATA.navbar(profileSlug).map((item) => (
           <DockIcon key={item.label}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   href={item.href}
-                  aria-label={item.label}
+                  aria-label={t(item.label)}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
                     "size-12 rounded-full",
@@ -50,29 +58,54 @@ export const NavigationDock: React.FC = () => {
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
-                <p>{item.label}</p>
+                <p>{t(item.label)}</p>
               </TooltipContent>
             </Tooltip>
           </DockIcon>
         ))}
         <Separator orientation="vertical" className="h-full" />
-        {Object.entries(DATA.contact.social).map(([name, social]) => (
-          <DockIcon key={name}>
+        {redirects.map(({link, title, icon}) => (
+          <DockIcon key={title}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  href={social.url}
-                  aria-label={social.name}
+                  href={link!}
+                  target="_blank"
+                  aria-label={title}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),
                     "size-12 rounded-full",
                   )}
                 >
-                  <social.icon className="size-4" />
+                  <Icon type={icon} className="size-4" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
-                <p>{name}</p>
+                <p>{title}</p>
+              </TooltipContent>
+            </Tooltip>
+          </DockIcon>
+        ))}
+        <Separator orientation="vertical" className="h-full" />
+        {downloads.map(({download, title, icon}) => (
+          <DockIcon key={title}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href={download!.url}
+                  download={download!.filename}
+                  target='_blank'
+                  aria-label={title}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12 rounded-full",
+                  )}
+                >
+                  <Icon type={icon} className="size-4" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{title}</p>
               </TooltipContent>
             </Tooltip>
           </DockIcon>
@@ -82,7 +115,7 @@ export const NavigationDock: React.FC = () => {
   )
 };
 
-export const Navigation: React.FC = () => {
+export const Navigation: React.FC<NavigationProps> = (props) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
@@ -107,7 +140,7 @@ export const Navigation: React.FC = () => {
 			>
 				<div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
 					<div className="flex justify-between gap-8">
-						<NavigationDock />
+						<NavigationDock {...props}/>
 					</div>
 
 					<Link

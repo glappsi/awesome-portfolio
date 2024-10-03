@@ -3,6 +3,7 @@ import { z } from 'zod';
 export const profileSchema = z.object({
   id: z.number(),
   name: z.string(),
+  description: z.string(),
   slug: z.string(),
   latitude: z.number().optional(),
   longitude: z.number().optional(),

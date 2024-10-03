@@ -42,6 +42,8 @@ import { UnorderedListElement as UnorderedListElement_40 } from '@payloadcms/ric
 import { UploadElementButton as UploadElementButton_41 } from '@payloadcms/richtext-slate/client'
 import { UploadElement as UploadElement_42 } from '@payloadcms/richtext-slate/client'
 import { WithUpload as WithUpload_43 } from '@payloadcms/richtext-slate/client'
+import { IconUIComponent as IconUIComponent_44 } from 'components/payload/icon-select'
+import { IconSelectComponent as IconSelectComponent_45 } from 'components/payload/icon-select'
 
 export const importMap = {
   "@payloadcms/richtext-slate/client#RichTextCell": RichTextCell_0,
@@ -87,5 +89,7 @@ export const importMap = {
   "@payloadcms/richtext-slate/client#UnorderedListElement": UnorderedListElement_40,
   "@payloadcms/richtext-slate/client#UploadElementButton": UploadElementButton_41,
   "@payloadcms/richtext-slate/client#UploadElement": UploadElement_42,
-  "@payloadcms/richtext-slate/client#WithUpload": WithUpload_43
+  "@payloadcms/richtext-slate/client#WithUpload": WithUpload_43,
+  "/components/payload/icon-select#IconUIComponent": IconUIComponent_44,
+  "/components/payload/icon-select#IconSelectComponent": IconSelectComponent_45
 }

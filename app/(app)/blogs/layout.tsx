@@ -1,12 +1,23 @@
 import { Navigation } from '../components/nav';
+import { getActiveProfile, getLinks } from '@/actions';
 
-export default function ProjectsLayout({
+export const revalidate = 6000; 
+
+export default async function ProjectsLayout({
 	children,
 }: { children: React.ReactNode }) {
+  const profilePromise = getActiveProfile();
+  const linksPromise = getLinks();
+
+  const [profile, links] = await Promise.all([profilePromise, linksPromise]);
+
+
 	return (
 		<div className="relative min-h-screen bg-gradient-to-tl from-zinc-900 via-zinc-400/10 to-zinc-900 ">
       <div className="relative pb-16">
-        <Navigation />
+        <Navigation 
+          profileSlug={profile.slug} 
+          links={links} />
         <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
           {children}
         </div>

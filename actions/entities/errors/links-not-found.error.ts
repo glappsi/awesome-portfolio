@@ -1,8 +1,8 @@
 import { BaseError } from './types';
 
-export class HeroPageNotFoundError extends Error {
+export class LinksNotFoundError extends Error {
   constructor(data: BaseError = {}) {
     super(JSON.stringify(data));
-    this.name = 'HeroPageNotFoundError';
+    this.name = 'LinksNotFoundError';
   }
 }

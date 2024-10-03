@@ -15,13 +15,13 @@ export interface Config {
     media: Media;
     tools: Tool;
     categories: Category;
-    pages: Page;
     'blog-paragraphs': BlogParagraph;
     blogs: Blog;
     projects: Project;
     skills: Skill;
     'career-steps': CareerStep;
     profiles: Profile;
+    links: Link;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -113,19 +113,6 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: number;
-  title: string;
-  description?: string | null;
-  hero?: (number | null) | Media;
-  type?: 'hero' | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-paragraphs".
  */
 export interface BlogParagraph {
@@ -208,12 +195,27 @@ export interface CareerStep {
 export interface Profile {
   id: number;
   name: string;
+  description?: string | null;
   slug: string;
   image?: (number | null) | Media;
   longitude?: number | null;
   location?: string | null;
   latitude?: number | null;
   aboutMe?: string | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "links".
+ */
+export interface Link {
+  id: number;
+  title: string;
+  icon: string;
+  download?: (number | null) | Media;
+  link?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -241,10 +243,6 @@ export interface PayloadLockedDocument {
         value: number | Category;
       } | null)
     | ({
-        relationTo: 'pages';
-        value: number | Page;
-      } | null)
-    | ({
         relationTo: 'blog-paragraphs';
         value: number | BlogParagraph;
       } | null)
@@ -267,6 +265,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'profiles';
         value: number | Profile;
+      } | null)
+    | ({
+        relationTo: 'links';
+        value: number | Link;
       } | null);
   globalSlug?: string | null;
   user: {

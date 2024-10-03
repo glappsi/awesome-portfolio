@@ -39,7 +39,9 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
 				/>
 			</div>
 
-			{children}
+      <article>
+			  {children}
+      </article>
 		</div>
 	);
 };
@@ -53,7 +55,7 @@ export const CardHeadline: React.FC<PropsWithChildren & {className?: string}> = 
 }
 
 export const CardDescription: React.FC<PropsWithChildren & {className?: string}> = ({ children, className }) => {
-  return (<p className={clsx(className, 'mt-4 leading-6 duration-150 text-zinc-400 group-hover:text-zinc-300')}>
+  return (<p className={clsx(className, 'mb-4 leading-6 duration-150 text-zinc-400 group-hover:text-zinc-300')}>
     {children}
   </p>);
 }

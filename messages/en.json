@@ -1,6 +1,18 @@
 {
   "ProfilePage": {
     "professionalSkills": "Professional Skills",
-    "softSkills": "Soft Skills"
+    "softSkills": "Soft Skills",
+    "contactAndDownloads": "Contact",
+    "contact": "Want to work with me? Contact me via the following links.",
+    "contactVia": "Contact via {channel}",
+    "download": "Download {media}",
+    "locatedAt": "Located at {location}",
+    "career": "Career",
+    "today": "today"
+  },
+  "Navigation": {
+    "home": "Home",
+    "profile": "Profile",
+    "projects": "Projects"
   }
 }

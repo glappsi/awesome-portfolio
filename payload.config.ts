@@ -10,7 +10,6 @@ import {s3Storage} from '@payloadcms/storage-s3'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
 import { Tools } from './collections/Tools'
 import { Categories } from './collections/Categories'
 import { BlogParagraphs } from './collections/BlogParagraphs'
@@ -19,6 +18,7 @@ import { Projects } from './collections/Projects'
 import { Skills } from './collections/Skills'
 import { CareerSteps } from './collections/CareerSteps'
 import { Profiles } from './collections/Profiles'
+import { Links } from './collections/Links'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -30,7 +30,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Tools, Categories, Pages, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles],
+  collections: [Users, Media, Tools, Categories, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles, Links],
   localization: {
     locales: ['en'],
     defaultLocale: 'en',

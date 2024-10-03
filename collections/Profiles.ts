@@ -9,6 +9,11 @@ export const Profiles: CollectionConfig = {
       required: true,
     },
     {
+      name: 'description',
+      type: 'textarea',
+      localized: true,
+    },
+    {
       name: 'slug',
       type: 'text',
       unique: true,
@@ -44,6 +49,11 @@ export const Profiles: CollectionConfig = {
       name: 'aboutMe',
       type: 'textarea',
       localized: true,
+    },
+    {
+      name: 'active',
+      type: 'checkbox',
+      defaultValue: false
     },
   ],
   admin: {
