@@ -27,7 +27,9 @@ export function getProfileBySlugUseCase(slug: string): Effect.Effect<Profile, Pr
         return profileSchema.parse(profile);
       },
       catch(_error: unknown) {
-        return new ZodParseError('Profile');
+        return new ZodParseError('Profile', {
+          originalError: _error
+        });
       },
     });
 

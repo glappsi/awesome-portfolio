@@ -9,7 +9,7 @@ import {
 
 import { MouseEventHandler, PropsWithChildren } from "react";
 
-export const Card: React.FC<PropsWithChildren & {className?: string, background?: React.ReactNode}> = ({ children, className, background }) => {
+export const Card: React.FC<PropsWithChildren & {className?: string, background?: React.ReactNode, onClick?: () => void}> = ({ children, className, background, onClick }) => {
 	const mouseX = useSpring(0, { stiffness: 500, damping: 100 });
 	const mouseY = useSpring(0, { stiffness: 500, damping: 100 });
 
@@ -24,6 +24,7 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
 	return (
 		<div
 			onMouseMove={onMouseMove}
+      onClick={onClick}
 			className={clsx(className, 'overflow-hidden relative duration-700 border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-zinc-600')}
 		>
       {!!background && <div className="opacity-25 absolute top-0 left-0 right-0 bottom-0 z-0">{background}</div>}

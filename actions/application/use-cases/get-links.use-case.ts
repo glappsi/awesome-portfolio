@@ -10,7 +10,6 @@ export function getLinksUseCase(): Effect.Effect<Array<Link>, LinksNotFoundError
   const program = Effect.tryPromise({
     async try() {
       const links = await repository.getLinks();
-      console.log(JSON.stringify(links, null, 2));
       if (!links) {
         throw new LinksNotFoundError();
       }
@@ -28,7 +27,9 @@ export function getLinksUseCase(): Effect.Effect<Array<Link>, LinksNotFoundError
         return linkListSchema.parse(links);
       },
       catch(_error: unknown) {
-        return new ZodParseError('Links');
+        return new ZodParseError('Links', {
+          originalError: _error
+        });
       },
     });
 

@@ -9,6 +9,10 @@ export const careerStepSchema = z.object({
   description: z.string().optional(),
   start: z.string().transform((str) => new Date(str)),  // Parse ISO string to Date
   end: z.string().transform((str) => new Date(str)).optional().nullable(),
+  projects: z.array(z.object({
+    categories: z.array(categorySchema),
+    tools: z.array(toolSchema),
+  })),
   categories: z.array(categorySchema),
   tools: z.array(toolSchema),
 });

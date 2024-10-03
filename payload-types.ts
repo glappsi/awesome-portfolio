@@ -152,6 +152,8 @@ export interface Project {
   published?: boolean | null;
   start: string;
   end?: string | null;
+  type?: ('profession' | 'hobby') | null;
+  badge?: (number | null) | Media;
   blog?: (number | null) | Blog;
   categories?: (number | Category)[] | null;
   tools?: (number | Tool)[] | null;

@@ -27,7 +27,9 @@ export function getBlogBySlugUseCase(slug: string): Effect.Effect<BlogWithDetail
         return blogDetailSchema.parse(blog);
       },
       catch(_error: unknown) {
-        return new ZodParseError('BlogWithDetails');
+        return new ZodParseError('BlogWithDetails', {
+          originalError: _error
+        });
       },
     });
 

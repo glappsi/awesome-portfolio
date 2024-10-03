@@ -40,6 +40,30 @@ export const Projects: CollectionConfig = {
       },
     },
     {
+      name: 'type',
+      type: 'radio',
+      options: [
+        {
+          label: 'Profession',
+          value: 'profession',
+        },
+        {
+          label: 'Hobby',
+          value: 'hobby',
+        }
+      ],
+      defaultValue: 'profession',
+      admin: {
+        layout: 'horizontal',
+      },
+    },
+    {
+      name: 'badge',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: false,
+    },
+    {
       name: 'blog',
       type: 'relationship',
       relationTo: 'blogs',

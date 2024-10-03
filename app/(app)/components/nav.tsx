@@ -17,6 +17,7 @@ import { filter } from 'lodash';
 import { useTranslations } from 'next-intl';
 import { Icon } from '@/components/ui/icon';
 import { Link as TLink } from '@/actions/entities/models/link';
+import { useRouter } from 'next/navigation';
 
 const DATA = {
   navbar: (profileSlug: string) => ([
@@ -116,6 +117,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
 };
 
 export const Navigation: React.FC<NavigationProps> = (props) => {
+  const router = useRouter();
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
@@ -144,7 +146,8 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
 					</div>
 
 					<Link
-						href="/"
+						href="#"
+            onClick={() => router.back()}
 						className="duration-200 text-zinc-300 hover:text-zinc-100"
 					>
 						<ArrowLeft className="w-6 h-6 " />

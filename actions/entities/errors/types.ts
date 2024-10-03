@@ -1,1 +1,1 @@
-export type BaseError = {traceId?: string};
+export type BaseError = {traceId?: string, originalError: unknown};

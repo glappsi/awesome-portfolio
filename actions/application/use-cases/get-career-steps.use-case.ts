@@ -27,7 +27,9 @@ export function getCareerStepsUseCase(): Effect.Effect<Array<CareerStep>, Career
         return careerStepListSchema.parse(careerSteps);
       },
       catch(_error: unknown) {
-        return new ZodParseError('CareerSteps');
+        return new ZodParseError('CareerSteps', {
+          originalError: _error
+        });
       },
     });
 

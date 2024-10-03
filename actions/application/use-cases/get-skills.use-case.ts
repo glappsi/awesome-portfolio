@@ -27,7 +27,9 @@ export function getSkillsUseCase(): Effect.Effect<Array<Skill>, SkillsNotFoundEr
         return skillListSchema.parse(skills);
       },
       catch(_error: unknown) {
-        return new ZodParseError('Skills');
+        return new ZodParseError('Skills', {
+          originalError: _error
+        });
       },
     });
 

@@ -10,6 +10,17 @@
     "career": "Career",
     "today": "today"
   },
+  "ProjectsPage": {
+    "title": "Projects",
+    "description": "See a overview over all my projects, professional or hobby.",
+    "soon": "SOON",
+    "today": "today",
+    "readMore": "Read more",
+    "tools": "Tools",
+    "categories": "Tags",
+    "profession": "Professional Projects",
+    "hobby": "Hobby Projects"
+  },
   "Navigation": {
     "home": "Home",
     "profile": "Profile",

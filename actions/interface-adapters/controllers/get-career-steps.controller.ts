@@ -4,10 +4,21 @@ import { Skill } from '../../entities/models/skill';
 import { CareerStepsNotFoundError } from '../../entities/errors/career-steps-not-found.error';
 import { getCareerStepsUseCase } from '../../application/use-cases/get-career-steps.use-case';
 import { CareerStep } from '../../entities/models/career-step';
+import { uniqBy } from 'lodash';
 
 function presenter(careerSteps: Array<CareerStep>) {
   return [
-    ...careerSteps
+    ...careerSteps.map((c) => ({
+      ...c,
+      categories: uniqBy([
+        ...c.categories,
+        ...c.projects.flatMap(p => p.categories)
+      ], c => c.name),
+      tools: uniqBy([
+        ...c.tools,
+        ...c.projects.flatMap(p => p.tools)
+      ], c => c.name)
+    }))
   ];
 }
 

@@ -32,7 +32,7 @@ export default async function Home() {
       </h1>
 
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      {profile?.description && (<div className="my-8 whitespace-pre text-center animate-fade-in">
+      {profile?.description && (<div className="my-8 px-4 lg:whitespace-pre text-center animate-fade-in">
         <h2 className="text-sm text-zinc-500 ">
         {profile?.description}
         </h2>

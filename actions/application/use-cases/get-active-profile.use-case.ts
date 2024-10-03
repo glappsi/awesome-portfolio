@@ -27,7 +27,9 @@ export function getActiveProfileUseCase(): Effect.Effect<Profile, ProfileNotFoun
         return profileSchema.parse(profile);
       },
       catch(_error: unknown) {
-        return new ZodParseError('Profile');
+        return new ZodParseError('Profile', {
+          originalError: _error
+        });
       },
     });
 
