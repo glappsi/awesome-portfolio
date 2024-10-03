@@ -16,6 +16,7 @@ import IconCloud from '@/components/ui/icon-cloud';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Separator } from '@/components/ui/separator';
 import { Icon } from '@/components/ui/icon';
+import clsx from 'clsx';
 
 type Props = {
   params: Promise<{
@@ -59,8 +60,10 @@ export default async function ProfilePage({
             >
               <CardHeadline>{t('career')}</CardHeadline>
               <Accordion type="single" collapsible className="w-full">
-                {careerSteps.map((step) => (
-                  <AccordionItem value="item-1">
+                {careerSteps.map((step, index) => (
+                  <AccordionItem className={clsx({
+                    '!border-0': index === (careerSteps.length - 1)
+                  })} value={`item-${index}`}>
                     <AccordionTrigger className="!no-underline">
                       <div className="text-left">
                         <h3 className="text-xl text-zinc-100">{step.title}</h3>
@@ -170,8 +173,8 @@ export default async function ProfilePage({
               <CardHeadline>{t('professionalSkills')}</CardHeadline>
               <div className="flex flex-col gap-2">
                 {profSkills.map((skill) => (
-                  <div className="flex gap-2 items-center" key={skill.id}>
-                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px]" />
+                  <div className="flex gap-2 items-start" key={skill.id}>
+                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
                     <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
                   </div>
                 ))}
@@ -184,8 +187,8 @@ export default async function ProfilePage({
               <CardHeadline>{t('softSkills')}</CardHeadline>
               <div className="flex flex-col gap-2">
                 {softSkills.map((skill) => (
-                  <div className="flex gap-2 items-center" key={skill.id}>
-                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px]" />
+                  <div className="flex gap-2 items-start" key={skill.id}>
+                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
                     <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
                   </div>
                 ))}
