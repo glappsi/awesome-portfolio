@@ -29,7 +29,7 @@ export function getActiveProfileUseCase(): Effect.Effect<Profile, ProfileNotFoun
       catch(_error: unknown) {
         return new ZodParseError('Profile', {
           originalError: _error,
-          data: projects
+          data: profile
         });
       },
     });

@@ -1,4 +1,4 @@
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
 import { lexicalMarkdown, lexicalMarkdownHook, MarkdownConverterFeature } from '../payload/converter/markdown'
 
@@ -30,6 +30,7 @@ export const BlogParagraphs: CollectionConfig = {
     //   // }
     // },
     ...lexicalMarkdown('content', 'markdown'),
+    lexicalHTML('content', { name: 'html', hidden: false, storeInDB: true }),
     // {
     //   name: '_content',
     //   label: 'Content as Markdown',

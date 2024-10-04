@@ -135,6 +135,7 @@ export interface BlogParagraph {
     [k: string]: unknown;
   } | null;
   markdown?: string | null;
+  html?: string | null;
   updatedAt: string;
   createdAt: string;
 }

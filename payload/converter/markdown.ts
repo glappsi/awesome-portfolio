@@ -1,4 +1,4 @@
-import { createServerFeature, getEnabledNodes, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { createServerFeature, getEnabledNodes, HTMLConverterFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import type { CollectionConfig, Field, FieldAffectingData, FieldBase, GlobalAfterReadHook } from 'payload'
 import {
   $convertFromMarkdownString,
@@ -32,13 +32,14 @@ export const lexicalMarkdown = (contentName: string, markdownName: string): Fiel
         // The HTMLConverter Feature is the feature which manages the HTML serializers.
         // If you do not pass any arguments to it, it will use the default serializers.
         MarkdownConverterFeature(),
+        HTMLConverterFeature({}),
       ],
     })
   }, {
     name: markdownName,
     type: 'code',
     admin: {
-      language: 'markdown'
+      language: 'markdown',
     }
   }]
 }

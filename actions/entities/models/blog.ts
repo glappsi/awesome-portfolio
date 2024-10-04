@@ -16,7 +16,9 @@ export const blogSchema = z.object({
 
 export const blogDetailSchema = blogSchema.extend({
   paragraphs: z.array(z.object({
-    content: z.array(z.any())
+    content: z.any(),
+    markdown: z.string(),
+    html: z.string(),
   }))
 })
 

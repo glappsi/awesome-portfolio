@@ -29,7 +29,7 @@ export function getBlogBySlugUseCase(slug: string): Effect.Effect<BlogWithDetail
       catch(_error: unknown) {
         return new ZodParseError('BlogWithDetails', {
           originalError: _error,
-          data: projects
+          data: blog
         });
       },
     });
