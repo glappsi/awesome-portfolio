@@ -1,7 +1,6 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { slateEditor } from '@payloadcms/richtext-slate'
+import { lexicalEditor, defaultEditorConfig, defaultEditorFeatures, LexicalEditorProps } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -23,6 +22,15 @@ import { Links } from './collections/Links'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const customEditorConfig: LexicalEditorProps = {};
+
+export const lexicalEditorConfig = {
+  ...defaultEditorConfig,
+  features: [
+    ...defaultEditorFeatures,
+  ]
+};
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -36,7 +44,7 @@ export default buildConfig({
     defaultLocale: 'en',
     fallback: true,
   },
-  editor: slateEditor({}),
+  editor: lexicalEditor(customEditorConfig),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

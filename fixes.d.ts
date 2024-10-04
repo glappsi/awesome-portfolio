@@ -24,3 +24,8 @@ declare module '@payloadcms/next/layouts' {
 
 declare module '@payloadcms/next/css' {
 }
+
+declare module '@payloadcms/richtext-lexical/client' {
+  const RichTextCell: any;
+  const RichTextField: any;
+}
