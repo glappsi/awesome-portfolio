@@ -19,6 +19,7 @@ export const blogDetailSchema = blogSchema.extend({
     content: z.any(),
     markdown: z.string(),
     html: z.string(),
+    render: z.enum(['html', 'markdown'])
   }))
 })
 

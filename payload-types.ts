@@ -119,6 +119,7 @@ export interface Category {
 export interface BlogParagraph {
   id: number;
   name: string;
+  render?: ('html' | 'markdown') | null;
   content?: {
     root: {
       type: string;

@@ -8,6 +8,9 @@ const withNextIntl = createNextIntlPlugin(
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ["js", "jsx", "ts", "tsx"],
+  experimental: {
+    mdxRs: true,
+  },
   eslint: {
     ignoreDuringBuilds: true,
   }

@@ -1,3 +1,5 @@
+"use client";
+
 import 'devicon/devicon.min.css';
 import clsx from 'clsx';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';

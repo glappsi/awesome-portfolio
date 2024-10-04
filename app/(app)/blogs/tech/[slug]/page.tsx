@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { getBlogBySlug } from '@/actions';
 import { Card } from '../../../components/card';
+import { BlogParagraph } from '../../paragraph';
 
 export const revalidate = 60;
 
@@ -36,11 +37,11 @@ export default async function BlogPage({
       <div
         className="prose prose-lg prose-gray max-w-none dark:prose-invert"
       >
-        {blog.paragraphs.map(({ html }, index) => (
-          <section
+        {blog.paragraphs.map((paragraph, index) => (
+          <BlogParagraph
             key={index}
-            dangerouslySetInnerHTML={{ __html: html }}
-          ></section>
+            paragraph={paragraph}
+          ></BlogParagraph>
         ))}
       </div>
     </Card>
