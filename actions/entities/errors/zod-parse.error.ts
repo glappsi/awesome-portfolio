@@ -5,7 +5,7 @@ export class ZodParseError extends Error {
     super(JSON.stringify({
       ...data,
       typeName
-    }));
+    }, null, 2));
     this.name = `ZodParseError${typeName}`;
   }
 }

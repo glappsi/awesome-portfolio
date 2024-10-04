@@ -28,7 +28,8 @@ export function getCareerStepsUseCase(): Effect.Effect<Array<CareerStep>, Career
       },
       catch(_error: unknown) {
         return new ZodParseError('CareerSteps', {
-          originalError: _error
+          originalError: _error,
+          data: projects
         });
       },
     });

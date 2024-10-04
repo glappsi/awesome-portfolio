@@ -28,7 +28,8 @@ export function getLinksUseCase(): Effect.Effect<Array<Link>, LinksNotFoundError
       },
       catch(_error: unknown) {
         return new ZodParseError('Links', {
-          originalError: _error
+          originalError: _error,
+          data: projects
         });
       },
     });

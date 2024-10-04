@@ -11,6 +11,11 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'needsLightBackground',
+      defaultValue: false,
+      type: 'checkbox',
+    },
   ],
   upload: true,
 }

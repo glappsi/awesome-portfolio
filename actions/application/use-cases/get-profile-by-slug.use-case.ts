@@ -28,7 +28,8 @@ export function getProfileBySlugUseCase(slug: string): Effect.Effect<Profile, Pr
       },
       catch(_error: unknown) {
         return new ZodParseError('Profile', {
-          originalError: _error
+          originalError: _error,
+          data: projects
         });
       },
     });

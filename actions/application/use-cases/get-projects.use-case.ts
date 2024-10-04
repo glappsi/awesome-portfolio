@@ -28,7 +28,8 @@ export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotF
       },
       catch(_error: unknown) {
         return new ZodParseError('Projects', {
-          originalError: _error
+          originalError: _error,
+          data: projects
         });
       },
     });

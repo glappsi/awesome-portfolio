@@ -11,7 +11,14 @@ export const projectSchema = z.object({
   end: z.string().transform((str) => new Date(str)).optional().nullable(),
   published: z.boolean().optional().nullable(),
   type: z.enum(['profession', 'hobby']),
-  blog: blogSchema,
+  badge: z.object({
+    url: z.string(),
+    alt: z.string(),
+    width: z.number(),
+    height: z.number(),
+    needsLightBackground: z.boolean().optional().nullable()
+  }).optional().nullable(),
+  blog: blogSchema.optional().nullable(),
   categories: z.array(categorySchema),
   tools: z.array(toolSchema),
 });
