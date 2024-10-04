@@ -37,7 +37,7 @@ export const BUILD_UPLOAD_TRANSFORMER = async (nodes: any) => {
         return ``
       }
   
-      return `<img src="${url}" alt="${document?.filename}" width="${document?.width}"  height="${document?.height}"/>`
+      return `![${document?.filename}](${url})`;
     },
   }
 }

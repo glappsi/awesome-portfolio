@@ -92,12 +92,18 @@ export const lexicalMarkdownHook = (contentName: string, markdownName: string): 
             }),
           });
           const transformers = lexicalField.editor.editorConfig.features?.markdownTransformers || TRANSFORMERS;
-          headlessEditor.update(() => { $convertFromMarkdownString(data[markdownName] || '', transformers) }, { discrete: true });
+          console.log('parse', getEnabledNodes({
+            editorConfig: lexicalField?.editor?.editorConfig
+          }), transformers);
+          headlessEditor.update(() => { $convertFromMarkdownString(data[markdownName] || '', transformers); }, { discrete: true });
 
           // Do this if you then want to get the editor JSON
           const editorJSON = headlessEditor.getEditorState().toJSON();
-          console.log('editorJSON', editorJSON);
-          data[contentName] = editorJSON;
+          console.log('editorJSON', editorJSON, 'from', data[markdownName]);
+
+          if (editorJSON?.root?.children?.length) {
+            data[contentName] = editorJSON;
+          }
         }
 
         return data;
