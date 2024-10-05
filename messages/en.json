@@ -8,7 +8,11 @@
     "download": "Download {media}",
     "locatedAt": "Located at {location}",
     "career": "Career",
-    "today": "today"
+    "today": "today",
+    "projectSkills": "Top Skills",
+    "projects": "Projects",
+    "other": "Other",
+    "allSkills": "All Skills"
   },
   "ProjectsPage": {
     "title": "Projects",
