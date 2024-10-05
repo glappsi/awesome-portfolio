@@ -1,14 +1,10 @@
-import Link from "next/link";
 import React from "react";
 import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
-import { Article } from "./article";
 import { Redis } from "@upstash/redis";
 import { getActiveProfile, getLinks, getProjects } from '@/actions';
-import { Eye } from "lucide-react";
 import { getTranslations } from 'next-intl/server';
 import { ArticleGrid } from './article-grid';
-import { uniqBy } from 'lodash';
+import { filter, uniqBy } from 'lodash';
 import { ArticleToolFilter } from './article-filter';
 
 const redis = Redis.fromEnv();
@@ -23,12 +19,13 @@ export default async function ProjectsPage() {
 
   const [allProjects, profile, links] = await Promise.all([allProjectsPromise, profilePromise, linksPromise]);
 
+  const blogProjects = filter(allProjects, p => !!p.blog);
   const views = (
     await redis.mget<number[]>(
-      ...allProjects.map((p) => ["pageviews", "projects", p.id].join(":")),
+      ...blogProjects.map((p) => ["pageviews", "projects", p.blog!.slug].join(":")),
     )
   ).reduce((acc, v, i) => {
-    acc[allProjects[i].id] = v ?? 0;
+    acc[blogProjects[i].blog!.slug] = v ?? 0;
     return acc;
   }, {} as Record<string, number>);
 
@@ -43,7 +40,7 @@ export default async function ProjectsPage() {
       <Navigation 
         profileSlug={profile.slug}
         links={links} />
-      <div className="px-6 md:pt-20 pt-[106px] mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
+      <div className="px-6 md:pt-20 pt-[var(--navbar-height)] mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             {t('title')}

@@ -147,13 +147,29 @@ export interface BlogParagraph {
 export interface Blog {
   id: number;
   title: string;
+  summary?: string | null;
   slug: string;
   published?: boolean | null;
   author: string;
   authorImage?: (number | null) | Media;
   date: string;
   paragraphs?: (number | BlogParagraph)[] | null;
+  links?: (number | Link)[] | null;
   type?: 'tech' | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "links".
+ */
+export interface Link {
+  id: number;
+  title: string;
+  showInNavigation?: boolean | null;
+  icon: string;
+  download?: (number | null) | Media;
+  link?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -221,19 +237,6 @@ export interface Profile {
   latitude?: number | null;
   aboutMe?: string | null;
   active?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "links".
- */
-export interface Link {
-  id: number;
-  title: string;
-  icon: string;
-  download?: (number | null) | Media;
-  link?: string | null;
   updatedAt: string;
   createdAt: string;
 }

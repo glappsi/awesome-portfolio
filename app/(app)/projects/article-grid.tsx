@@ -39,7 +39,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
             badgeLight={!!project.badge && !!project.badge!.needsLightBackground}>
             <Article
               project={project}
-              views={views[project.id]}
+              views={project.blog ? views[project.blog!.slug] : undefined}
               isHighlight={highlightId === indexOf(projects, project)} />
           </Card>
         ))}
@@ -58,7 +58,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
             badgeLight={!!project.badge && !!project.badge!.needsLightBackground}>
             <Article
               project={project}
-              views={views[project.id]}
+              views={project.blog ? views[project.blog!.slug] : undefined}
               isHighlight={highlightId === indexOf(projects, project)} />
           </Card>
         ))}
@@ -78,7 +78,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
           badgeLight={!!project.badge && !!project.badge!.needsLightBackground}>
           <Article
             project={project}
-            views={views[project.id]}
+            views={project.blog ? views[project.blog!.slug] : undefined}
             isHighlight={highlightId === indexOf(projects, project)} />
         </Card>
       ))}

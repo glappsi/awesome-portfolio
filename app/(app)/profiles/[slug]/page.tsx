@@ -52,7 +52,7 @@ export default async function ProfilePage({
       <Navigation
         profileSlug={profile.slug}
         links={links} />
-      <div className="px-6 md:pt-20 pt-[106px] mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
+      <div className="px-6 md:pt-20 pt-[var(--navbar-height)] mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="w-full h-px bg-zinc-800" />
 
         <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-3 ">

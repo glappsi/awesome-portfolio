@@ -11,7 +11,7 @@ import { Devicons } from '../components/devicons';
 
 type Props = {
   project: Project;
-  views: number;
+  views?: number;
   isHighlight?: boolean;
 };
 
@@ -42,10 +42,10 @@ export const Article: React.FC<Props> = ({ project, isHighlight, views }) => {
             <span>{t('today')}</span>
           )}
         </span>
-        <span className="text-zinc-500 text-xs  flex items-center gap-1">
+        {views !== undefined && <span className="text-zinc-500 text-xs  flex items-center gap-1">
           <Eye className="w-4 h-4" />{" "}
           {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
-        </span>
+        </span>}
       </div>
       <h2 className="z-20 text-xl font-medium duration-1000 lg:text-3xl text-zinc-200 group-hover:text-white font-display">
         {project.title}

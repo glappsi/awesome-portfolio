@@ -32,6 +32,8 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    --navbar-height: 106px;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -68,5 +70,17 @@
   body {
     @apply bg-background text-foreground;
   }
-} 
+}
+
+.seo-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;
+}
 

@@ -9,6 +9,11 @@ export const Links: CollectionConfig = {
       required: true,
       localized: true,
     },
+    {
+      name: 'showInNavigation',
+      defaultValue: false,
+      type: 'checkbox',
+    },
     // TODO: This is a bug in payload currently
     // ui type values can't be persisted, so we need the _icon workaround
     // Report this to GitHub

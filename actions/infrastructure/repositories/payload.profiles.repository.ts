@@ -58,6 +58,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const payload = await this._getPayload();
     const links = await payload.find({
       collection: 'links',
+      showInNavigation: true
     });
 
     return links.docs as Array<Link>;

@@ -3,7 +3,7 @@ import { getActiveProfile, getLinks } from '@/actions';
 
 export const revalidate = 6000; 
 
-export default async function ProjectsLayout({
+export default async function BlogLayout({
 	children,
 }: { children: React.ReactNode }) {
   const profilePromise = getActiveProfile();
@@ -18,9 +18,9 @@ export default async function ProjectsLayout({
         <Navigation 
           profileSlug={profile.slug} 
           links={links} />
-        <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
+        <main>
           {children}
-        </div>
+        </main>
       </div>
 		</div>
 	);

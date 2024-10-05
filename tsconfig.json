@@ -30,9 +30,6 @@
       "@/*": [
         "./*"
       ],
-      "contentlayer/generated": [
-        "./.contentlayer/generated"
-      ],
       "@payload-config": [
         "./payload.config.ts"
       ]

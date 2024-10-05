@@ -11,7 +11,7 @@ import { MouseEventHandler, PropsWithChildren, useState } from "react";
 import ShimmerButton from '@/components/ui/shimmer-button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
-export const Card: React.FC<PropsWithChildren & {className?: string, background?: React.ReactNode, badge?: React.ReactNode, badgeTooltip?: React.ReactNode, badgeLight?: boolean, onClick?: () => void}> = ({ children, className, background, badge, badgeTooltip, badgeLight, onClick }) => {
+export const Card: React.FC<PropsWithChildren & {className?: string, background?: React.ReactNode, badge?: React.ReactNode, badgeTooltip?: React.ReactNode, badgeLight?: boolean, isFullscreen?: boolean, onClick?: () => void}> = ({ children, className, background, badge, badgeTooltip, badgeLight, isFullscreen, onClick }) => {
 	const mouseX = useSpring(0, { stiffness: 500, damping: 100 });
 	const mouseY = useSpring(0, { stiffness: 500, damping: 100 });
   const [badgeTooltipOpen, setIsBadgeTooltipOpen] = useState(false);
@@ -28,7 +28,10 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
 		<div
 			onMouseMove={onMouseMove}
       onClick={onClick}
-			className={clsx(className, 'relative duration-700 border rounded-xl hover:bg-zinc-800/10 group md:gap-8 hover:border-zinc-400/50 border-zinc-600')}
+			className={clsx(className, 'relative duration-700 rounded-xl hover:bg-zinc-800/10 group md:gap-8', {
+        'border hover:border-zinc-400/50 border-zinc-600' : !isFullscreen,
+        'md:border hover:border-zinc-400/50 border-zinc-600' : !!isFullscreen,
+      })}
 		>
       {!!background && <div className="opacity-25 absolute top-0 left-0 right-0 bottom-0 z-0">{background}</div>}
       {!!badge && (
@@ -53,7 +56,9 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>)}
-			<div className="rounded-xl overflow-hidden pointer-events-none">
+			<div className={clsx("rounded-xl overflow-hidden pointer-events-none", {
+        'hidden md:block': !!isFullscreen
+      })}>
 				<div className="absolute rounded-xl inset-0 z-0  transition duration-1000 [mask-image:linear-gradient(black,transparent)]" />
 				<motion.div
 					className="absolute rounded-xl inset-0 z-10  bg-gradient-to-br opacity-100  via-zinc-100/10  transition duration-1000 group-hover:opacity-50 "

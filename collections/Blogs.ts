@@ -10,6 +10,11 @@ export const Blogs: CollectionConfig = {
       localized: true,
     },
     {
+      name: 'summary',
+      type: 'textarea',
+      localized: true,
+    },
+    {
       name: 'slug',
       type: 'text',
       unique: true,
@@ -47,6 +52,12 @@ export const Blogs: CollectionConfig = {
       name: 'paragraphs',
       type: 'relationship',
       relationTo: 'blog-paragraphs',
+      hasMany: true,
+    },
+    {
+      name: 'links',
+      type: 'relationship',
+      relationTo: 'links',
       hasMany: true,
     },
     {
