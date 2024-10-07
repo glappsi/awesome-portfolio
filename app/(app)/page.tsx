@@ -2,6 +2,7 @@ import React from "react";
 import Particles from "./components/particles";
 import { getActiveProfile, getLinks } from '@/actions';
 import { NavigationDock } from './components/nav';
+import Image from 'next/image';
 
 export const revalidate = 60; 
 
@@ -15,9 +16,11 @@ export default async function Home() {
     <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
 
       {profile.image && (
-        <img
+        <Image
           src={profile.image.url}
           alt={profile.image.alt}
+          width={profile.image.width}
+          height={profile.image.height}
           className="h-[200px] w-[200px] mb-8 rounded-full border p-1"
         />
       )}

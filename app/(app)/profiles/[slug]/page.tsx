@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { getActiveProfile, getCareerSteps, getLinks, getProfileBySlug, getProjects, getSkills } from '@/actions';
+import { getActiveProfile, getCareerSteps, getLinks, getProfileBySlug, getProjects, getSkills, getTestimonials } from '@/actions';
 import { Navigation } from '../../components/nav';
 import { Card, CardDescription, CardHeadline } from '../../components/card';
 import Globe from '@/components/ui/globe';
@@ -11,7 +11,6 @@ import { filter, flatMap, uniq } from 'lodash';
 import Marquee from '@/components/ui/marquee';
 import { ArrowRightIcon, DotFilledIcon } from "@radix-ui/react-icons"
 import { getFormatter, getTranslations } from 'next-intl/server';
-import { Badge } from '@/components/ui/badge';
 import IconCloud from '@/components/ui/icon-cloud';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Separator } from '@/components/ui/separator';
@@ -19,6 +18,8 @@ import { Icon } from '@/components/ui/icon';
 import clsx from 'clsx';
 import { SkillChart } from './skill-chart';
 import { Link as TLink } from '@/actions/entities/models/link';
+import TestimonialShuffle from './testimonial';
+import Image from 'next/image';
 
 type Props = {
   params: Promise<{
@@ -49,7 +50,8 @@ export default async function ProfilePage({
   const careerStepsPromise = getCareerSteps();
   const linksPromise = getLinks();
   const projectsPromise = getProjects();
-  const [profile, skills, careerSteps, links, projects] = await Promise.all([profilePromise, skillsPromise, careerStepsPromise, linksPromise, projectsPromise]);
+  const testimonialsPromise = getTestimonials();
+  const [profile, skills, careerSteps, links, projects, testimonials] = await Promise.all([profilePromise, skillsPromise, careerStepsPromise, linksPromise, projectsPromise, testimonialsPromise]);
 
   const profSkills = filter(skills, s => s.type === 'profession');
   const softSkills = filter(skills, s => s.type === 'soft');
@@ -83,7 +85,7 @@ export default async function ProfilePage({
                       '[&[data-state=closed]]:pb-0': index === (careerSteps.length - 1),
                     }, '!no-underline')}>
                       <div className="text-left">
-                        <h3 className="text-xl text-zinc-100">{step.title}</h3>
+                        <h3 className="text-zinc-100">{step.title}</h3>
                         <span className="text-zinc-400">{step.company}, {format.dateTime(step.start, { year: 'numeric', month: 'short' })} - {step.end ? format.dateTime(step.start, { year: 'numeric', month: 'short' }) : t('today')}</span>
                       </div>
                     </AccordionTrigger>
@@ -118,9 +120,11 @@ export default async function ProfilePage({
 
           <div className="flex flex-col gap-8">
             <Card className="p-4 md:p-8 text-center">
-              <img
+              <Image
                 src={profile.image.url}
                 alt={profile.image.alt}
+                width={profile.image.width}
+                height={profile.image.height}
                 className="m-auto h-[100px] w-[100px] mb-8 rounded-full border p-1"
               />
               <CardHeadline className="mb-8">{profile.name}</CardHeadline>
@@ -129,6 +133,16 @@ export default async function ProfilePage({
               )}
             </Card>
 
+            {!!(profile.latitude && profile.longitude) && (<Card className="overflow-hidden aspect-square w-full">
+              {!!profile.location && (<CardDescription className="text-zinc-900 absolute bottom-0 right-[15px] z-10">{t('locatedAt', { location: profile.location })}</CardDescription>)}
+              <Globe
+                className="absolute left-[-12.5%] top-[-25%] w-[150%] h-[150%]"
+                markers={[{
+                  location: [profile.latitude, profile.longitude],
+                  size: 0.1
+                }]} />
+            </Card>)}
+
             <Card
               className="p-4 md:p-8"
             >
@@ -136,10 +150,10 @@ export default async function ProfilePage({
               <CardDescription>{t('contact')}</CardDescription>
 
               <div className="flex flex-col gap-2">
-                {contact.map(({ link, title, icon }) => (
+                {contact.map(({ link, title, icon, isExternal }) => (
                   <Link
                     href={link!}
-                    target="_blank"
+                    target={isExternal ? "_blank" : "_self"}
                     aria-label={title}
                     className={cn(
                       buttonVariants({ variant: "outline" }),
@@ -150,6 +164,17 @@ export default async function ProfilePage({
                     {t('contactVia', { channel: title })}
                   </Link>
                 ))}
+                <Link
+                  href="/projects"
+                  aria-label="projects"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "rounded-full",
+                  )}
+                >
+                  <Icon type={'ArchiveIcon'} className="size-4 mr-2" />
+                  {t('myProjects')}
+                </Link>
               </div>
               <Separator className="my-3" />
               <div className="flex flex-col gap-2">
@@ -170,15 +195,10 @@ export default async function ProfilePage({
                 ))}
               </div>
             </Card>
-            {!!(profile.latitude && profile.longitude) && (<Card className="overflow-hidden aspect-square w-full">
-              {!!profile.location && (<CardDescription className="text-zinc-900 absolute bottom-0 right-[15px] z-10">{t('locatedAt', { location: profile.location })}</CardDescription>)}
-              <Globe
-                className="absolute left-[-12.5%] top-[-25%] w-[150%] h-[150%]"
-                markers={[{
-                  location: [profile.latitude, profile.longitude],
-                  size: 0.1
-                }]} />
-            </Card>)}
+
+            {!!testimonials?.length && <Card className="p-4 md:p-8">
+              <TestimonialShuffle testimonials={testimonials} />
+            </Card>}
           </div>
 
           <div className="flex flex-col gap-8">
@@ -189,8 +209,8 @@ export default async function ProfilePage({
               <div className="flex flex-col gap-2">
                 {profSkills.map((skill) => (
                   <div className="flex gap-2 items-start" key={skill.id}>
-                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
-                    <span className="text-zinc-100 text-lg">{skill.title}</span>
+                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[20px] !w-[20px] shrink-0 mt-[1px]" />
+                    <span className="text-zinc-100">{skill.title}</span>
                   </div>
                 ))}
               </div>
@@ -203,8 +223,8 @@ export default async function ProfilePage({
               <div className="flex flex-col gap-2">
                 {softSkills.map((skill) => (
                   <div className="flex gap-2 items-start" key={skill.id}>
-                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
-                    <span className="text-zinc-100 text-lg">{skill.title}</span>
+                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[20px] !w-[20px] shrink-0 mt-[1px]" />
+                    <span className="text-zinc-100">{skill.title}</span>
                   </div>
                 ))}
 

@@ -11,6 +11,15 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: process.env.APP_URL,
+        pathname: '/api/media/**',
+      },
+    ],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   }

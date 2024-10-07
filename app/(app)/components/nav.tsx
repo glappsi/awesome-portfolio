@@ -2,7 +2,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { HomeIcon, CubeIcon, PersonIcon } from "@radix-ui/react-icons"
+import { HomeIcon, ArchiveIcon, PersonIcon } from "@radix-ui/react-icons"
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -23,7 +23,7 @@ const DATA = {
   navbar: (profileSlug: string) => ([
     { href: "/", icon: HomeIcon, label: "home" },
     { href: `/profiles/${profileSlug}`, icon: PersonIcon, label: "profile" },
-    { href: "/projects", icon: CubeIcon, label: "projects" },
+    { href: "/projects", icon: ArchiveIcon, label: "projects" },
   ]),
 };
 
@@ -65,13 +65,13 @@ export const NavigationDock: React.FC<NavigationProps> = ({
           </DockIcon>
         ))}
         <Separator orientation="vertical" className="h-full" />
-        {redirects.map(({link, title, icon}) => (
+        {redirects.map(({link, title, icon, isExternal}) => (
           <DockIcon key={title}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   href={link!}
-                  target="_blank"
+                  target={isExternal ? "_blank" : "_self"}
                   aria-label={title}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),

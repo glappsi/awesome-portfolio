@@ -17,5 +17,5 @@ export const Media: CollectionConfig = {
       type: 'checkbox',
     },
   ],
-  upload: true,
+  upload: true
 }

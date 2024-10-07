@@ -28,6 +28,13 @@ export const Skills: CollectionConfig = {
       },
     },
     {
+      name: 'order',
+      type: 'number',
+      admin: {
+        step: 0,
+      },
+    },
+    {
       name: 'categories',
       type: 'relationship',
       relationTo: 'categories',

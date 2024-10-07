@@ -9,6 +9,7 @@ import { getSkillsController } from './interface-adapters/controllers/get-skills
 import { getCareerStepsController } from './interface-adapters/controllers/get-career-steps.controller';
 import { getLinksController } from './interface-adapters/controllers/get-links.controller';
 import { getActiveProfileController } from './interface-adapters/controllers/get-active-profile.controller';
+import { getTestimonialsController } from './interface-adapters/controllers/get-testimonials.controller';
 
 initializeContainer();
 
@@ -38,4 +39,8 @@ export async function getCareerSteps() {
 
 export async function getLinks() {
   return await Effect.runPromise(getLinksController());
+}
+
+export async function getTestimonials() {
+  return await Effect.runPromise(getTestimonialsController());
 }

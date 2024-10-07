@@ -6,6 +6,7 @@ import { Profile } from '../../entities/models/profile';
 import { Skill } from '../../entities/models/skill';
 import { CareerStep } from '../../entities/models/career-step';
 import { Link } from '../../entities/models/link';
+import { Testimonial } from '../../entities/models/testimonial';
 
 @injectable()
 export class PayloadProfilesRepository implements IProfilesRepository {
@@ -39,7 +40,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const payload = await this._getPayload();
     const skills = await payload.find({
       collection: 'skills',
-      sort: '-id',
+      sort: 'order',
       limit: 0
     });
 
@@ -68,5 +69,14 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     });
 
     return links.docs as Array<Link>;
+  }
+
+  async getTestimonials(): Promise<Array<Testimonial>> {
+    const payload = await this._getPayload();
+    const skills = await payload.find({
+      collection: 'testimonials',
+    });
+
+    return skills.docs as Array<Testimonial>;
   }
 }

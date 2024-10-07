@@ -18,6 +18,7 @@ import { Skills } from './collections/Skills'
 import { CareerSteps } from './collections/CareerSteps'
 import { Profiles } from './collections/Profiles'
 import { Links } from './collections/Links'
+import { Testimonials } from './collections/Testimonials'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,7 +39,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Tools, Categories, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles, Links],
+  collections: [Users, Media, Tools, Categories, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles, Links, Testimonials],
   localization: {
     locales: ['en'],
     defaultLocale: 'en',

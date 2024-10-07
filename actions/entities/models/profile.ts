@@ -11,6 +11,8 @@ export const profileSchema = z.object({
   image: z.object({
     url: z.string(),
     alt: z.string(),
+    width: z.number(),
+    height: z.number(),
   }),
   aboutMe: z.string().optional().nullable(),
 });

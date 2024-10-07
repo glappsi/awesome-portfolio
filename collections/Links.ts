@@ -14,6 +14,11 @@ export const Links: CollectionConfig = {
       defaultValue: false,
       type: 'checkbox',
     },
+    {
+      name: 'isExternal',
+      defaultValue: true,
+      type: 'checkbox',
+    },
     // TODO: This is a bug in payload currently
     // ui type values can't be persisted, so we need the _icon workaround
     // Report this to GitHub

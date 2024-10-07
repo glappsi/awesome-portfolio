@@ -1,6 +1,3 @@
-'use client'
-
-import { useState } from 'react'
 import Image from 'next/image'
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import clsx from 'clsx'
@@ -19,8 +16,6 @@ type Props = {
 }
 
 export default function Gallery({images, className}: Props) {
-  const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null)
-
   return (
     <div className={clsx("container mx-auto", className)}>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
@@ -36,7 +31,6 @@ export default function Gallery({images, className}: Props) {
                   fill
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  onClick={() => setSelectedImage(image)}
                   className="transition-transform duration-300 ease-in-out hover:scale-110"
                 />
               </div>

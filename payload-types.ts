@@ -22,6 +22,7 @@ export interface Config {
     'career-steps': CareerStep;
     profiles: Profile;
     links: Link;
+    testimonials: Testimonial;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -171,6 +172,7 @@ export interface Link {
   id: number;
   title: string;
   showInNavigation?: boolean | null;
+  isExternal?: boolean | null;
   icon: string;
   download?: (number | null) | Media;
   link?: string | null;
@@ -204,6 +206,7 @@ export interface Skill {
   id: number;
   title: string;
   type?: ('profession' | 'soft') | null;
+  order?: number | null;
   categories?: (number | Category)[] | null;
   tools?: (number | Tool)[] | null;
   updatedAt: string;
@@ -239,6 +242,19 @@ export interface Profile {
   latitude?: number | null;
   aboutMe?: string | null;
   active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  quote: string;
+  avatar?: (number | null) | Media;
+  author: string;
+  description: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -292,6 +308,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'links';
         value: number | Link;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
       } | null);
   globalSlug?: string | null;
   user: {

@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/chart"
 import { Project } from '@/actions/entities/models/project'
 import { useTranslations } from 'next-intl'
-import { Badge } from '@/components/ui/badge';
-import { CardSubHeadline } from '../../components/card';
 import { Tool } from '@/actions/entities/models/tool';
 
 type Props = {
@@ -24,7 +22,7 @@ export function SkillChart({
 }: Props) {
   const t = useTranslations('ProfilePage');
 
-  const projectsTools = filter(flatMap(projects, p => p.tools), t => t.hideInTopSkills) as Tool[];
+  const projectsTools = filter(flatMap(projects, p => p.tools), t => !t.hideInTopSkills) as Tool[];
   const nameCounts = countBy(projectsTools, 'name');
   const sortedNames = orderBy(
     map(nameCounts, (occurrences, name) => ({ 
