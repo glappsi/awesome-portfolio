@@ -1,6 +1,6 @@
-declare module '@payloadcms/next/utilities' {
-  const getPayloadHMR: any;
-}
+// declare module '@payloadcms/next/utilities' {
+//   const getPayloadHMR: any;
+// }
 
 declare module '@payloadcms/next/views' {
   const NotFoundPage: any;

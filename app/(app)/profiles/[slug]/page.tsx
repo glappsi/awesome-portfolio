@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { getActiveProfile, getCareerSteps, getLinks, getProfileBySlug, getProjects, getSkills, getTestimonials } from '@/actions';
+import { createMessage, getActiveProfile, getCareerSteps, getLinks, getProfileBySlug, getProjects, getSkills, getTestimonials } from '@/actions';
 import { Navigation } from '../../components/nav';
 import { Card, CardDescription, CardHeadline } from '../../components/card';
 import Globe from '@/components/ui/globe';
@@ -20,6 +20,8 @@ import { SkillChart } from './skill-chart';
 import { Link as TLink } from '@/actions/entities/models/link';
 import TestimonialShuffle from './testimonial';
 import Image from 'next/image';
+import { ContactButton } from './contact-form';
+import { NeonGradientCard } from '../../../../components/ui/neon-gradient-card';
 
 type Props = {
   params: Promise<{
@@ -143,9 +145,7 @@ export default async function ProfilePage({
                 }]} />
             </Card>)}
 
-            <Card
-              className="p-4 md:p-8"
-            >
+            <NeonGradientCard>
               <CardHeadline>{t('contactAndDownloads')}</CardHeadline>
               <CardDescription>{t('contact')}</CardDescription>
 
@@ -164,17 +164,7 @@ export default async function ProfilePage({
                     {t('contactVia', { channel: title })}
                   </Link>
                 ))}
-                <Link
-                  href="/projects"
-                  aria-label="projects"
-                  className={cn(
-                    buttonVariants({ variant: "outline" }),
-                    "rounded-full",
-                  )}
-                >
-                  <Icon type={'ArchiveIcon'} className="size-4 mr-2" />
-                  {t('myProjects')}
-                </Link>
+                <ContactButton onSubmit={createMessage} />
               </div>
               <Separator className="my-3" />
               <div className="flex flex-col gap-2">
@@ -193,8 +183,19 @@ export default async function ProfilePage({
                     {t('download', { media: title })}
                   </Link>
                 ))}
+                <Link
+                  href="/projects"
+                  aria-label="projects"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "rounded-full",
+                  )}
+                >
+                  <Icon type={'ArchiveIcon'} className="size-4 mr-2" />
+                  {t('myProjects')}
+                </Link>
               </div>
-            </Card>
+            </NeonGradientCard>
 
             {!!testimonials?.length && <Card className="p-4 md:p-8">
               <TestimonialShuffle testimonials={testimonials} />

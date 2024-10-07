@@ -19,10 +19,11 @@ export default function TestimonialShuffle({ testimonials }: Props) {
   useEffect(() => {
     const interval = setTimeout(() => {
       const currentIndex = findIndex(testimonials, currentTestimonial);
-      if (currentIndex === (testimonials.length - 1)) {
-        return;
-      }
-      const nextIndex = currentIndex + 1;
+      // if (currentIndex === (testimonials.length - 1)) {
+      //   return;
+      // }
+      // const nextIndex = currentIndex + 1;
+      const nextIndex = currentIndex === (testimonials.length - 1) ? 0 : currentIndex + 1;
       setTestimonial(testimonials[nextIndex]);
       setQuote(undefined);
       setTimeout(() => {

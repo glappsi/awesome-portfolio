@@ -5,6 +5,7 @@
     "contactAndDownloads": "Contact",
     "contact": "Want to work with me? Contact me via the following links.",
     "contactVia": "Contact via {channel}",
+    "sendMessage": "Send a message",
     "download": "Download {media}",
     "locatedAt": "Located at {location}",
     "career": "Career",
@@ -13,7 +14,15 @@
     "projects": "Projects",
     "other": "Other",
     "allSkills": "All Skills",
-    "myProjects": "See my projects"
+    "myProjects": "See my projects",
+    "email": "Email",
+    "message": "Your message to me",
+    "sent": "Message sent successfully!",
+    "submit": "Send",
+    "z": {
+      "email": "A valid email is required",
+      "message": "Please enter a message"
+    }
   },
   "ProjectsPage": {
     "title": "Projects",
@@ -30,5 +39,8 @@
     "home": "Home",
     "profile": "Profile",
     "projects": "Projects"
+  },
+  "form": {
+    "loading": "Loading..."
   }
 }

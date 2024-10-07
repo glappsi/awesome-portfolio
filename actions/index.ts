@@ -10,6 +10,9 @@ import { getCareerStepsController } from './interface-adapters/controllers/get-c
 import { getLinksController } from './interface-adapters/controllers/get-links.controller';
 import { getActiveProfileController } from './interface-adapters/controllers/get-active-profile.controller';
 import { getTestimonialsController } from './interface-adapters/controllers/get-testimonials.controller';
+import { ZodParseError } from './entities/errors/zod-parse.error';
+import { createMessageController } from './interface-adapters/controllers/create-message.controller';
+import { CreateMessage } from './entities/models/message';
 
 initializeContainer();
 
@@ -43,4 +46,8 @@ export async function getLinks() {
 
 export async function getTestimonials() {
   return await Effect.runPromise(getTestimonialsController());
+}
+
+export async function createMessage(message: CreateMessage) {
+  return await Effect.runPromise(createMessageController(message));
 }
