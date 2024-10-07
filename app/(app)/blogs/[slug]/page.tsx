@@ -1,7 +1,21 @@
-import { getBlogBySlug } from '@/actions';
+import { getBlogBySlug, getProjects } from '@/actions';
+import { filter, map } from 'lodash';
 import { redirect } from 'next/navigation';
 
 export const revalidate = 60;
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const projects = await getProjects();
+
+  return map(filter(
+    projects,
+    p => !!p.blog
+  ), p => ({
+    slug: p.blog!.slug
+  }));
+}
 
 type Props = {
   params: Promise<{

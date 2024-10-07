@@ -1,13 +1,27 @@
 import Image from "next/image"
-import { getBlogBySlug } from '@/actions';
+import { getBlogBySlug, getProjects } from '@/actions';
 import { Card } from '../../../components/card';
 import { BlogParagraph } from '../../paragraph';
 import { Redis } from "@upstash/redis";
 import { ReportView } from '../../view';
 import { Header } from './header';
 import { Eye } from 'lucide-react';
+import { filter, map } from 'lodash';
 
 export const revalidate = 60;
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const projects = await getProjects();
+
+  return map(filter(
+    projects,
+    p => !!p.blog
+  ), p => ({
+    slug: p.blog!.slug
+  }));
+}
 
 type Props = {
   params: Promise<{

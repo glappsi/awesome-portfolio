@@ -3,7 +3,7 @@ import Particles from "./components/particles";
 import { getActiveProfile, getLinks } from '@/actions';
 import { NavigationDock } from './components/nav';
 
-export const revalidate = 6000; 
+export const revalidate = 60; 
 
 export default async function Home() {
   const profilePromise = getActiveProfile();

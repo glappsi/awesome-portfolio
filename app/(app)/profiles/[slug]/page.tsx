@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { getCareerSteps, getLinks, getProfileBySlug, getProjects, getSkills } from '@/actions';
+import { getActiveProfile, getCareerSteps, getLinks, getProfileBySlug, getProjects, getSkills } from '@/actions';
 import { Navigation } from '../../components/nav';
 import { Card, CardDescription, CardHeadline } from '../../components/card';
 import Globe from '@/components/ui/globe';
@@ -18,6 +18,7 @@ import { Separator } from '@/components/ui/separator';
 import { Icon } from '@/components/ui/icon';
 import clsx from 'clsx';
 import { SkillChart } from './skill-chart';
+import { Link as TLink } from '@/actions/entities/models/link';
 
 type Props = {
   params: Promise<{
@@ -26,6 +27,17 @@ type Props = {
 };
 
 export const revalidate = 60;
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const profile = await getActiveProfile();
+
+  return [{
+    slug: profile.slug
+  }]
+}
+ 
 
 export default async function ProfilePage({
   params
@@ -44,8 +56,8 @@ export default async function ProfilePage({
   const skillTools = filter(uniq(flatMap(profSkills, skill => skill.tools).map(t => t.name)));
   const skillCategories = filter(uniq(flatMap(skills, skill => skill.categories).map(t => t.displayName)));
 
-  const contact = filter(links, l => !!l.link && l.showInNavigation);
-  const downloads = filter(links, l => !!l.download && l.showInNavigation);
+  const contact = filter(links, l => !!l.link && l.showInNavigation) as TLink[];
+  const downloads = filter(links, l => !!l.download && l.showInNavigation) as TLink[];
 
   return (
     <div className="relative pb-16">
