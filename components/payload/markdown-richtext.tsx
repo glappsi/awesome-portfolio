@@ -15,7 +15,6 @@ type MarkdownRichTextFieldProps = {
 }
 
 export const MarkdownRichTextField: React.FC<MarkdownRichTextFieldProps> = ({ field, ...props }) => {
-  console.log(JSON.stringify(field, null, 2));
   const markdownField = `_${field?.name}`;
   const { value: markdownValue, setValue: setMarkdownValue, ...rest } = useField<string>({ path: field?.name });
   const { value: richTextValue, setValue: setRichTextValue } = useField<any>({ path: markdownField });

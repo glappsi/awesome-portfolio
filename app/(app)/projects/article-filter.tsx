@@ -24,7 +24,7 @@ export const ArticleToolFilter: React.FC<Props> = ({tools}) => {
   return (
     <div className="flex gap-4 overflow-auto">
       <Devicons
-        icons={tools.map(t => t.name)}
+        tools={tools}
         value={selection}
         size="xl"
         onClick={name => name === selection ? select(undefined) : select(name)}

@@ -16,8 +16,9 @@ export class PayloadProjectsRepository implements IProjectsRepository {
     const payload = await this._getPayload();
     const projects = await payload.find({
       collection: 'projects',
+      limit: 0,
       depth: 1,
-      sort: '-start'
+      sort: '-end'
     });
     for (const project of projects?.docs) {
       if (project.blog?.authorImage) {

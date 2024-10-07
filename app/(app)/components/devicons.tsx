@@ -4,10 +4,12 @@ import 'devicon/devicon.min.css';
 import clsx from 'clsx';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useState } from 'react';
+import { Tool } from '@/actions/entities/models/tool';
+import { filter, map, uniqBy } from 'lodash';
 
 type Props = {
-  icons: string[];
-  tooltips?: string[];
+  tools: Tool[];
+  withTooltips?: boolean;
   variant?: 'gray' | 'colored';
   withWordmark?: boolean;
   asCard?: boolean;
@@ -17,10 +19,13 @@ type Props = {
   value?: string;
 }
 
-export const Devicons: React.FC<Props> = ({ icons, tooltips, variant, withWordmark, asCard, className, size, value, onClick }) => {
+export const Devicons: React.FC<Props> = ({ tools, withTooltips, variant, withWordmark, asCard, className, size, value, onClick }) => {
   const [openTooltip, setOpenTooltip] = useState<string>();
+  const supportedTools = uniqBy(filter(tools, t => !t.noIcon), t => t.name);
+  const icons = map(supportedTools, t => t.name);
+  const tooltips = map(supportedTools, t => t.displayName);
 
-  if (tooltips?.length) {
+  if (tooltips?.length && withTooltips) {
     return (
       <TooltipProvider>
         {icons.map((i, index) => (

@@ -11,13 +11,13 @@ export const blogSchema = z.object({
     url: z.string(),
     alt: z.string(),
   }).optional(),
-  links: linkListSchema.optional().nullable(),
   date: z.string().transform((str) => new Date(str)),
   published: z.boolean().optional().nullable(),
   type: z.string(),
 });
 
 export const blogDetailSchema = blogSchema.extend({
+  links: linkListSchema.optional().nullable(),
   paragraphs: z.array(z.object({
     content: z.any(),
     markdown: z.string(),

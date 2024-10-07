@@ -16,7 +16,11 @@ export class PayloadBlogsRepository implements IBlogsRepository {
     const payload = await this._getPayload();
     const blog = await payload.find({
       collection: 'blogs',
-      slug
+      where: {
+        slug: {
+          equals: slug
+        }
+      },
     });
 
     return blog.docs?.[0] as BlogWithDetails;

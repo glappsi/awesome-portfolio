@@ -37,8 +37,8 @@ export const NavigationDock: React.FC<NavigationProps> = ({
   links
 }) => {
   const t = useTranslations('Navigation');
-  const redirects = filter(links, l => !!l.link);
-  const downloads = filter(links, l => !!l.download);
+  const redirects = filter(links, l => !!l.link && l.showInNavigation);
+  const downloads = filter(links, l => !!l.download && l.showInNavigation);
 
   return (
     <TooltipProvider>

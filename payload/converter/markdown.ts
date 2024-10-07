@@ -64,7 +64,7 @@ export const lexicalMarkdownHook = (contentName: string, markdownName: string): 
           return data;
         }
 
-        if (!isEqual(originalDoc[contentName], data[contentName])) {
+        if ((!originalDoc || !isEqual(originalDoc[contentName], data?.[contentName])) && data?.[contentName]) {
           console.log('content changed', JSON.stringify(data[contentName], null, 2));
           const headlessEditor = createHeadlessEditor({
             nodes: getEnabledNodes({
@@ -84,7 +84,7 @@ export const lexicalMarkdownHook = (contentName: string, markdownName: string): 
             console.error({ err: e }, 'ERROR parsing editor state');
             return data;
           }
-        } else if (originalDoc[markdownName] !== data[markdownName]) {
+        } else if ((!originalDoc || originalDoc[markdownName] !== data?.[markdownName]) && data?.[markdownName]) {
           console.log('markdown changed', data[contentName]);
           const headlessEditor = createHeadlessEditor({
             nodes: getEnabledNodes({

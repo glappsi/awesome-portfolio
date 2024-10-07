@@ -43,4 +43,7 @@ export const Links: CollectionConfig = {
       type: 'text'
     },
   ],
+  admin: {
+    useAsTitle: 'title',
+  },
 }

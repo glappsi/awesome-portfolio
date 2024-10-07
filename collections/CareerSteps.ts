@@ -45,18 +45,9 @@ export const CareerSteps: CollectionConfig = {
       type: 'relationship',
       relationTo: 'projects',
       hasMany: true,
-    },
-    {
-      name: 'categories',
-      type: 'relationship',
-      relationTo: 'categories',
-      hasMany: true,
-    },
-    {
-      name: 'tools',
-      type: 'relationship',
-      relationTo: 'tools',
-      hasMany: true,
     }
   ],
+  admin: {
+    useAsTitle: 'title',
+  },
 }

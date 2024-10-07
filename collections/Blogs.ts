@@ -38,6 +38,12 @@ export const Blogs: CollectionConfig = {
       hasMany: false,
     },
     {
+      name: 'gallery',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: true,
+    },
+    {
       name: 'date',
       required: true,
       type: 'date',

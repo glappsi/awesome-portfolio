@@ -28,6 +28,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
       <div className="flex flex-col gap-8">
         {(evenIndexed as Array<Project>).map((project) => (
           <Card 
+            key={project.id}
             onClick={() => setHighlightId(indexOf(projects, project))}
             badge={!!project.badge && <Image
               src={project.badge!.url}
@@ -47,6 +48,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
       <div className="flex flex-col gap-8">
         {(oddIndexed as Array<Project>).map((project) => (
           <Card 
+            key={project.id}
             onClick={() => setHighlightId(indexOf(projects, project))}
             badge={!!project.badge && <Image
               src={project.badge!.url}
@@ -67,6 +69,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
     <div className="lg:hidden flex gap-8 flex-wrap mx-auto">
       {filteredProjects.map((project) => (
         <Card 
+          key={project.id}
           onClick={() => setHighlightId(indexOf(projects, project))}
           badge={!!project.badge && <Image
             src={project.badge!.url}

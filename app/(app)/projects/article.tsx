@@ -59,9 +59,9 @@ export const Article: React.FC<Props> = ({ project, isHighlight, views }) => {
         <div className="flex flex-col gap-4 mt-4 p-4 bg-zinc-900 rounded-sm">
           <div aria-label={t('tools')} className="flex flex-wrap gap-2">
             <Devicons
-              icons={project.tools.map(t => t.name)}
-              tooltips={project.tools.map(t => t.displayName)}
+              tools={project.tools}
               variant="colored"
+              withTooltips
               asCard />
           </div>
 
@@ -72,13 +72,13 @@ export const Article: React.FC<Props> = ({ project, isHighlight, views }) => {
           </div>
         </div>
 
-        <div className="flex justify-end">
+        {!!project.blog && (<div className="flex justify-end">
           <Link href={project.blog?.slug ? `/blogs/${project.blog?.slug}` : '#'}>
             <Button className='mt-8' variant="secondary">
               {t('readMore')}&nbsp;<span aria-hidden="true">&rarr;</span>
             </Button>
           </Link>
-        </div>
+        </div>)}
       </>)}
     </div>
   );

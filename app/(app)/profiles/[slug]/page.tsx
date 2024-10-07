@@ -44,8 +44,8 @@ export default async function ProfilePage({
   const skillTools = filter(uniq(flatMap(profSkills, skill => skill.tools).map(t => t.name)));
   const skillCategories = filter(uniq(flatMap(skills, skill => skill.categories).map(t => t.displayName)));
 
-  const contact = filter(links, l => !!l.link);
-  const downloads = filter(links, l => !!l.download);
+  const contact = filter(links, l => !!l.link && l.showInNavigation);
+  const downloads = filter(links, l => !!l.download && l.showInNavigation);
 
   return (
     <div className="relative pb-16">
@@ -79,7 +79,7 @@ export default async function ProfilePage({
                       <ul className="whitespace-break-spaces text-zinc-100">
                         {step.description?.split('\n').map((line) => (
                           <li className="flex gap-2">
-                            <DotFilledIcon className="!h-[20px] !w-[20px]" />
+                            <DotFilledIcon className="shrink-0 !h-[20px] !w-[20px]" />
                             <span>{line}</span>
                           </li>
                         ))}
@@ -87,9 +87,9 @@ export default async function ProfilePage({
 
                       <Marquee className="mt-4">
                         <Devicons
-                          icons={step.tools.map(t => t.name)}
-                          tooltips={step.tools.map(t => t.displayName)}
+                          tools={flatMap(careerSteps, cs => flatMap(cs.projects, p => p.tools))}
                           variant="colored"
+                          withTooltips
                           asCard />
                       </Marquee>
                     </AccordionContent>
@@ -123,7 +123,7 @@ export default async function ProfilePage({
               <CardHeadline>{t('contactAndDownloads')}</CardHeadline>
               <CardDescription>{t('contact')}</CardDescription>
 
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2">
                 {contact.map(({ link, title, icon }) => (
                   <Link
                     href={link!}
@@ -140,7 +140,7 @@ export default async function ProfilePage({
                 ))}
               </div>
               <Separator className="my-3" />
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2">
                 {downloads.map(({ download, title, icon }) => (
                   <Link
                     href={download!.url}
@@ -211,7 +211,7 @@ export default async function ProfilePage({
                   </div>
                 ))}
 
-                <div className="flex gap-2 pt-4">
+                <div className="flex flex-wrap gap-2 pt-4">
                   {skillCategories.map((c) => (
                     <Badge variant="outline">#{c}</Badge>
                   ))}

@@ -6,6 +6,7 @@ export const linkSchema = z.object({
   title: z.string(),
   icon: z.enum(IconKeys as [IconType, ...IconType[]]),
   link: z.string().optional().nullable(),
+  showInNavigation: z.boolean().optional().nullable(),
   download: z.object({
     url: z.string(),
     filename: z.string(),

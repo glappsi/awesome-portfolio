@@ -12,9 +12,7 @@ export const careerStepSchema = z.object({
   projects: z.array(z.object({
     categories: z.array(categorySchema),
     tools: z.array(toolSchema),
-  })),
-  categories: z.array(categorySchema),
-  tools: z.array(toolSchema),
+  }))
 });
 export const careerStepListSchema = z.array(careerStepSchema);
 

@@ -4,8 +4,9 @@ import { Redis } from "@upstash/redis";
 import { getActiveProfile, getLinks, getProjects } from '@/actions';
 import { getTranslations } from 'next-intl/server';
 import { ArticleGrid } from './article-grid';
-import { filter, uniqBy } from 'lodash';
+import { countBy, filter, flatMap, orderBy, uniqBy } from 'lodash';
 import { ArticleToolFilter } from './article-filter';
+import { Project } from '@/actions/entities/models/project';
 
 const redis = Redis.fromEnv();
 
@@ -29,11 +30,17 @@ export default async function ProjectsPage() {
     return acc;
   }, {} as Record<string, number>);
 
-  const publishedProjects = allProjects.filter(p => p.published);
-  const professionalProjects = publishedProjects.filter(p => p.type === 'profession');
-  const hobbyProjects = publishedProjects.filter(p => p.type === 'hobby');
+  const publishedProjects = filter(allProjects, (p: Project) => p.published) as Project[];
+  const professionalProjects = filter(publishedProjects, (p: Project) => p.type === 'profession') as Project[];
+  const hobbyProjects = filter(publishedProjects, (p: Project) => p.type === 'hobby') as Project[];
 
-  const tools = uniqBy(publishedProjects.flatMap(p => p.tools), t => t.name);
+  const allTools = publishedProjects.flatMap(p => p.tools);
+  const toolsCount = countBy(allTools, t => t.name); // lodash method to count occurrences of each tool by name
+  const tools = orderBy(
+    uniqBy(allTools, t => t.name),  // ensure tools are unique by name
+    t => toolsCount[t.name],          // sort by the count of each tool
+    'desc'                            // sort in descending order
+  );
 
   return (
     <div className="relative pb-16">

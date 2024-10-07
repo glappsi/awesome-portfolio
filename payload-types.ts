@@ -98,6 +98,8 @@ export interface Tool {
   id: number;
   name: string;
   displayName: string;
+  shortName?: string | null;
+  noIcon?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -152,6 +154,7 @@ export interface Blog {
   published?: boolean | null;
   author: string;
   authorImage?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   date: string;
   paragraphs?: (number | BlogParagraph)[] | null;
   links?: (number | Link)[] | null;
@@ -217,8 +220,6 @@ export interface CareerStep {
   start: string;
   end?: string | null;
   projects?: (number | Project)[] | null;
-  categories?: (number | Category)[] | null;
-  tools?: (number | Tool)[] | null;
   updatedAt: string;
   createdAt: string;
 }

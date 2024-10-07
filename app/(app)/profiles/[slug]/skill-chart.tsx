@@ -26,21 +26,27 @@ export function SkillChart({
   const projectsTools = flatMap(projects, p => p.tools);
   const nameCounts = countBy(projectsTools, 'name');
   const sortedNames = orderBy(
-    map(nameCounts, (occurrences, name) => ({ name, occurrences, displayName: find(projectsTools, p => p.name === name)?.displayName ,fill: `var(--color-${name})` })),
+    map(nameCounts, (occurrences, name) => ({ 
+      name, 
+      occurrences, 
+      displayName: find(projectsTools, p => p.name === name)?.displayName,
+      shortName: find(projectsTools, p => p.name === name)?.shortName,
+      fill: `var(--color-${name})` 
+    })),
     ['occurrences'],
     ['desc']
   );
-  const chartData = sortedNames.slice(0, 4);
-  const otherCount = sumBy(sortedNames.slice(4), 'occurrences');
-  if (otherCount > 0) {
-    chartData.push({ name: 'other', occurrences: otherCount, displayName: undefined, fill: 'var(--color-other)' });
-  }
+  const chartData = sortedNames.slice(0, 5);
+  // const otherCount = sumBy(sortedNames.slice(4), 'occurrences');
+  // if (otherCount > 0) {
+  //   chartData.push({ name: 'other', occurrences: otherCount, displayName: undefined, fill: 'var(--color-other)' });
+  // }
 
   const chartConfig = reduce(chartData, (acc, value, index) => {
     return {
       ...acc,
       [value.name]: {
-        label: value.displayName || t(value.name),
+        label: value.shortName || value.displayName || t(value.name),
         color: `hsl(var(--chart-${index+1}))`,
       }
     }
@@ -84,7 +90,7 @@ export function SkillChart({
 
       <div>
         <CardSubHeadline>{t('allSkills')}</CardSubHeadline>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {allSkills.map((s) => (
             <Badge variant="outline">{s}</Badge>
           ))}

@@ -14,6 +14,16 @@ export const Tools: CollectionConfig = {
       required: true,
       localized: true,
     },
+    {
+      name: 'shortName',
+      type: 'text',
+      localized: true,
+    },
+    {
+      name: 'noIcon',
+      type: 'checkbox',
+      defaultValue: false,
+    },
   ],
   admin: {
     useAsTitle: 'name'

@@ -39,6 +39,8 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const payload = await this._getPayload();
     const skills = await payload.find({
       collection: 'skills',
+      sort: '-id',
+      limit: 0
     });
 
     return skills.docs as Array<Skill>;
@@ -58,7 +60,11 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const payload = await this._getPayload();
     const links = await payload.find({
       collection: 'links',
-      showInNavigation: true
+      where: {
+        showInNavigation: {
+          equals: true
+        }
+      }
     });
 
     return links.docs as Array<Link>;
