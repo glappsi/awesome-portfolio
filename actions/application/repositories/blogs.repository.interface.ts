@@ -1,5 +1,5 @@
-import { BlogWithDetails } from '../../entities/models/blog';
+import { BlogWithDetailsDto } from '../../entities/models/blog';
 
 export interface IBlogsRepository {
-  getBlogBySlug(slug: string): Promise<BlogWithDetails>;
+  getBlogBySlug(slug: string): Promise<BlogWithDetailsDto>;
 }

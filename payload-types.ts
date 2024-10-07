@@ -172,7 +172,9 @@ export interface Blog {
 export interface Link {
   id: number;
   title: string;
+  symbol?: string | null;
   showInNavigation?: boolean | null;
+  hideOnMobile?: boolean | null;
   isExternal?: boolean | null;
   icon: string;
   download?: (number | null) | Media;

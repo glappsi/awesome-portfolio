@@ -1,5 +1,5 @@
-import { Project } from '../../entities/models/project';
+import { ProjectDto } from '../../entities/models/project';
 
 export interface IProjectsRepository {
-  getProjects(): Promise<Array<Project>>;
+  getProjects(): Promise<Array<ProjectDto>>;
 }

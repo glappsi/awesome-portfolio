@@ -18,6 +18,8 @@ import { useTranslations } from 'next-intl';
 import { Icon } from '@/components/ui/icon';
 import { Link as TLink } from '@/actions/entities/models/link';
 import { useRouter } from 'next/navigation';
+import { createMessage } from '@/actions';
+import { ContactButton } from './contact-form';
 
 const DATA = {
   navbar: (profileSlug: string) => ([
@@ -65,8 +67,12 @@ export const NavigationDock: React.FC<NavigationProps> = ({
           </DockIcon>
         ))}
         <Separator orientation="vertical" className="h-full" />
-        {redirects.map(({link, title, icon, isExternal}) => (
-          <DockIcon key={title}>
+        {redirects.map(({link, title, icon, isExternal, hideOnMobile}) => (
+          <DockIcon 
+            key={title}
+            className={cn({
+              "hidden md:flex": hideOnMobile
+            })}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
@@ -87,8 +93,9 @@ export const NavigationDock: React.FC<NavigationProps> = ({
             </Tooltip>
           </DockIcon>
         ))}
+        <ContactButton className="hidden md:flex" onSubmit={createMessage} iconOnly />
         <Separator orientation="vertical" className="h-full" />
-        {downloads.map(({download, title, icon}) => (
+        {downloads.map(({download, title, icon, symbol}) => (
           <DockIcon key={title}>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -102,7 +109,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
                     "size-12 rounded-full",
                   )}
                 >
-                  <Icon type={icon} className="size-4" />
+                  {symbol ? symbol : <Icon type={icon} className="size-4" />}
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
@@ -147,7 +154,10 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
 
 					<Link
 						href="#"
-            onClick={() => router.back()}
+            onClick={async () => {
+              await scrollToTop();
+              router.back()
+            }}
 						className="duration-200 text-zinc-300 hover:text-zinc-100"
 					>
 						<ArrowLeft className="w-6 h-6 " />
@@ -157,3 +167,24 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
 		</header>
 	);
 };
+
+function scrollToTop() {
+  return new Promise((resolve) => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
+    // Listen for the scroll event to detect when scrolling stops
+    const checkIfScrollingStopped = () => {
+      // If user has scrolled to the top, resolve the promise
+      if (window.pageYOffset === 0) {
+        window.removeEventListener('scroll', checkIfScrollingStopped);
+        resolve({});
+      }
+    };
+
+    // Add a scroll event listener to check when scrolling ends
+    window.addEventListener('scroll', checkIfScrollingStopped);
+  });
+}

@@ -2,7 +2,7 @@ import { injectable } from 'inversify';
 import config from '@payload-config';
 import { getPayloadHMR } from '@payloadcms/next/utilities';
 import { IMessagesRepository } from '../../application/repositories/messages.repository.interface';
-import { CreateMessage } from '../../entities/models/message';
+import { CreateMessageDto } from '../../entities/models/message';
 
 @injectable()
 export class PayloadMessagesRepository implements IMessagesRepository {
@@ -12,7 +12,7 @@ export class PayloadMessagesRepository implements IMessagesRepository {
 
   constructor() {}
 
-  async createMessage(dto: CreateMessage): Promise<number> {
+  async createMessage(dto: CreateMessageDto): Promise<number> {
     const payload = await this._getPayload();
     const result = await payload.create({
       collection: 'messages',

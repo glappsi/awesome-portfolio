@@ -5,9 +5,4 @@ export const createMessageSchema = z.object({
   message: z.string(),
 });
 
-export const messageSchema = createMessageSchema.extend({
-  id: z.number(),
-});
-
-export type CreateMessage = z.infer<typeof createMessageSchema>;
-export type Message = z.infer<typeof messageSchema>;
+export type CreateMessageDto = z.input<typeof createMessageSchema>;

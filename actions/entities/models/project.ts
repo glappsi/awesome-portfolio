@@ -25,3 +25,4 @@ export const projectSchema = z.object({
 export const projectListSchema = z.array(projectSchema);
 
 export type Project = z.infer<typeof projectSchema>;
+export type ProjectDto = z.input<typeof projectSchema>;

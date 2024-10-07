@@ -1,10 +1,10 @@
 import { Effect } from "effect"
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
-import { CreateMessage, createMessageSchema } from '../../entities/models/message';
+import { CreateMessageDto, createMessageSchema } from '../../entities/models/message';
 import { MessageCouldNotBeCreatedError } from '../../entities/errors/message-could-not-be-created.error';
 
-export function createMessageUseCase(dto: CreateMessage): Effect.Effect<number, MessageCouldNotBeCreatedError | ZodParseError> {
+export function createMessageUseCase(dto: CreateMessageDto): Effect.Effect<number, MessageCouldNotBeCreatedError | ZodParseError> {
   const repository = getInjection('IMessagesRepository');
 
   const program = Effect.try({
@@ -19,7 +19,7 @@ export function createMessageUseCase(dto: CreateMessage): Effect.Effect<number, 
     },
   });
 
-  const sendMessageEffect = (dto: CreateMessage) =>
+  const sendMessageEffect = (dto: CreateMessageDto) =>
     Effect.tryPromise({
       async try() {
         const id = await repository.createMessage(dto);

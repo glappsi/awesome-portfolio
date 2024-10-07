@@ -17,3 +17,4 @@ export const careerStepSchema = z.object({
 export const careerStepListSchema = z.array(careerStepSchema);
 
 export type CareerStep = z.infer<typeof careerStepSchema>;
+export type CareerStepDto = z.input<typeof careerStepSchema>;

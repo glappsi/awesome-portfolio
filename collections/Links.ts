@@ -10,7 +10,17 @@ export const Links: CollectionConfig = {
       localized: true,
     },
     {
+      name: 'symbol',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'showInNavigation',
+      defaultValue: false,
+      type: 'checkbox',
+    },
+    {
+      name: 'hideOnMobile',
       defaultValue: false,
       type: 'checkbox',
     },

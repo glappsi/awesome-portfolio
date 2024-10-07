@@ -16,3 +16,4 @@ export const testimonialSchema = z.object({
 export const testimonialListSchema = z.array(testimonialSchema);
 
 export type Testimonial = z.infer<typeof testimonialSchema>;
+export type TestimonialDto = z.input<typeof testimonialSchema>;

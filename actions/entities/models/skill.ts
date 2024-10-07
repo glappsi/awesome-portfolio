@@ -12,3 +12,4 @@ export const skillSchema = z.object({
 export const skillListSchema = z.array(skillSchema);
 
 export type Skill = z.infer<typeof skillSchema>;
+export type SkillDto = z.input<typeof skillSchema>;

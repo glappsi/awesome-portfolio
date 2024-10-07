@@ -19,10 +19,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { Button } from '@/components/ui/button'
-import { CardHeadline } from '../../components/card'
 import { toast } from 'sonner'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import confetti from "canvas-confetti";
+import { CardHeadline } from './card'
+import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 
 export type SubmitHandler = (values: {email: string; message: string;}) => Promise<{id: number}>;
 
@@ -86,8 +88,10 @@ export function ContactForm({
 }
 
 export function ContactButton({
+  className,
+  iconOnly,
   onSubmit
-}: {onSubmit: SubmitHandler}) {
+}: {onSubmit: SubmitHandler, iconOnly?: boolean, className?: string}) {
   const t = useTranslations('ProfilePage');
   const [open, setOpen] = useState(false);
 
@@ -95,9 +99,11 @@ export function ContactButton({
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline" className='rounded-full' >
-            <Icon type={'PaperPlaneIcon'} className="size-4 mr-2" />
-            {t('sendMessage')}
+          <Button variant={iconOnly ? 'ghost' : 'outline'} className={cn('rounded-full', className)} >
+            <Icon type={'PaperPlaneIcon'} className={clsx("size-4", {
+              "mr-2": !iconOnly
+            })} />
+            {!iconOnly && t('sendMessage')}
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-[400px]">

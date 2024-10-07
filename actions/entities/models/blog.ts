@@ -33,4 +33,6 @@ export const blogDetailSchema = blogSchema.extend({
 })
 
 export type Blog = z.infer<typeof blogSchema>;
+export type BlogDto = z.input<typeof blogSchema>;
 export type BlogWithDetails = z.infer<typeof blogDetailSchema>;
+export type BlogWithDetailsDto = z.input<typeof blogDetailSchema>;

@@ -18,3 +18,4 @@ export const profileSchema = z.object({
 });
 
 export type Profile = z.infer<typeof profileSchema>;
+export type ProfileDto = z.input<typeof profileSchema>;

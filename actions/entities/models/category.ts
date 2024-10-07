@@ -7,3 +7,4 @@ export const categorySchema = z.object({
 });
 
 export type Category = z.infer<typeof categorySchema>;
+export type CategoryDto = z.input<typeof categorySchema>;

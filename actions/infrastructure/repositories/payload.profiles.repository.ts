@@ -2,11 +2,11 @@ import { injectable } from 'inversify';
 import config from '@payload-config';
 import { getPayloadHMR } from '@payloadcms/next/utilities';
 import { IProfilesRepository } from '../../application/repositories/profiles.repository.interface';
-import { Profile } from '../../entities/models/profile';
-import { Skill } from '../../entities/models/skill';
-import { CareerStep } from '../../entities/models/career-step';
-import { Link } from '../../entities/models/link';
-import { Testimonial } from '../../entities/models/testimonial';
+import { CareerStepDto } from '../../entities/models/career-step';
+import { ProfileDto } from '../../entities/models/profile';
+import { SkillDto } from '../../entities/models/skill';
+import { LinkDto } from '../../entities/models/link';
+import { TestimonialDto } from '../../entities/models/testimonial';
 
 @injectable()
 export class PayloadProfilesRepository implements IProfilesRepository {
@@ -16,27 +16,35 @@ export class PayloadProfilesRepository implements IProfilesRepository {
 
   constructor() {}
 
-  async getActiveProfile(): Promise<Profile> {
+  async getActiveProfile(): Promise<ProfileDto> {
     const payload = await this._getPayload();
     const blog = await payload.find({
       collection: 'profiles',
-      active: true
+      where: {
+        active: {
+          equals: true
+        }
+      }
     });
 
-    return blog.docs?.[0] as Profile;
+    return blog.docs?.[0] as ProfileDto;
   }
 
-  async getProfile(slug: string): Promise<Profile> {
+  async getProfile(slug: string): Promise<ProfileDto> {
     const payload = await this._getPayload();
     const blog = await payload.find({
       collection: 'profiles',
-      slug
+      where: {
+        slug: {
+          equals: slug
+        }
+      }
     });
 
-    return blog.docs?.[0] as Profile;
+    return blog.docs?.[0] as ProfileDto;
   }
 
-  async getSkills(): Promise<Array<Skill>> {
+  async getSkills(): Promise<Array<SkillDto>> {
     const payload = await this._getPayload();
     const skills = await payload.find({
       collection: 'skills',
@@ -44,20 +52,20 @@ export class PayloadProfilesRepository implements IProfilesRepository {
       limit: 0
     });
 
-    return skills.docs as Array<Skill>;
+    return skills.docs as Array<SkillDto>;
   }
 
-  async getCareerSteps(): Promise<Array<CareerStep>> {
+  async getCareerSteps(): Promise<Array<CareerStepDto>> {
     const payload = await this._getPayload();
     const careerSteps = await payload.find({
       collection: 'career-steps',
       sort: '-start'
     });
 
-    return careerSteps.docs as Array<CareerStep>;
+    return careerSteps.docs as Array<CareerStepDto>;
   }
 
-  async getLinks(): Promise<Array<Link>> {
+  async getLinks(): Promise<Array<LinkDto>> {
     const payload = await this._getPayload();
     const links = await payload.find({
       collection: 'links',
@@ -68,15 +76,15 @@ export class PayloadProfilesRepository implements IProfilesRepository {
       }
     });
 
-    return links.docs as Array<Link>;
+    return links.docs as Array<LinkDto>;
   }
 
-  async getTestimonials(): Promise<Array<Testimonial>> {
+  async getTestimonials(): Promise<Array<TestimonialDto>> {
     const payload = await this._getPayload();
     const skills = await payload.find({
       collection: 'testimonials',
     });
 
-    return skills.docs as Array<Testimonial>;
+    return skills.docs as Array<TestimonialDto>;
   }
 }

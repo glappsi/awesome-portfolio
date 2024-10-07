@@ -20,8 +20,8 @@ import { SkillChart } from './skill-chart';
 import { Link as TLink } from '@/actions/entities/models/link';
 import TestimonialShuffle from './testimonial';
 import Image from 'next/image';
-import { ContactButton } from './contact-form';
 import { NeonGradientCard } from '../../../../components/ui/neon-gradient-card';
+import { ContactButton } from '../../components/contact-form';
 
 type Props = {
   params: Promise<{
@@ -69,8 +69,6 @@ export default async function ProfilePage({
         profileSlug={profile.slug}
         links={links} />
       <div className="px-6 md:pt-20 pt-[var(--navbar-height)] mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
-        <div className="w-full h-px bg-zinc-800" />
-
         <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-3 ">
           <div className="flex flex-col gap-8">
             <Card
@@ -127,7 +125,7 @@ export default async function ProfilePage({
                 alt={profile.image.alt}
                 width={profile.image.width}
                 height={profile.image.height}
-                className="m-auto h-[100px] w-[100px] mb-8 rounded-full border p-1"
+                className="m-auto h-[100px] w-[100px] mb-4 md:mb-8 rounded-full border p-1"
               />
               <CardHeadline className="mb-8">{profile.name}</CardHeadline>
               {!!profile.aboutMe && (

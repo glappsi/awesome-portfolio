@@ -10,3 +10,4 @@ export const toolSchema = z.object({
 });
 
 export type Tool = z.infer<typeof toolSchema>;
+export type ToolDto = z.input<typeof toolSchema>;
