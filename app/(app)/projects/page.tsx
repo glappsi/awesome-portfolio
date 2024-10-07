@@ -12,6 +12,8 @@ const redis = Redis.fromEnv();
 
 export const revalidate = 60;
 
+export const dynamic = 'force-static';
+
 export default async function ProjectsPage() {
   const t = await getTranslations('ProjectsPage');
   const profilePromise = getActiveProfile();
