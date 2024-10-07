@@ -7,6 +7,7 @@ import { ReportView } from '../../view';
 import { Header } from './header';
 import { Eye } from 'lucide-react';
 import { filter, map } from 'lodash';
+import Gallery from '../../gallery';
 
 export const revalidate = 60;
 
@@ -45,7 +46,10 @@ export default async function BlogPage({
       <Header blog={blog} views={views} />
       <ReportView slug={slug} />
 
-      <div className="md:pt-24 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16">
+      <div className="lg:pt-8 mx-auto lg:space-y-8 max-w-7xl lg:px-8 md:space-y-16 flex flex-col-reverse lg:flex-col">
+        {!!blog.gallery?.length && (
+          <Gallery className='max-w-3xl mt-8 lg:mt-0' images={blog.gallery} />
+        )}
       <Card 
         className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
         isFullscreen>

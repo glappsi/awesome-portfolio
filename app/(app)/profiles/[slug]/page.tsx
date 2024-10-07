@@ -9,7 +9,7 @@ import Globe from '@/components/ui/globe';
 import { Devicons } from '../../components/devicons';
 import { filter, flatMap, uniq } from 'lodash';
 import Marquee from '@/components/ui/marquee';
-import { CheckCircledIcon, DotFilledIcon } from "@radix-ui/react-icons"
+import { ArrowRightIcon, DotFilledIcon } from "@radix-ui/react-icons"
 import { getFormatter, getTranslations } from 'next-intl/server';
 import { Badge } from '@/components/ui/badge';
 import IconCloud from '@/components/ui/icon-cloud';
@@ -184,28 +184,13 @@ export default async function ProfilePage({
           <div className="flex flex-col gap-8">
             <Card
               className="overflow-hidden p-4 md:p-8"
-              // background={<div className="flex flex-col gap-4 p-2">
-              //   {skillTools.map((tools, index) => (
-              //     <Marquee
-              //       key={index}
-              //       pauseOnHover
-              //       delay={`${500*index}ms`}
-              //     >
-              //       <Devicons 
-              //         className='text-6xl mx-2'
-              //         icons={tools}
-              //         variant='colored' />
-              //     </Marquee>
-              //     ))}
-              //   </div>
-              // }>
               background={<IconCloud iconSlugs={skillTools} />}>
               <CardHeadline>{t('professionalSkills')}</CardHeadline>
               <div className="flex flex-col gap-2">
                 {profSkills.map((skill) => (
                   <div className="flex gap-2 items-start" key={skill.id}>
-                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
-                    <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
+                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
+                    <span className="text-zinc-100 text-lg">{skill.title}</span>
                   </div>
                 ))}
               </div>
@@ -218,16 +203,16 @@ export default async function ProfilePage({
               <div className="flex flex-col gap-2">
                 {softSkills.map((skill) => (
                   <div className="flex gap-2 items-start" key={skill.id}>
-                    <CheckCircledIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
-                    <span className="font-bold text-zinc-100 text-lg">{skill.title}</span>
+                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[25px] !w-[25px] shrink-0 mt-[1px]" />
+                    <span className="text-zinc-100 text-lg">{skill.title}</span>
                   </div>
                 ))}
 
-                <div className="flex flex-wrap gap-2 pt-4">
+                {/* <div className="flex flex-wrap gap-2 pt-4">
                   {skillCategories.map((c) => (
                     <Badge variant="outline">#{c}</Badge>
                   ))}
-                </div>
+                </div> */}
               </div>
             </Card>
           </div>

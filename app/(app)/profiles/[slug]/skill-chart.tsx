@@ -1,7 +1,7 @@
 "use client"
 
 import { Bar, BarChart, XAxis, YAxis } from "recharts"
-import { countBy, find, flatMap, map, orderBy, reduce, sumBy, uniq } from 'lodash';
+import { countBy, filter, find, flatMap, map, orderBy, reduce, sumBy, uniq } from 'lodash';
 
 import {
   ChartConfig,
@@ -13,6 +13,7 @@ import { Project } from '@/actions/entities/models/project'
 import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge';
 import { CardSubHeadline } from '../../components/card';
+import { Tool } from '@/actions/entities/models/tool';
 
 type Props = {
   projects: Array<Project>
@@ -23,7 +24,7 @@ export function SkillChart({
 }: Props) {
   const t = useTranslations('ProfilePage');
 
-  const projectsTools = flatMap(projects, p => p.tools);
+  const projectsTools = filter(flatMap(projects, p => p.tools), t => t.hideInTopSkills) as Tool[];
   const nameCounts = countBy(projectsTools, 'name');
   const sortedNames = orderBy(
     map(nameCounts, (occurrences, name) => ({ 
@@ -31,12 +32,12 @@ export function SkillChart({
       occurrences, 
       displayName: find(projectsTools, p => p.name === name)?.displayName,
       shortName: find(projectsTools, p => p.name === name)?.shortName,
-      fill: `var(--color-${name})` 
+      fill: `hsl(var(--color-${name}))` 
     })),
     ['occurrences'],
     ['desc']
   );
-  const chartData = sortedNames.slice(0, 5);
+  const chartData = sortedNames.slice(0, 10);
   // const otherCount = sumBy(sortedNames.slice(4), 'occurrences');
   // if (otherCount > 0) {
   //   chartData.push({ name: 'other', occurrences: otherCount, displayName: undefined, fill: 'var(--color-other)' });
@@ -47,7 +48,7 @@ export function SkillChart({
       ...acc,
       [value.name]: {
         label: value.shortName || value.displayName || t(value.name),
-        color: `hsl(var(--chart-${index+1}))`,
+        color: 'var(--foreground)'//`hsl(var(--chart-${index+1}))`,
       }
     }
   }, {
@@ -60,13 +61,13 @@ export function SkillChart({
 
   return (
     <div className="flex flex-col gap-4">
-      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+      <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
         <BarChart
           accessibilityLayer
           data={chartData}
           layout="vertical"
           margin={{
-            left: 0,
+            left: 15,
           }}
         >
           <YAxis
@@ -88,14 +89,14 @@ export function SkillChart({
         </BarChart>
       </ChartContainer>
 
-      <div>
+      {/* <div>
         <CardSubHeadline>{t('allSkills')}</CardSubHeadline>
         <div className="flex flex-wrap gap-2">
           {allSkills.map((s) => (
             <Badge variant="outline">{s}</Badge>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

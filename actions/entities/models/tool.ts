@@ -4,6 +4,7 @@ export const toolSchema = z.object({
   id: z.number(),
   name: z.string(),
   noIcon: z.boolean().optional().nullable(),
+  hideInTopSkills: z.boolean().optional().nullable(),
   displayName: z.string(),
   shortName: z.string().optional().nullable(),
 });

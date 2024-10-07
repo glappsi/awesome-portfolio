@@ -24,6 +24,11 @@ export const Tools: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
     },
+    {
+      name: 'hideInTopSkills',
+      type: 'checkbox',
+      defaultValue: false,
+    },
   ],
   admin: {
     useAsTitle: 'name'

@@ -33,7 +33,7 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
         'md:border hover:border-zinc-400/50 border-zinc-600' : !!isFullscreen,
       })}
 		>
-      {!!background && <div className="opacity-25 absolute top-0 left-0 right-0 bottom-0 z-0">{background}</div>}
+      {!!background && <div className="opacity-25 absolute top-0 left-0 right-0 bottom-0 z-[-1]">{background}</div>}
       {!!badge && (
         <TooltipProvider>
           <Tooltip

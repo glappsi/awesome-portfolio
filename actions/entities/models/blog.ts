@@ -18,6 +18,12 @@ export const blogSchema = z.object({
 
 export const blogDetailSchema = blogSchema.extend({
   links: linkListSchema.optional().nullable(),
+  gallery: z.array(z.object({
+    url: z.string(),
+    alt: z.string(),
+    width: z.number(),
+    height: z.number(),
+  })).optional().nullable(),
   paragraphs: z.array(z.object({
     content: z.any(),
     markdown: z.string(),
