@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Eye, View } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Project } from '@/actions/entities/models/project';
 import clsx from 'clsx';
 import { Button } from '@/components/ui/button';
@@ -67,7 +67,7 @@ export const Article: React.FC<Props> = ({ project, isHighlight, views }) => {
 
           <div aria-label={t('categories')} className="flex flex-wrap gap-2">
             {project.categories.map((c) => (
-              <Badge variant="outline">#{c.displayName}</Badge>
+              <Badge key={c.name} variant="outline">#{c.displayName}</Badge>
             ))}
           </div>
         </div>

@@ -29,13 +29,14 @@ export async function generateMetadata({ params }: {
 }
 
 export default async function ProfileLayout({
-	children,
+  children,
 }: { children: React.ReactNode }) {
   const faqs = await generateFAQs();
 
-	return (
+  return (
     <>
       {faqs && <Script
+        id="faqs_structured_data"
         strategy="beforeInteractive"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -46,5 +47,5 @@ export default async function ProfileLayout({
         {children}
       </div>
     </>
-	);
+  );
 }

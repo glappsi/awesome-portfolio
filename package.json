@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "fmt": "npx rome check . --apply-unsafe && npx rome format . --write"
   },
   "dependencies": {
@@ -78,6 +79,8 @@
     "@types/react-dom": "^18.2.13",
     "autoprefixer": "^10.4.16",
     "clipboardy": "^4.0.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.0.0-canary.171",
     "license-checker": "^25.0.1",
     "postcss": "^8.4.31",
     "postcss-nesting": "^12.0.1",

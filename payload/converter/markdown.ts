@@ -1,5 +1,5 @@
 import { createServerFeature, getEnabledNodes, HTMLConverterFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
-import type { CollectionConfig, Field, FieldAffectingData, FieldBase, GlobalAfterReadHook } from 'payload'
+import type { CollectionConfig, Field } from 'payload'
 import {
   $convertFromMarkdownString,
   $convertToMarkdownString,
@@ -51,11 +51,10 @@ export const lexicalMarkdownHook = (contentName: string, markdownName: string): 
         collection,
         data,
         originalDoc,
-        operation,
       }) => {
         console.log('before change triggered', originalDoc, data);
         const lexicalField = collection.fields.find(field => 'name' in field && field.name === contentName) as LexicalEditorField;
-       if (!lexicalField?.editor) {
+        if (!lexicalField?.editor) {
           console.error('[LEXICAL MD HOOK]: No Editor found!');
           return data;
         }

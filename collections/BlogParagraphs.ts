@@ -1,6 +1,6 @@
-import { lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
+import { lexicalHTML } from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
-import { lexicalMarkdown, lexicalMarkdownHook, MarkdownConverterFeature } from '../payload/converter/markdown'
+import { lexicalMarkdown, lexicalMarkdownHook } from '../payload/converter/markdown'
 
 export const BlogParagraphs: CollectionConfig = {
   slug: 'blog-paragraphs',

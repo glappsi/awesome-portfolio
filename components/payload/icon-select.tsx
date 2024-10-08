@@ -20,17 +20,17 @@ export const IconSelectComponent: React.FC<WidgetSelectProps> = ({ field: { name
 
   return (
     <div className="icon-select">
-      <label className = "field-label">
+      <label className="field-label">
         Select an icon
-    </label>
-    <div style={{display: 'flex', gap: '5px', flexWrap: 'wrap'}}>
-    {IconKeys.map((iconKey) => {
-      const IconComp = Icons[iconKey];
-      return (<Button buttonStyle={value === iconKey ? 'primary' : 'secondary'} icon={<IconComp />} onClick={() => _setValue(iconKey)}></Button>);
-    })}
+      </label>
+      <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
+        {IconKeys.map((iconKey) => {
+          const IconComp = Icons[iconKey];
+          return (<Button key={iconKey} buttonStyle={value === iconKey ? 'primary' : 'secondary'} icon={<IconComp />} onClick={() => _setValue(iconKey)}></Button>);
+        })}
+      </div>
     </div>
-  </div>
-)
+  )
 }
 
 export const IconUIComponent: React.FC<WidgetSelectProps> = ({ field: { name } }) => {

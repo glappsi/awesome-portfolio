@@ -1,7 +1,7 @@
 "use client"
 
 import { Bar, BarChart, XAxis, YAxis } from "recharts"
-import { countBy, filter, find, flatMap, map, orderBy, reduce, sumBy, uniq } from 'lodash';
+import { countBy, filter, find, flatMap, map, orderBy, reduce } from 'lodash';
 
 import {
   ChartConfig,
@@ -25,12 +25,12 @@ export function SkillChart({
   const projectsTools = filter(flatMap(projects, p => p.tools), t => !t.hideInTopSkills) as Tool[];
   const nameCounts = countBy(projectsTools, 'name');
   const sortedNames = orderBy(
-    map(nameCounts, (occurrences, name) => ({ 
-      name, 
-      occurrences, 
+    map(nameCounts, (occurrences, name) => ({
+      name,
+      occurrences,
       displayName: find(projectsTools, p => p.name === name)?.displayName,
       shortName: find(projectsTools, p => p.name === name)?.shortName,
-      fill: `hsl(var(--color-${name}))` 
+      fill: `hsl(var(--color-${name}))`
     })),
     ['occurrences'],
     ['desc']
@@ -41,7 +41,7 @@ export function SkillChart({
   //   chartData.push({ name: 'other', occurrences: otherCount, displayName: undefined, fill: 'var(--color-other)' });
   // }
 
-  const chartConfig = reduce(chartData, (acc, value, index) => {
+  const chartConfig = reduce(chartData, (acc, value) => {
     return {
       ...acc,
       [value.name]: {
@@ -55,7 +55,7 @@ export function SkillChart({
     }
   }) satisfies ChartConfig;
 
-  const allSkills = uniq(map(projectsTools, t => t.displayName));
+  // const allSkills = uniq(map(projectsTools, t => t.displayName));
 
   return (
     <div className="flex flex-col gap-4">

@@ -10,6 +10,7 @@ export async function Footer() {
     <footer className="border-t-8 w-screen p-8 flex justify-center gap-4">
       {legals.map(l => (
         <Link
+          key={l.type}
           href={`/legals/${l.type}`}
           target="_blank"
           aria-label={l.type}>

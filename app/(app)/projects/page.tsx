@@ -4,7 +4,7 @@ import { Redis } from "@upstash/redis";
 import { getActiveProfile, getLinks, getProjects } from '@/actions';
 import { getTranslations } from 'next-intl/server';
 import { ArticleGrid } from './article-grid';
-import { countBy, filter, flatMap, orderBy, uniqBy } from 'lodash';
+import { countBy, filter, orderBy, uniqBy } from 'lodash';
 import { ArticleToolFilter } from './article-filter';
 import { Project } from '@/actions/entities/models/project';
 
@@ -47,7 +47,7 @@ export default async function ProjectsPage() {
 
   return (
     <div className="relative pb-16">
-      <Navigation 
+      <Navigation
         profileSlug={profile.slug}
         links={links} />
       <div className="px-6 md:pt-20 pt-[var(--navbar-height)] mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
@@ -56,7 +56,7 @@ export default async function ProjectsPage() {
             {t('title')}
           </h2>
           <p className="mt-4 text-zinc-400">
-          {t('description')}
+            {t('description')}
           </p>
         </div>
         <div>
@@ -86,7 +86,7 @@ export default async function ProjectsPage() {
         <div className="flex flex-col gap-6">
           <ArticleGrid
             projects={professionalProjects}
-            views={views}  />
+            views={views} />
         </div>
 
         {!!hobbyProjects?.length && (<>

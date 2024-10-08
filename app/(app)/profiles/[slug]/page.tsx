@@ -40,7 +40,7 @@ export async function generateStaticParams() {
     slug: profile.slug
   }]
 }
- 
+
 
 export default async function ProfilePage({
   params
@@ -58,7 +58,7 @@ export default async function ProfilePage({
   const profSkills = filter(skills, s => s.type === 'profession');
   const softSkills = filter(skills, s => s.type === 'soft');
   const skillTools = filter(uniq(flatMap(profSkills, skill => skill.tools).map(t => t.name)));
-  const skillCategories = filter(uniq(flatMap(skills, skill => skill.categories).map(t => t.displayName)));
+  // const skillCategories = filter(uniq(flatMap(skills, skill => skill.categories).map(t => t.displayName)));
 
   const contact = filter(links, l => !!l.link && l.showInNavigation) as TLink[];
   const downloads = filter(links, l => !!l.download && l.showInNavigation) as TLink[];
@@ -77,7 +77,7 @@ export default async function ProfilePage({
               <CardHeadline>{t('career')}</CardHeadline>
               <Accordion type="single" collapsible className="w-full">
                 {careerSteps.map((step, index) => (
-                  <AccordionItem className={clsx({
+                  <AccordionItem key={step.id} className={clsx({
                     '!border-0': index === (careerSteps.length - 1)
                   })} value={`item-${index}`}>
                     <AccordionTrigger className={clsx({
@@ -91,8 +91,8 @@ export default async function ProfilePage({
                     </AccordionTrigger>
                     <AccordionContent>
                       <ul className="whitespace-break-spaces text-zinc-100">
-                        {step.description?.split('\n').map((line) => (
-                          <li className="flex gap-2">
+                        {step.description?.split('\n').map((line, index) => (
+                          <li key={index} className="flex gap-2">
                             <DotFilledIcon className="shrink-0 !h-[20px] !w-[20px]" />
                             <span>{line}</span>
                           </li>
@@ -150,6 +150,7 @@ export default async function ProfilePage({
               <div className="flex flex-col gap-2">
                 {contact.map(({ link, title, icon, isExternal }) => (
                   <Link
+                    key={title}
                     href={link!}
                     target={isExternal ? "_blank" : "_self"}
                     aria-label={title}
@@ -168,6 +169,7 @@ export default async function ProfilePage({
               <div className="flex flex-col gap-2">
                 {downloads.map(({ download, title, icon }) => (
                   <Link
+                    key={title}
                     href={download!.url}
                     download={download!.filename}
                     target='_blank'
