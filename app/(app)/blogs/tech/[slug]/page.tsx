@@ -98,12 +98,12 @@ export default async function BlogPage({
 
       <div className="flex flex-col-reverse lg:flex-col">
         {!!blog.gallery?.length && (
-          <div className="w-full lg:border-b-8 lg:mb-8">
+          <div className="w-full lg:border-b-8">
             <Gallery className='mt-8 lg:mt-0 lg:mb-0 lg:max-w-min' images={blog.gallery} />
           </div>
         )}
       <Card 
-        className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+        className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 md:mt-8 py-8"
         isFullscreen>
         <header className="mb-8 flex justify-between items-start">
           <h1 className="seo-hidden">
