@@ -78,7 +78,6 @@ export const lexicalMarkdownHook = (contentName: string, markdownName: string): 
             const markdown = await new Promise(resolve => headlessEditor.getEditorState().read(() => {
               resolve($convertToMarkdownString([...transformers, UPLOAD_TRANSFORMER]));
             }));
-            console.log('markdown', markdown);
             data[markdownName] = markdown;
           } catch (e) {
             console.error({ err: e }, 'ERROR parsing editor state');
