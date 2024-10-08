@@ -59,13 +59,13 @@ export function SkillChart({
 
   return (
     <div className="flex flex-col gap-4">
-      <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
+      <ChartContainer config={chartConfig} className="h-[300px] min-h-[300px] w-full">
         <BarChart
           accessibilityLayer
           data={chartData}
           layout="vertical"
           margin={{
-            left: 15,
+            left: 19,
           }}
         >
           <YAxis

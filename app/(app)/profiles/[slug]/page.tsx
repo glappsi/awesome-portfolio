@@ -86,7 +86,7 @@ export default async function ProfilePage({
                     }, '!no-underline')}>
                       <div className="text-left">
                         <h3 className="text-zinc-100">{step.title}</h3>
-                        <span className="text-zinc-400">{step.company}, {format.dateTime(step.start, { year: 'numeric', month: 'short' })} - {step.end ? format.dateTime(step.start, { year: 'numeric', month: 'short' }) : t('today')}</span>
+                        <span className="text-zinc-400">{step.company}, {format.dateTime(step.start, { year: 'numeric', month: 'short' })} - {step.end ? format.dateTime(step.end, { year: 'numeric', month: 'short' }) : t('today')}</span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
