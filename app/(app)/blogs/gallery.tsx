@@ -17,32 +17,36 @@ type Props = {
 
 export default function Gallery({images, className}: Props) {
   return (
-    <div className={clsx("container mx-auto", className)}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
+    <div className={clsx("mx-auto", className)}>
+      <div className="flex flex-col items-center md:flex-row gap-4 overflow-auto max-w-[100vw]">
         {images.map((image, index) => (
           <Dialog key={index}>
             <DialogTrigger asChild>
-              <div className={`relative cursor-pointer overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out ${
-                image.height > image.width ? 'row-span-2' : ''
-              }`}>
+              <div 
+                className={`md:h-[300px] shrink-0 relative cursor-pointer rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out`}
+                style={{
+                  aspectRatio: `${+image.width}/${+image.height}`
+                }}>
                 <Image
                   src={image.url}
                   alt={image.alt}
-                  fill
+                  width={image.width}
+                  height={image.height}
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="transition-transform duration-300 ease-in-out hover:scale-110"
+                  className={`transition-transform duration-300 ease-in-out hover:scale-110`}
                 />
               </div>
             </DialogTrigger>
-            <DialogContent className="max-w-[90vw] max-h-[90vh] h-full">
-              <div className="relative w-full h-full flex justify-center items-center">
+            <DialogContent className="max-w-[95vw] max-h-[95vh] md:max-w-[90vw] md:max-h-[90vh] h-full p-0 md:p-6">
+              <div className="md:overflow-hidden relative w-full h-full flex justify-center items-center">
                 <Image
                   src={image.url}
                   alt={image.alt}
                   width={image.width}
                   height={image.height}
                   sizes="90vw"
+                  className="max-h-full max-w-full"
                 />
               </div>
             </DialogContent>

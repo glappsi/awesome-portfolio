@@ -2,16 +2,18 @@ import Link from "next/link";
 import React from "react";
 import { BlogWithDetails } from '@/actions/entities/models/blog';
 import { Icon } from '@/components/ui/icon';
+import { cn } from '../../../../../lib/utils';
 
 type Props = {
 	blog: BlogWithDetails
-
-	views: number;
+  hideBorder?: boolean;
 };
-export const Header: React.FC<Props> = ({ blog, views }) => {
+export const Header: React.FC<Props> = ({ blog, hideBorder }) => {
 	return (
 		<header
-			className="border-b-8 pt-[calc(var(--navbar-height)/2)] md:pt-0 relative isolate overflow-hidden bg-gradient-to-tl from-black via-zinc-900 to-black"
+			className={cn("border-b-8 pt-[calc(var(--navbar-height)/2)] md:pt-0 relative isolate overflow-hidden bg-gradient-to-tl from-black via-zinc-900 to-black", {
+        'md:border-b-0': hideBorder
+      })}
 		>
 			{/* <div
 				className={`fixed inset-x-0 top-0 z-50 backdrop-blur lg:backdrop-blur-none duration-200 border-b lg:bg-transparent ${
