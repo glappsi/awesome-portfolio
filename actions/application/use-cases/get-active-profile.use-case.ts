@@ -17,7 +17,9 @@ export function getActiveProfileUseCase(): Effect.Effect<Profile, ProfileNotFoun
       return profile;
     },
     catch(error: unknown) {
-      return new ProfileNotFoundError()
+      return new ProfileNotFoundError({
+        originalError: error
+      })
     }
   });
 

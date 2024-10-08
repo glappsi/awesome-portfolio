@@ -24,6 +24,7 @@ export interface Config {
     links: Link;
     testimonials: Testimonial;
     messages: Message;
+    faqs: Faq;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -157,6 +158,7 @@ export interface Blog {
   published?: boolean | null;
   author: string;
   authorImage?: (number | null) | Media;
+  thumbnail?: (number | null) | Media;
   gallery?: (number | Media)[] | null;
   date: string;
   paragraphs?: (number | BlogParagraph)[] | null;
@@ -274,6 +276,17 @@ export interface Message {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  question: string;
+  answer: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -330,6 +343,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'messages';
         value: number | Message;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: number | Faq;
       } | null);
   globalSlug?: string | null;
   user: {

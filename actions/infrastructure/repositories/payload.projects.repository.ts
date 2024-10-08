@@ -5,6 +5,7 @@ import { ProjectDto } from '../../entities/models/project';
 import { IProjectsRepository } from '../../application/repositories/projects.repository.interface';
 import { BlogDto } from '../../entities/models/blog';
 import { Blog } from '../../../payload-types';
+import { getSafeLocale } from '@/i18n/utils';
 
 @injectable()
 export class PayloadProjectsRepository implements IProjectsRepository {
@@ -16,16 +17,19 @@ export class PayloadProjectsRepository implements IProjectsRepository {
 
   async getProjects(): Promise<Array<ProjectDto>> {
     const payload = await this._getPayload();
+    const locale = await getSafeLocale();
     const projects = await payload.find({
       collection: 'projects',
       limit: 0,
       depth: 1,
+      locale,
       sort: '-end'
     });
     for (const project of projects?.docs) {
       if ((project.blog as BlogDto)?.authorImage) {
          const media = await payload.findByID({
           collection: 'media',
+          locale,
           id: (project.blog as {authorImage:number}).authorImage
         });
         if (typeof media.url === "string") {

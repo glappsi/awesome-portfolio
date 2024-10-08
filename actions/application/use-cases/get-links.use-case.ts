@@ -17,7 +17,9 @@ export function getLinksUseCase(): Effect.Effect<Array<Link>, LinksNotFoundError
       return links;
     },
     catch(error: unknown) {
-      return new LinksNotFoundError()
+      return new LinksNotFoundError({
+        originalError: error
+      })
     }
   });
 

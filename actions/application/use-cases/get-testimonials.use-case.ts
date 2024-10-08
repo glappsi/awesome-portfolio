@@ -17,7 +17,9 @@ export function getTestimonialsUseCase(): Effect.Effect<Array<Testimonial>, Test
       return testimonials;
     },
     catch(error: unknown) {
-      return new TestimonialsNotFoundError()
+      return new TestimonialsNotFoundError({
+        originalError: error
+      })
     }
   });
 

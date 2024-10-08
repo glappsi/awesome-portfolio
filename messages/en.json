@@ -22,18 +22,26 @@
     "z": {
       "email": "A valid email is required",
       "message": "Please enter a message"
+    },
+    "seo": {
+      "title": "About me",
+      "description": "Everything work related about me, my technical skills, career, contact and further links. Reach out to me :)"
     }
   },
   "ProjectsPage": {
     "title": "Projects",
-    "description": "See a overview over all my projects, professional or hobby.",
+    "description": "See an overview over all my projects, professional or hobby.",
     "soon": "SOON",
     "today": "today",
     "readMore": "Read more",
     "tools": "Tools",
     "categories": "Tags",
     "profession": "Professional Projects",
-    "hobby": "Hobby Projects"
+    "hobby": "Hobby Projects",
+    "seo": {
+      "title": "Projects",
+      "description": "Overview over all my projects, professional or hobby."
+    }
   },
   "Navigation": {
     "home": "Home",

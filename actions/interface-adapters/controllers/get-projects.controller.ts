@@ -3,7 +3,7 @@ import { getProjectsUseCase } from '../../application/use-cases/get-projects.use
 import { Project } from '../../entities/models/project';
 import { ProjectsNotFoundError } from '../../entities/errors/projects-not-found.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
-import { staticImage } from '@/lib/server-utils';
+import { staticImage } from '@/lib/images';
 
 function presenter(projects: Array<Project>) {
   return [

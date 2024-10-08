@@ -17,7 +17,9 @@ export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotF
       return projects;
     },
     catch(error: unknown) {
-      return new ProjectsNotFoundError()
+      return new ProjectsNotFoundError({
+        originalError: error
+      })
     }
   });
 

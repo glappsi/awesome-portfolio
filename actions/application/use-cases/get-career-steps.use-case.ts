@@ -17,7 +17,9 @@ export function getCareerStepsUseCase(): Effect.Effect<Array<CareerStep>, Career
       return careerSteps;
     },
     catch(error: unknown) {
-      return new CareerStepsNotFoundError()
+      return new CareerStepsNotFoundError({
+        originalError: error
+      })
     }
   });
 

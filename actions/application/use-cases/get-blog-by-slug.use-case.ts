@@ -17,7 +17,9 @@ export function getBlogBySlugUseCase(slug: string): Effect.Effect<BlogWithDetail
       return blog;
     },
     catch(error: unknown) {
-      return new BlogNotFoundError()
+      return new BlogNotFoundError({
+        originalError: error
+      })
     }
   });
 

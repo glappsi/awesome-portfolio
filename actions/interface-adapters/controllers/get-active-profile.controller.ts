@@ -3,7 +3,7 @@ import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Profile } from '../../entities/models/profile';
 import { ProfileNotFoundError } from '../../entities/errors/profile-not-found.error';
 import { getActiveProfileUseCase } from '../../application/use-cases/get-active-profile.use-case';
-import { staticImage } from '@/lib/server-utils';
+import { staticImage } from '@/lib/images';
 
 function presenter(profile: Profile) {
   return {

@@ -30,7 +30,9 @@ export function createMessageUseCase(dto: CreateMessageDto): Effect.Effect<numbe
         return id;
       },
       catch(error: unknown) {
-        return new MessageCouldNotBeCreatedError()
+        return new MessageCouldNotBeCreatedError({
+          originalError: error
+        })
       }
     });
 

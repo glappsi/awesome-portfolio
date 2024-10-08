@@ -12,6 +12,7 @@ import { getActiveProfileController } from './interface-adapters/controllers/get
 import { getTestimonialsController } from './interface-adapters/controllers/get-testimonials.controller';
 import { createMessageController } from './interface-adapters/controllers/create-message.controller';
 import { CreateMessageDto } from './entities/models/message';
+import { getFAQsController } from './interface-adapters/controllers/get-faqs.controller';
 
 initializeContainer();
 
@@ -45,6 +46,10 @@ export async function getLinks() {
 
 export async function getTestimonials() {
   return await Effect.runPromise(getTestimonialsController());
+}
+
+export async function getFAQs() {
+  return await Effect.runPromise(getFAQsController());
 }
 
 export async function createMessage(message: CreateMessageDto) {

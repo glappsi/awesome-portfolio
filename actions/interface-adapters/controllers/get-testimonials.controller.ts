@@ -3,7 +3,7 @@ import { TestimonialsNotFoundError } from '../../entities/errors/testimonials-no
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Testimonial } from '../../entities/models/testimonial';
 import { getTestimonialsUseCase } from '../../application/use-cases/get-testimonials.use-case';
-import { staticImage } from '@/lib/server-utils';
+import { staticImage } from '@/lib/images';
 
 function presenter(testimonials: Array<Testimonial>) {
   return [

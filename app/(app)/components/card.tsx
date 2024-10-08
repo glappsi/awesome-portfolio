@@ -39,8 +39,9 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
           <Tooltip
             open={badgeTooltipOpen}
             onOpenChange={setIsBadgeTooltipOpen}>
-            <TooltipTrigger className="absolute top-[-30px] right-5 z-1">
+            <TooltipTrigger className="absolute max-h-[45px] top-[-22.5px] right-5 z-1">
               <ShimmerButton 
+                className="max-h-[45px]"
                 background={badgeLight ? 'rgba(255, 255, 255, 1)' : undefined}
                 shimmerColor={badgeLight ? '#000000' : undefined}
                 onClick={(e) => {

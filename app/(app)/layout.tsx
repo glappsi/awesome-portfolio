@@ -7,47 +7,64 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getLocale, getMessages} from 'next-intl/server';
 import { Toaster } from "@/components/ui/sonner"
 
-export const metadata: Metadata = {
-  title: {
-    default: "glappa.dev",
-    template: "%s | glappa.dev",
-  },
-  description: "Senior Web Developer and Frontend enthusiast",
-  openGraph: {
-    title: "glappa.dev",
-    description:
-      "Senior Web Developer and Frontend enthusiast",
-    url: "https://glappa.dev",
-    siteName: "glappa.dev",
-    images: [
-      {
-        url: "https://glappa.dev/SEO.jpg",
-        width: 1920,
-        height: 1080,
-      },
-    ],
-    locale: "en-US",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+
+  return {
+    title: {
+      default: "glappa.dev",
+      template: "%s | glappa.dev",
+    },
+    description: "Senior Web Developer and Frontend enthusiast",
+    alternates: {
+      canonical: `https://${process.env.APP_URL}`,
+    },
+    openGraph: {
+      title: "glappa.dev",
+      description:
+        "Senior Web Developer and Frontend enthusiast",
+      url: `https://${process.env.APP_URL}`,
+      siteName: "glappa.dev",
+      images: [
+        {
+          url: `https://${process.env.APP_URL}/seo_1024x1024.jpg`,
+          width: 1024,
+          height: 1024,
+        },
+        {
+          url: `https://${process.env.APP_URL}/seo_1024x576.jpg`,
+          width: 1024,
+          height: 576,
+        },
+        {
+          url: `https://${process.env.APP_URL}/seo_576x1024.jpg`,
+          width: 576,
+          height: 1024,
+        },
+      ],
+      locale,
+      type: "website",
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  twitter: {
-    title: "Florian Glappa",
-    card: "summary_large_image",
-  },
-  icons: {
-    shortcut: "/favicon.png",
-  },
-};
+    twitter: {
+      title: "Florian Glappa",
+      card: "summary_large_image",
+    },
+    icons: {
+      shortcut: "/favicon.png",
+    },
+  };
+}
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",

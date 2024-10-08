@@ -8,6 +8,47 @@ import { Header } from './header';
 import { Eye } from 'lucide-react';
 import { filter, map } from 'lodash';
 import Gallery from '../../gallery';
+import { generateMetadata as generateBaseMetadata } from '../../../layout';
+import { merge } from 'lodash';
+import { generateBlog } from '@/lib/google-structured-data';
+import Script from 'next/script';
+
+export async function generateMetadata({ params }: {
+  params: Promise<{
+    slug: string
+  }>
+}) {
+  const baseMetadata = await generateBaseMetadata();
+  const blog = await getBlogBySlug((await params).slug);
+
+  const metadata = merge(baseMetadata, {
+    title: blog.title,
+    description: blog.summary,
+    alternates: {
+      canonical: `https://${process.env.APP_URL}/blogs/${blog.type}/${blog.slug}`
+    },
+    openGraph: {
+      title: blog.title,
+      description: blog.summary,
+      url: `https://${process.env.APP_URL}/blogs/${blog.type}/${blog.slug}`
+    },
+  });
+
+  if (blog.thumbnail) {
+    metadata.openGraph = {
+      ...metadata.openGraph,
+      images: [
+        {
+          url: `https://${process.env.APP_URL}${blog.thumbnail.url}`,
+          width: blog.thumbnail.width,
+          height: blog.thumbnail.height,
+        }
+      ]
+    }
+  }
+
+  return metadata;
+}
 
 export const revalidate = 60;
 
@@ -37,11 +78,20 @@ export default async function BlogPage({
 }: Props) {
   const slug = (await params).slug;
   const blog = await getBlogBySlug(slug);
+  const blogData = generateBlog(blog);
 
   const views =
     (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
 
   return (
+    <>
+    {blogData && <Script
+      strategy="beforeInteractive"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(blogData),
+      }}
+    />}
     <div className="min-h-screen">
       <Header blog={blog} views={views} />
       <ReportView slug={slug} />
@@ -93,5 +143,6 @@ export default async function BlogPage({
       </Card>
       </div>
     </div>
+    </>
   )
 }

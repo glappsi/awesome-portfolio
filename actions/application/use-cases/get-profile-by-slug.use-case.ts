@@ -17,7 +17,9 @@ export function getProfileBySlugUseCase(slug: string): Effect.Effect<Profile, Pr
       return profile;
     },
     catch(error: unknown) {
-      return new ProfileNotFoundError()
+      return new ProfileNotFoundError({
+        originalError: error
+      })
     }
   });
 

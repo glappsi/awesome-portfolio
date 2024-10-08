@@ -83,7 +83,3 @@
   overflow: hidden;
   white-space: nowrap;
 }
-
-.recharts-wrapper {
-  touch-action: manipulation;
-}

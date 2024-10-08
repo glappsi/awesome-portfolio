@@ -17,7 +17,9 @@ export function getSkillsUseCase(): Effect.Effect<Array<Skill>, SkillsNotFoundEr
       return skills;
     },
     catch(error: unknown) {
-      return new SkillsNotFoundError()
+      return new SkillsNotFoundError({
+        originalError: error
+      })
     }
   });
 

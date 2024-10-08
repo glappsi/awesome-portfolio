@@ -178,7 +178,7 @@ function scrollToTop() {
     // Listen for the scroll event to detect when scrolling stops
     const checkIfScrollingStopped = () => {
       // If user has scrolled to the top, resolve the promise
-      if (window.pageYOffset === 0) {
+      if (window.scrollY === 0) {
         window.removeEventListener('scroll', checkIfScrollingStopped);
         resolve({});
       }
@@ -186,5 +186,6 @@ function scrollToTop() {
 
     // Add a scroll event listener to check when scrolling ends
     window.addEventListener('scroll', checkIfScrollingStopped);
+    checkIfScrollingStopped();
   });
 }

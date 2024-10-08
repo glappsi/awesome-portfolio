@@ -10,7 +10,13 @@ export const blogSchema = z.object({
   authorImage: z.object({
     url: z.string(),
     alt: z.string(),
-  }).optional(),
+  }).optional().nullable(),
+  thumbnail: z.object({
+    url: z.string(),
+    alt: z.string(),
+    width: z.number(),
+    height: z.number(),
+  }).optional().nullable(),
   date: z.string().transform((str) => new Date(str)),
   published: z.boolean().optional().nullable(),
   type: z.string(),
