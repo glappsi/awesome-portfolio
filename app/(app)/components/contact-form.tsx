@@ -106,7 +106,7 @@ export function ContactButton({
             {!iconOnly && t('sendMessage')}
           </Button>
         </DialogTrigger>
-        <DialogContent className="max-w-[400px]">
+        <DialogContent className="max-w-[400px] gap-0">
           <CardHeadline className="mb-4">{t('sendMessage')}</CardHeadline>
           <ContactForm onSubmit={(val) => onSubmit(val)
             .then((result) => {
