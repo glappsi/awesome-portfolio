@@ -13,6 +13,9 @@ import { getTestimonialsController } from './interface-adapters/controllers/get-
 import { createMessageController } from './interface-adapters/controllers/create-message.controller';
 import { CreateMessageDto } from './entities/models/message';
 import { getFAQsController } from './interface-adapters/controllers/get-faqs.controller';
+import { getLegalsController } from './interface-adapters/controllers/get-legals.controller';
+import { getLegalByTypeController } from './interface-adapters/controllers/get-legal-by-type.controller';
+import { LegalDto } from './entities/models/legal';
 
 initializeContainer();
 
@@ -46,6 +49,14 @@ export async function getLinks() {
 
 export async function getTestimonials() {
   return await Effect.runPromise(getTestimonialsController());
+}
+
+export async function getLegals() {
+  return await Effect.runPromise(getLegalsController());
+}
+
+export async function getLegalByType(type: LegalDto['type']) {
+  return await Effect.runPromise(getLegalByTypeController(type));
 }
 
 export async function getFAQs() {

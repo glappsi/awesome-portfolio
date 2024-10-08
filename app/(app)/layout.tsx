@@ -6,6 +6,7 @@ import { Analytics } from "./components/analytics";
 import {NextIntlClientProvider} from 'next-intl';
 import {getLocale, getMessages} from 'next-intl/server';
 import { Toaster } from "@/components/ui/sonner"
+import { Footer } from './components/footer';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -97,6 +98,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           {children}
+          <Footer />
           <Toaster />
         </NextIntlClientProvider>
       </body>

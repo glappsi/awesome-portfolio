@@ -22,6 +22,7 @@ import { Testimonials } from './collections/Testimonials'
 import { Messages } from './collections/Messages'
 import { availableLocales } from './i18n/utils'
 import { FAQs } from './collections/FAQs'
+import { Legals } from './collections/Legals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,7 +43,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Tools, Categories, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles, Links, Testimonials, Messages, FAQs],
+  collections: [Users, Media, Tools, Categories, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles, Links, Testimonials, Messages, FAQs, Legals],
   localization: {
     locales: [...availableLocales],
     defaultLocale: 'en',

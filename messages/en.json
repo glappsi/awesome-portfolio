@@ -48,6 +48,10 @@
     "profile": "Profile",
     "projects": "Projects"
   },
+  "LegalsPage": {
+    "privacy": "Privacy Policy",
+    "imprint": "Imprint"
+  },
   "form": {
     "loading": "Loading..."
   }

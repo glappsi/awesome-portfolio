@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { getBlogBySlug, getProjects } from '@/actions';
 import { Card } from '../../../components/card';
-import { BlogParagraph } from '../../paragraph';
+import { DynamicContent } from '../../../components/content';
 import { Redis } from "@upstash/redis";
 import { ReportView } from '../../view';
 import { Header } from './header';
@@ -96,7 +96,7 @@ export default async function BlogPage({
       <Header blog={blog} views={views} />
       <ReportView slug={slug} />
 
-      <div className="lg:pt-8 mx-auto lg:space-y-8 max-w-7xl lg:px-8 md:space-y-16 flex flex-col-reverse lg:flex-col">
+      <div className="flex flex-col-reverse lg:flex-col">
         {!!blog.gallery?.length && (
           <Gallery className='max-w-3xl mt-8 lg:mt-0' images={blog.gallery} />
         )}
@@ -134,10 +134,10 @@ export default async function BlogPage({
           className="prose prose-lg prose-gray max-w-none dark:prose-invert"
         >
           {blog.paragraphs.map((paragraph, index) => (
-            <BlogParagraph
+            <DynamicContent
               key={index}
-              paragraph={paragraph}
-            ></BlogParagraph>
+              content={paragraph}
+            ></DynamicContent>
           ))}
         </div>
       </Card>
