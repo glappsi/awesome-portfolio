@@ -80,7 +80,7 @@ export const Card: React.FC<PropsWithChildren & {className?: string, background?
 
 export const CardHeadline: React.FC<PropsWithChildren & {className?: string}> = ({ children, className }) => {
   return (<h2
-    className={clsx('pb-4 md:mb-8 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display', className)}
+    className={clsx('mb-4 md:mb-8 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display', className)}
   >
     {children}
   </h2>);
