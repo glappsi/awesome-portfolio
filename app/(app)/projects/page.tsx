@@ -33,8 +33,9 @@ export default async function ProjectsPage() {
   }, {} as Record<string, number>);
 
   const publishedProjects = filter(allProjects, (p: Project) => p.published) as Project[];
-  const professionalProjects = filter(publishedProjects, (p: Project) => p.type === 'profession') as Project[];
-  const hobbyProjects = filter(publishedProjects, (p: Project) => p.type === 'hobby') as Project[];
+  const highlightProjects = filter(publishedProjects, (p: Project) => p.highlight) as Project[];
+  const professionalProjects = filter(publishedProjects, (p: Project) => p.type === 'profession' && !p.highlight) as Project[];
+  const hobbyProjects = filter(publishedProjects, (p: Project) => p.type === 'hobby' && !p.highlight) as Project[];
 
   const allTools = publishedProjects.flatMap(p => p.tools);
   const toolsCount = countBy(allTools, t => t.name); // lodash method to count occurrences of each tool by name
@@ -62,6 +63,20 @@ export default async function ProjectsPage() {
           <ArticleToolFilter tools={tools} />
         </div>
 
+        {!!highlightProjects?.length && (<>
+          <div className="flex gap-6 items-center">
+            <h3 className="shrink-0 text-2xl font-bold text-zinc-100">{t('highlight')}</h3>
+            <div className="flex w-full h-px bg-zinc-800">
+            </div>
+          </div>
+          <div className="flex flex-col gap-6">
+            <ArticleGrid
+              projects={highlightProjects}
+              views={views}
+              isHighlight />
+          </div>
+        </>)}
+
         <div className="flex gap-6 items-center">
           <h3 className="shrink-0 text-2xl font-bold text-zinc-100">{t('profession')}</h3>
           <div className="flex w-full h-px bg-zinc-800">
@@ -71,7 +86,7 @@ export default async function ProjectsPage() {
         <div className="flex flex-col gap-6">
           <ArticleGrid
             projects={professionalProjects}
-            views={views} />
+            views={views}  />
         </div>
 
         {!!hobbyProjects?.length && (<>

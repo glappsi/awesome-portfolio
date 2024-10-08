@@ -10,6 +10,7 @@ export const projectSchema = z.object({
   start: z.string().transform((str) => new Date(str)),  // Parse ISO string to Date
   end: z.string().transform((str) => new Date(str)).optional().nullable(),
   published: z.boolean().optional().nullable(),
+  highlight: z.boolean().optional().nullable(),
   type: z.enum(['profession', 'hobby']),
   badge: z.object({
     url: z.string(),

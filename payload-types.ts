@@ -194,6 +194,7 @@ export interface Project {
   title: string;
   description?: string | null;
   published?: boolean | null;
+  highlight?: boolean | null;
   start: string;
   end?: string | null;
   type?: ('profession' | 'hobby') | null;

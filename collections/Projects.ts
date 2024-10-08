@@ -19,6 +19,10 @@ export const Projects: CollectionConfig = {
       type: 'checkbox',
     },
     {
+      name: 'highlight',
+      type: 'checkbox',
+    },
+    {
       name: 'start',
       type: 'date',
       required: true,

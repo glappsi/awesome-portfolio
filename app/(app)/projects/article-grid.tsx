@@ -12,9 +12,10 @@ import { Tool } from '../../../actions/entities/models/tool';
 type Props = {
   projects: Array<Project>;
   views: Record<string, number>;
+  isHighlight?: boolean;
 }
 
-export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
+export const ArticleGrid: React.FC<Props> = ({ projects, views, isHighlight }) => {
   const [highlightId, setHighlightId] = useState(0);
   const selection = useArticleFilterStore((state) => state.selection);
 
@@ -29,6 +30,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
         {(evenIndexed as Array<Project>).map((project) => (
           <Card 
             key={project.id}
+            isHighlight={isHighlight && indexOf(projects, project) === 0}
             onClick={() => setHighlightId(indexOf(projects, project))}
             badge={!!project.badge && <Image
               src={project.badge!.url}
@@ -70,6 +72,7 @@ export const ArticleGrid: React.FC<Props> = ({ projects, views }) => {
       {filteredProjects.map((project) => (
         <Card 
           key={project.id}
+          isHighlight={isHighlight && indexOf(projects, project) === 0}
           onClick={() => setHighlightId(indexOf(projects, project))}
           badge={!!project.badge && <Image
             src={project.badge!.url}
