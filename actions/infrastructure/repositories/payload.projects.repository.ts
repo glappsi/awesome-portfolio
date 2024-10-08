@@ -36,6 +36,17 @@ export class PayloadProjectsRepository implements IProjectsRepository {
           (project.blog as Blog).authorImage = media;
         }
       }
+
+      if ((project.blog as BlogDto)?.thumbnail) {
+        const media = await payload.findByID({
+         collection: 'media',
+         locale,
+         id: (project.blog as {thumbnail:number}).thumbnail
+       });
+       if (typeof media.url === "string") {
+         (project.blog as Blog).thumbnail = media;
+       }
+     }
     }
     
     return projects?.docs as Array<ProjectDto>;
