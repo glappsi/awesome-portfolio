@@ -1,7 +1,7 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
-import { ZodParseError } from '../../entities/errors/zod-parse.error';
+import { Effect } from 'effect';
 import { LinksNotFoundError } from '../../entities/errors/links-not-found.error';
+import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Link, linkListSchema } from '../../entities/models/link';
 
 export function getLinksUseCase(): Effect.Effect<
@@ -13,7 +13,7 @@ export function getLinksUseCase(): Effect.Effect<
   const program = Effect.tryPromise({
     async try() {
       const links = await repository.getLinks();
-      if (!links) {
+      if (!links?.length) {
         throw new LinksNotFoundError();
       }
 

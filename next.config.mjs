@@ -16,6 +16,10 @@ const nextConfig = {
         hostname: process.env.APP_URL,
         pathname: '/api/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co'
+      },
     ],
   },
   eslint: {

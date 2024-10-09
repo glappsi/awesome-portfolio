@@ -1,16 +1,12 @@
 import { Effect } from 'effect';
 import { getProjectsUseCase } from '../../application/use-cases/get-projects.use-case';
-import { Project } from '../../entities/models/project';
 import { ProjectsNotFoundError } from '../../entities/errors/projects-not-found.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
-import { staticImage } from '@/lib/images';
+import { Project } from '../../entities/models/project';
 
 function presenter(projects: Array<Project>) {
   return [
-    ...projects.map((p) => ({
-      ...p,
-      badge: staticImage(p.badge),
-    })),
+    ...projects
   ];
 }
 

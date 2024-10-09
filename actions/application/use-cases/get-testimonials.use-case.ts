@@ -1,11 +1,11 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
+import { Effect } from 'effect';
+import { TestimonialsNotFoundError } from '../../entities/errors/testimonials-not-found.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import {
   Testimonial,
   testimonialListSchema,
 } from '../../entities/models/testimonial';
-import { TestimonialsNotFoundError } from '../../entities/errors/testimonials-not-found.error';
 
 export function getTestimonialsUseCase(): Effect.Effect<
   Array<Testimonial>,
@@ -16,7 +16,7 @@ export function getTestimonialsUseCase(): Effect.Effect<
   const program = Effect.tryPromise({
     async try() {
       const testimonials = await repository.getTestimonials();
-      if (!testimonials) {
+      if (!testimonials?.length) {
         throw new TestimonialsNotFoundError();
       }
 

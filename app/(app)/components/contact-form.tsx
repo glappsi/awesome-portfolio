@@ -128,14 +128,13 @@ export function ContactButton({
         <DialogContent className='max-w-[400px] gap-0'>
           <CardHeadline className='mb-4'>{t('sendMessage')}</CardHeadline>
           <ContactForm
-            onSubmit={(val) =>
-              onSubmit(val).then((result) => {
-                toast(t('sent'));
-                confetti();
-                setOpen(false);
-                return result;
-              })
-            }
+            onSubmit={async (val) => {
+              const result = await onSubmit(val);
+              toast(t('sent'));
+              confetti();
+              setOpen(false);
+              return result;
+            }}
           />
         </DialogContent>
       </Dialog>

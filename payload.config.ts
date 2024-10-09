@@ -1,33 +1,33 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import {
-  lexicalEditor,
   defaultEditorConfig,
   defaultEditorFeatures,
+  lexicalEditor,
   LexicalEditorProps,
 } from '@payloadcms/richtext-lexical';
+import { s3Storage } from '@payloadcms/storage-s3';
 import path from 'path';
 import { buildConfig } from 'payload';
-import { fileURLToPath } from 'url';
 import sharp from 'sharp';
-import { s3Storage } from '@payloadcms/storage-s3';
+import { fileURLToPath } from 'url';
 
-import { Users } from './collections/Users';
-import { Media } from './collections/Media';
-import { Tools } from './collections/Tools';
-import { Categories } from './collections/Categories';
 import { BlogParagraphs } from './collections/BlogParagraphs';
 import { Blogs } from './collections/Blogs';
-import { Projects } from './collections/Projects';
-import { Skills } from './collections/Skills';
 import { CareerSteps } from './collections/CareerSteps';
-import { Profiles } from './collections/Profiles';
-import { Links } from './collections/Links';
-import { Testimonials } from './collections/Testimonials';
-import { Messages } from './collections/Messages';
-import { availableLocales } from './i18n/utils';
+import { Categories } from './collections/Categories';
 import { FAQs } from './collections/FAQs';
 import { Legals } from './collections/Legals';
+import { Links } from './collections/Links';
+import { Media } from './collections/Media';
+import { Messages } from './collections/Messages';
+import { Profiles } from './collections/Profiles';
+import { Projects } from './collections/Projects';
+import { Skills } from './collections/Skills';
+import { Testimonials } from './collections/Testimonials';
+import { Tools } from './collections/Tools';
+import { Users } from './collections/Users';
+import { availableLocales } from './i18n/utils';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

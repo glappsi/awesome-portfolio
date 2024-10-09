@@ -1,8 +1,8 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
+import { Effect } from 'effect';
+import { LegalsNotFoundError } from '../../entities/errors/legals-not-found.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Legal, legalListSchema } from '../../entities/models/legal';
-import { LegalsNotFoundError } from '../../entities/errors/legals-not-found.error';
 
 export function getLegalsUseCase(): Effect.Effect<
   Array<Legal>,
@@ -13,7 +13,8 @@ export function getLegalsUseCase(): Effect.Effect<
   const program = Effect.tryPromise({
     async try() {
       const legals = await repository.getLegals();
-      if (!legals) {
+      const hasAllLegals = legals?.length && ['privacy', 'imprint'].every(type => legals.find(l => l.type === type));
+      if (!hasAllLegals) {
         throw new LegalsNotFoundError();
       }
 

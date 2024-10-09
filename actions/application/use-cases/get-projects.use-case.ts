@@ -1,8 +1,8 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
+import { Effect } from 'effect';
+import { ProjectsNotFoundError } from '../../entities/errors/projects-not-found.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Project, projectListSchema } from '../../entities/models/project';
-import { ProjectsNotFoundError } from '../../entities/errors/projects-not-found.error';
 
 export function getProjectsUseCase(): Effect.Effect<
   Array<Project>,
@@ -13,7 +13,7 @@ export function getProjectsUseCase(): Effect.Effect<
   const program = Effect.tryPromise({
     async try() {
       const projects = await repository.getProjects();
-      if (!projects) {
+      if (!projects?.length) {
         throw new ProjectsNotFoundError();
       }
 

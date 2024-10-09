@@ -37,3 +37,5 @@ next-env.d.ts
 
 .contentlayer
 third-party-licenses.json
+
+backup.sql

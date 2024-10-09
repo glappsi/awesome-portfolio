@@ -1,8 +1,8 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
+import { Effect } from 'effect';
+import { SkillsNotFoundError } from '../../entities/errors/skills-not-found.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Skill, skillListSchema } from '../../entities/models/skill';
-import { SkillsNotFoundError } from '../../entities/errors/skills-not-found.error';
 
 export function getSkillsUseCase(): Effect.Effect<
   Array<Skill>,
@@ -13,7 +13,7 @@ export function getSkillsUseCase(): Effect.Effect<
   const program = Effect.tryPromise({
     async try() {
       const skills = await repository.getSkills();
-      if (!skills) {
+      if (!skills?.length) {
         throw new SkillsNotFoundError();
       }
 

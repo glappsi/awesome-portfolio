@@ -114,7 +114,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
             </TooltipContent>
           </Tooltip>
         </DockIcon>
-        <Separator orientation='vertical' className='h-full' />
+        <Separator style={downloads?.length ? {} : { display: 'none' }} orientation='vertical' className='h-full' />
         {downloads.map(({ download, title, icon, symbol }) => (
           <DockIcon key={title}>
             <Tooltip>

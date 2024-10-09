@@ -17,5 +17,13 @@ export const Media: CollectionConfig = {
       type: 'checkbox',
     },
   ],
+  hooks: {
+    afterRead: [async ({ doc }) => {
+      if (doc.url && process.env.APP_URL) {
+        doc.url = `https://${process.env.APP_URL}${doc.url}`;
+      }
+      return doc;
+    }],
+  },
   upload: true,
 };

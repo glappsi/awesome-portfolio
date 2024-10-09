@@ -1,7 +1,7 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
-import { ZodParseError } from '../../entities/errors/zod-parse.error';
+import { Effect } from 'effect';
 import { CareerStepsNotFoundError } from '../../entities/errors/career-steps-not-found.error';
+import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import {
   CareerStep,
   careerStepListSchema,
@@ -16,7 +16,7 @@ export function getCareerStepsUseCase(): Effect.Effect<
   const program = Effect.tryPromise({
     async try() {
       const careerSteps = await repository.getCareerSteps();
-      if (!careerSteps) {
+      if (!careerSteps?.length) {
         throw new CareerStepsNotFoundError();
       }
 
