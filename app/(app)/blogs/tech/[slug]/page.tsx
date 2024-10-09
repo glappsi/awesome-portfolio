@@ -1,17 +1,16 @@
-import Image from 'next/image';
 import { getBlogBySlug, getProjects } from '@/actions';
+import { generateBlog } from '@/lib/google-structured-data';
+import { Redis } from '@upstash/redis';
+import { filter, map, merge } from 'lodash';
+import { Eye } from 'lucide-react';
+import Image from 'next/image';
+import Script from 'next/script';
 import { Card } from '../../../components/card';
 import { DynamicContent } from '../../../components/content';
-import { Redis } from '@upstash/redis';
+import { generateMetadata as generateBaseMetadata } from '../../../layout';
+import Gallery from '../../gallery';
 import { ReportView } from '../../view';
 import { Header } from './header';
-import { Eye } from 'lucide-react';
-import { filter, map } from 'lodash';
-import Gallery from '../../gallery';
-import { generateMetadata as generateBaseMetadata } from '../../../layout';
-import { merge } from 'lodash';
-import { generateBlog } from '@/lib/google-structured-data';
-import Script from 'next/script';
 
 export async function generateMetadata({
   params,
@@ -55,6 +54,8 @@ export async function generateMetadata({
 export const revalidate = 60;
 
 export const dynamicParams = false;
+
+export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
   const projects = await getProjects();

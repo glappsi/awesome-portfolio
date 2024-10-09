@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import clsx from 'clsx';
+import Image from 'next/image';
 
 // Define the structure of our image objects
 interface ImageItem {
@@ -18,7 +18,7 @@ type Props = {
 export default function Gallery({ images, className }: Props) {
   return (
     <div className={clsx('mx-auto', className)}>
-      <div className='flex max-w-[100vw] flex-col items-center gap-2 overflow-auto bg-[hsl(var(--border))] md:flex-row'>
+      <div className='flex max-w-[100vw] flex-col items-center gap-2 overflow-x-auto bg-[hsl(var(--border))] md:flex-row'>
         {images.map((image, index) => (
           <Dialog key={index}>
             <DialogTrigger asChild>
@@ -39,15 +39,19 @@ export default function Gallery({ images, className }: Props) {
                 />
               </div>
             </DialogTrigger>
-            <DialogContent className='h-full max-h-[95vh] max-w-[95vw] p-0 md:max-h-[90vh] md:max-w-[90vw] md:p-6'>
-              <div className='relative flex size-full items-center justify-center md:overflow-hidden'>
+            <DialogContent className='h-full max-h-[95vh] max-w-[95vw] p-0 md:max-h-[90vh] md:max-w-[90vw]'>
+              <div className='relative flex size-full items-center justify-center overflow-hidden'>
                 <Image
                   src={image.url}
                   alt={image.alt}
                   width={image.width}
                   height={image.height}
                   sizes='90vw'
-                  className='max-h-full max-w-full'
+                  style={{
+                    maxWidth: `min(100%,${image.width}px)`,
+                    maxHeight: `min(100%,${image.height}px)`,
+                  }}
+                  className={`grow w-auto h-auto`}
                 />
               </div>
             </DialogContent>
