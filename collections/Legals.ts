@@ -1,6 +1,9 @@
-import { lexicalHTML } from '@payloadcms/richtext-lexical'
-import type { CollectionConfig } from 'payload'
-import { lexicalMarkdown, lexicalMarkdownHook } from '../payload/converter/markdown'
+import { lexicalHTML } from '@payloadcms/richtext-lexical';
+import type { CollectionConfig } from 'payload';
+import {
+  lexicalMarkdown,
+  lexicalMarkdownHook,
+} from '../payload/converter/markdown';
 
 export const Legals: CollectionConfig = {
   slug: 'legals',
@@ -18,7 +21,7 @@ export const Legals: CollectionConfig = {
         {
           label: 'Privacy',
           value: 'privacy',
-        }
+        },
       ],
       admin: {
         layout: 'horizontal',
@@ -35,7 +38,7 @@ export const Legals: CollectionConfig = {
         {
           label: 'Markdown',
           value: 'markdown',
-        }
+        },
       ],
       defaultValue: 'html',
       admin: {
@@ -49,4 +52,4 @@ export const Legals: CollectionConfig = {
   admin: {
     useAsTitle: 'type',
   },
-}
+};

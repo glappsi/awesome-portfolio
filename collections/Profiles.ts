@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Profiles: CollectionConfig = {
   slug: 'profiles',
@@ -53,10 +53,10 @@ export const Profiles: CollectionConfig = {
     {
       name: 'active',
       type: 'checkbox',
-      defaultValue: false
+      defaultValue: false,
     },
   ],
   admin: {
     useAsTitle: 'slug',
   },
-}
+};

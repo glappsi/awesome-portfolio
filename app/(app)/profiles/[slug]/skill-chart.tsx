@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { Bar, BarChart, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, XAxis, YAxis } from 'recharts';
 import { countBy, filter, find, flatMap, map, orderBy, reduce } from 'lodash';
 
 import {
@@ -8,32 +8,33 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import { Project } from '@/actions/entities/models/project'
-import { useTranslations } from 'next-intl'
+} from '@/components/ui/chart';
+import { Project } from '@/actions/entities/models/project';
+import { useTranslations } from 'next-intl';
 import { Tool } from '@/actions/entities/models/tool';
 
 type Props = {
-  projects: Array<Project>
-}
+  projects: Array<Project>;
+};
 
-export function SkillChart({
-  projects
-}: Props) {
+export function SkillChart({ projects }: Props) {
   const t = useTranslations('ProfilePage');
 
-  const projectsTools = filter(flatMap(projects, p => p.tools), t => !t.hideInTopSkills) as Tool[];
+  const projectsTools = filter(
+    flatMap(projects, (p) => p.tools),
+    (t) => !t.hideInTopSkills,
+  ) as Tool[];
   const nameCounts = countBy(projectsTools, 'name');
   const sortedNames = orderBy(
     map(nameCounts, (occurrences, name) => ({
       name,
       occurrences,
-      displayName: find(projectsTools, p => p.name === name)?.displayName,
-      shortName: find(projectsTools, p => p.name === name)?.shortName,
-      fill: `hsl(var(--color-${name}))`
+      displayName: find(projectsTools, (p) => p.name === name)?.displayName,
+      shortName: find(projectsTools, (p) => p.name === name)?.shortName,
+      fill: `hsl(var(--color-${name}))`,
     })),
     ['occurrences'],
-    ['desc']
+    ['desc'],
   );
   const chartData = sortedNames.slice(0, 10);
   // const otherCount = sumBy(sortedNames.slice(4), 'occurrences');
@@ -41,36 +42,43 @@ export function SkillChart({
   //   chartData.push({ name: 'other', occurrences: otherCount, displayName: undefined, fill: 'var(--color-other)' });
   // }
 
-  const chartConfig = reduce(chartData, (acc, value) => {
-    return {
-      ...acc,
-      [value.name]: {
-        label: value.shortName || value.displayName || t(value.name),
-        color: 'var(--foreground)'//`hsl(var(--chart-${index+1}))`,
-      }
-    }
-  }, {
-    occurrences: {
-      label: t('projects')
-    }
-  }) satisfies ChartConfig;
+  const chartConfig = reduce(
+    chartData,
+    (acc, value) => {
+      return {
+        ...acc,
+        [value.name]: {
+          label: value.shortName || value.displayName || t(value.name),
+          color: 'var(--foreground)', //`hsl(var(--chart-${index+1}))`,
+        },
+      };
+    },
+    {
+      occurrences: {
+        label: t('projects'),
+      },
+    },
+  ) satisfies ChartConfig;
 
   // const allSkills = uniq(map(projectsTools, t => t.displayName));
 
   return (
-    <div className="flex flex-col gap-4">
-      <ChartContainer config={chartConfig} className="h-[300px] min-h-[300px] w-full">
+    <div className='flex flex-col gap-4'>
+      <ChartContainer
+        config={chartConfig}
+        className='h-[300px] min-h-[300px] w-full'
+      >
         <BarChart
           accessibilityLayer
           data={chartData}
-          layout="vertical"
+          layout='vertical'
           margin={{
             left: 19,
           }}
         >
           <YAxis
-            dataKey="name"
-            type="category"
+            dataKey='name'
+            type='category'
             tickLine={false}
             tickMargin={10}
             axisLine={false}
@@ -78,12 +86,12 @@ export function SkillChart({
               chartConfig[value as keyof typeof chartConfig]?.label
             }
           />
-          <XAxis dataKey="occurrences" type="number" hide />
+          <XAxis dataKey='occurrences' type='number' hide />
           <ChartTooltip
             cursor={false}
             content={<ChartTooltipContent hideLabel />}
           />
-          <Bar dataKey="occurrences" layout="vertical" radius={5} />
+          <Bar dataKey='occurrences' layout='vertical' radius={5} />
         </BarChart>
       </ChartContainer>
 
@@ -96,5 +104,5 @@ export function SkillChart({
         </div>
       </div> */}
     </div>
-  )
+  );
 }

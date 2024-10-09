@@ -18,9 +18,9 @@ export class PayloadLegalsRepository implements ILegalsRepository {
     const locale = await getSafeLocale();
     const legals = await payload.find({
       collection: 'legals',
-      locale
+      locale,
     });
-    
+
     return legals?.docs as Array<LegalDto>;
   }
 
@@ -32,11 +32,11 @@ export class PayloadLegalsRepository implements ILegalsRepository {
       locale,
       where: {
         type: {
-          equals: type
-        }
-      }
+          equals: type,
+        },
+      },
     });
-    
+
     return legals?.docs[0] as LegalDto;
   }
 }

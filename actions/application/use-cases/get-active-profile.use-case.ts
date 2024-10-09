@@ -1,10 +1,13 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { ProfileNotFoundError } from '../../entities/errors/profile-not-found.error';
 import { Profile, profileSchema } from '../../entities/models/profile';
 
-export function getActiveProfileUseCase(): Effect.Effect<Profile, ProfileNotFoundError | ZodParseError> {
+export function getActiveProfileUseCase(): Effect.Effect<
+  Profile,
+  ProfileNotFoundError | ZodParseError
+> {
   const repository = getInjection('IProfilesRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +21,9 @@ export function getActiveProfileUseCase(): Effect.Effect<Profile, ProfileNotFoun
     },
     catch(error: unknown) {
       return new ProfileNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseProfileEffect = (profile: unknown) =>
@@ -31,7 +34,7 @@ export function getActiveProfileUseCase(): Effect.Effect<Profile, ProfileNotFoun
       catch(_error: unknown) {
         return new ZodParseError('Profile', {
           originalError: _error,
-          data: profile
+          data: profile,
         });
       },
     });

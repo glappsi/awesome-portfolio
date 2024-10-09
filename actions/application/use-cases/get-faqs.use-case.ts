@@ -1,4 +1,4 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { FAQ, faqListSchema } from '../../entities/models/faq';
 

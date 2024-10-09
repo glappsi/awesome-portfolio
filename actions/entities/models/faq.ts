@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const faqSchema = z.object({
   id: z.number(),
   question: z.string(),
-  answer: z.string()
+  answer: z.string(),
 });
 export const faqListSchema = z.array(faqSchema);
 

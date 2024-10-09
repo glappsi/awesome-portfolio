@@ -1,27 +1,40 @@
-import React from "react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { createMessage, getActiveProfile, getCareerSteps, getLinks, getProfileBySlug, getProjects, getSkills, getTestimonials } from '@/actions';
-import { Navigation } from '../../components/nav';
-import { Card, CardDescription, CardHeadline } from '../../components/card';
-import Globe from '@/components/ui/globe';
-import { Devicons } from '../../components/devicons';
-import { filter, flatMap, uniq } from 'lodash';
-import Marquee from '@/components/ui/marquee';
-import { ArrowRightIcon, DotFilledIcon } from "@radix-ui/react-icons"
-import { getFormatter, getTranslations } from 'next-intl/server';
-import IconCloud from '@/components/ui/icon-cloud';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Separator } from '@/components/ui/separator';
-import { Icon } from '@/components/ui/icon';
-import clsx from 'clsx';
-import { SkillChart } from './skill-chart';
+import {
+  createMessage,
+  getActiveProfile,
+  getCareerSteps,
+  getLinks,
+  getProfileBySlug,
+  getProjects,
+  getSkills,
+  getTestimonials,
+} from '@/actions';
 import { Link as TLink } from '@/actions/entities/models/link';
-import TestimonialShuffle from './testimonial';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { buttonVariants } from '@/components/ui/button';
+import Globe from '@/components/ui/globe';
+import { Icon } from '@/components/ui/icon';
+import IconCloud from '@/components/ui/icon-cloud';
+import Marquee from '@/components/ui/marquee';
+import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
+import { ArrowRightIcon, DotFilledIcon } from '@radix-ui/react-icons';
+import clsx from 'clsx';
+import { filter, flatMap, uniq } from 'lodash';
+import { getFormatter, getTranslations } from 'next-intl/server';
 import Image from 'next/image';
+import Link from 'next/link';
 import { NeonGradientCard } from '../../../../components/ui/neon-gradient-card';
+import { Card, CardDescription, CardHeadline } from '../../components/card';
 import { ContactButton } from '../../components/contact-form';
+import { Devicons } from '../../components/devicons';
+import { Navigation } from '../../components/nav';
+import { SkillChart } from './skill-chart';
+import TestimonialShuffle from './testimonial';
 
 type Props = {
   params: Promise<{
@@ -36,15 +49,14 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const profile = await getActiveProfile();
 
-  return [{
-    slug: profile.slug
-  }]
+  return [
+    {
+      slug: profile.slug,
+    },
+  ];
 }
 
-
-export default async function ProfilePage({
-  params
-}: Props) {
+export default async function ProfilePage({ params }: Props) {
   const t = await getTranslations('ProfilePage');
   const format = await getFormatter();
   const profilePromise = getProfileBySlug((await params).slug);
@@ -53,58 +65,96 @@ export default async function ProfilePage({
   const linksPromise = getLinks();
   const projectsPromise = getProjects();
   const testimonialsPromise = getTestimonials();
-  const [profile, skills, careerSteps, links, projects, testimonials] = await Promise.all([profilePromise, skillsPromise, careerStepsPromise, linksPromise, projectsPromise, testimonialsPromise]);
+  const [profile, skills, careerSteps, links, projects, testimonials] =
+    await Promise.all([
+      profilePromise,
+      skillsPromise,
+      careerStepsPromise,
+      linksPromise,
+      projectsPromise,
+      testimonialsPromise,
+    ]);
 
-  const profSkills = filter(skills, s => s.type === 'profession');
-  const softSkills = filter(skills, s => s.type === 'soft');
-  const skillTools = filter(uniq(flatMap(profSkills, skill => skill.tools).map(t => t.name)));
+  const profSkills = filter(skills, (s) => s.type === 'profession');
+  const softSkills = filter(skills, (s) => s.type === 'soft');
+  const skillTools = filter(
+    uniq(flatMap(profSkills, (skill) => skill.tools).map((t) => t.name)),
+  );
   // const skillCategories = filter(uniq(flatMap(skills, skill => skill.categories).map(t => t.displayName)));
 
-  const contact = filter(links, l => !!l.link && l.showInNavigation) as TLink[];
-  const downloads = filter(links, l => !!l.download && l.showInNavigation) as TLink[];
+  const contact = filter(
+    links,
+    (l) => !!l.link && l.showInNavigation,
+  ) as TLink[];
+  const downloads = filter(
+    links,
+    (l) => !!l.download && l.showInNavigation,
+  ) as TLink[];
 
   return (
-    <div className="relative pb-16">
-      <Navigation
-        profileSlug={profile.slug}
-        links={links} />
-      <div className="px-6 md:pt-20 pt-[var(--navbar-height)] mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
-        <div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-3 ">
-          <div className="flex flex-col gap-8">
-            <Card
-              className="p-4 md:p-8"
-            >
+    <div className='relative pb-16'>
+      <Navigation profileSlug={profile.slug} links={links} />
+      <div className='mx-auto max-w-7xl space-y-8 px-6 pt-[var(--navbar-height)] md:space-y-16 md:pt-24 lg:px-8 lg:pt-32'>
+        <div className='mx-auto grid grid-cols-1 gap-8 lg:grid-cols-3'>
+          <div className='flex flex-col gap-8'>
+            <Card className='p-4 md:p-8'>
               <CardHeadline>{t('career')}</CardHeadline>
-              <Accordion type="single" collapsible className="w-full">
+              <Accordion type='single' collapsible className='w-full'>
                 {careerSteps.map((step, index) => (
-                  <AccordionItem key={step.id} className={clsx({
-                    '!border-0': index === (careerSteps.length - 1)
-                  })} value={`item-${index}`}>
-                    <AccordionTrigger className={clsx({
-                      '!pt-0': index === 0,
-                      '[&[data-state=closed]]:pb-0': index === (careerSteps.length - 1),
-                    }, '!no-underline')}>
-                      <div className="text-left">
-                        <h3 className="text-zinc-100">{step.title}</h3>
-                        <span className="text-zinc-400">{step.company}, {format.dateTime(step.start, { year: 'numeric', month: 'short' })} - {step.end ? format.dateTime(step.end, { year: 'numeric', month: 'short' }) : t('today')}</span>
+                  <AccordionItem
+                    key={step.id}
+                    className={clsx({
+                      '!border-0': index === careerSteps.length - 1,
+                    })}
+                    value={`item-${index}`}
+                  >
+                    <AccordionTrigger
+                      className={clsx(
+                        {
+                          '!pt-0': index === 0,
+                          '[&[data-state=closed]]:pb-0':
+                            index === careerSteps.length - 1,
+                        },
+                        '!no-underline',
+                      )}
+                    >
+                      <div className='text-left'>
+                        <h3 className='text-zinc-100'>{step.title}</h3>
+                        <span className='text-zinc-400'>
+                          {step.company},{' '}
+                          {format.dateTime(step.start, {
+                            year: 'numeric',
+                            month: 'short',
+                          })}{' '}
+                          -{' '}
+                          {step.end
+                            ? format.dateTime(step.end, {
+                                year: 'numeric',
+                                month: 'short',
+                              })
+                            : t('today')}
+                        </span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <ul className="whitespace-break-spaces text-zinc-100">
+                      <ul className='whitespace-break-spaces text-zinc-100'>
                         {step.description?.split('\n').map((line, index) => (
-                          <li key={index} className="flex gap-2">
-                            <DotFilledIcon className="shrink-0 !h-[20px] !w-[20px]" />
+                          <li key={index} className='flex gap-2'>
+                            <DotFilledIcon className='!h-[20px] !w-[20px] shrink-0' />
                             <span>{line}</span>
                           </li>
                         ))}
                       </ul>
 
-                      <Marquee className="mt-4">
+                      <Marquee className='mt-4'>
                         <Devicons
-                          tools={flatMap(careerSteps, cs => flatMap(cs.projects, p => p.tools))}
-                          variant="colored"
+                          tools={flatMap(careerSteps, (cs) =>
+                            flatMap(cs.projects, (p) => p.tools),
+                          )}
+                          variant='colored'
                           withTooltips
-                          asCard />
+                          asCard
+                        />
                       </Marquee>
                     </AccordionContent>
                   </AccordionItem>
@@ -112,61 +162,70 @@ export default async function ProfilePage({
               </Accordion>
             </Card>
 
-            <Card className="p-4 md:p-8">
+            <Card className='p-4 md:p-8'>
               <CardHeadline>{t('projectSkills')}</CardHeadline>
               <SkillChart projects={projects} />
             </Card>
           </div>
 
-          <div className="flex flex-col gap-8">
-            <Card className="p-4 md:p-8 text-center">
+          <div className='flex flex-col gap-8'>
+            <Card className='p-4 text-center md:p-8'>
               <Image
                 src={profile.image.url}
                 alt={profile.image.alt}
                 width={profile.image.width}
                 height={profile.image.height}
-                className="m-auto h-[100px] w-[100px] mb-4 md:mb-8 rounded-full border p-1"
+                className='m-auto mb-4 size-[100px] rounded-full border p-1 md:mb-8'
               />
-              <CardHeadline className="mb-8">{profile.name}</CardHeadline>
+              <CardHeadline className='mb-8'>{profile.name}</CardHeadline>
               {!!profile.aboutMe && (
-                <CardDescription className="italic">{`"${profile.aboutMe}"`}</CardDescription>
+                <CardDescription className='italic'>{`"${profile.aboutMe}"`}</CardDescription>
               )}
             </Card>
 
-            {!!(profile.latitude && profile.longitude) && (<Card className="overflow-hidden aspect-square w-full">
-              {!!profile.location && (<CardDescription className="text-zinc-900 absolute bottom-0 right-[15px] z-10">{t('locatedAt', { location: profile.location })}</CardDescription>)}
-              <Globe
-                className="absolute left-[-12.5%] top-[-25%] w-[150%] h-[150%]"
-                markers={[{
-                  location: [profile.latitude, profile.longitude],
-                  size: 0.1
-                }]} />
-            </Card>)}
+            {!!(profile.latitude && profile.longitude) && (
+              <Card className='aspect-square w-full overflow-hidden'>
+                {!!profile.location && (
+                  <CardDescription className='absolute bottom-0 right-[15px] z-10 text-zinc-900'>
+                    {t('locatedAt', { location: profile.location })}
+                  </CardDescription>
+                )}
+                <Globe
+                  className='absolute -top-1/4 left-[-12.5%] size-[150%]'
+                  markers={[
+                    {
+                      location: [profile.latitude, profile.longitude],
+                      size: 0.1,
+                    },
+                  ]}
+                />
+              </Card>
+            )}
 
             <NeonGradientCard>
               <CardHeadline>{t('contactAndDownloads')}</CardHeadline>
               <CardDescription>{t('contact')}</CardDescription>
 
-              <div className="flex flex-col gap-2">
+              <div className='flex flex-col gap-2'>
                 {contact.map(({ link, title, icon, isExternal }) => (
                   <Link
                     key={title}
                     href={link!}
-                    target={isExternal ? "_blank" : "_self"}
+                    target={isExternal ? '_blank' : '_self'}
                     aria-label={title}
                     className={cn(
-                      buttonVariants({ variant: "outline" }),
-                      "rounded-full",
+                      buttonVariants({ variant: 'outline' }),
+                      'rounded-full',
                     )}
                   >
-                    <Icon type={icon} className="size-4 mr-2" />
+                    <Icon type={icon} className='mr-2 size-4' />
                     {t('contactVia', { channel: title })}
                   </Link>
                 ))}
                 <ContactButton onSubmit={createMessage} />
               </div>
-              <Separator className="my-3" />
-              <div className="flex flex-col gap-2">
+              <Separator className='my-3' />
+              <div className='flex flex-col gap-2'>
                 {downloads.map(({ download, title, icon }) => (
                   <Link
                     key={title}
@@ -175,57 +234,58 @@ export default async function ProfilePage({
                     target='_blank'
                     aria-label={title}
                     className={cn(
-                      buttonVariants({ variant: "outline" }),
-                      "rounded-full",
+                      buttonVariants({ variant: 'outline' }),
+                      'rounded-full',
                     )}
                   >
-                    <Icon type={icon} className="size-4 mr-2" />
+                    <Icon type={icon} className='mr-2 size-4' />
                     {t('download', { media: title })}
                   </Link>
                 ))}
                 <Link
-                  href="/projects"
-                  aria-label="projects"
+                  href='/projects'
+                  aria-label='projects'
                   className={cn(
-                    buttonVariants({ variant: "outline" }),
-                    "rounded-full",
+                    buttonVariants({ variant: 'outline' }),
+                    'rounded-full',
                   )}
                 >
-                  <Icon type={'ArchiveIcon'} className="size-4 mr-2" />
+                  <Icon type={'ArchiveIcon'} className='mr-2 size-4' />
                   {t('myProjects')}
                 </Link>
               </div>
             </NeonGradientCard>
 
-            {!!testimonials?.length && <Card className="p-4 md:p-8">
-              <TestimonialShuffle testimonials={testimonials} />
-            </Card>}
+            {!!testimonials?.length && (
+              <Card className='p-4 md:p-8'>
+                <TestimonialShuffle testimonials={testimonials} />
+              </Card>
+            )}
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className='flex flex-col gap-8'>
             <Card
-              className="overflow-hidden p-4 md:p-8"
-              background={<IconCloud iconSlugs={skillTools} />}>
+              className='overflow-hidden p-4 md:p-8'
+              background={<IconCloud iconSlugs={skillTools} />}
+            >
               <CardHeadline>{t('professionalSkills')}</CardHeadline>
-              <div className="flex flex-col gap-2">
+              <div className='flex flex-col gap-2'>
                 {profSkills.map((skill) => (
-                  <div className="flex gap-2 items-start" key={skill.id}>
-                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[20px] !w-[20px] shrink-0 mt-[1px]" />
-                    <span className="text-zinc-100">{skill.title}</span>
+                  <div className='flex items-start gap-2' key={skill.id}>
+                    <ArrowRightIcon className='mt-px !h-[20px] !w-[20px] shrink-0 !stroke-2 text-zinc-100' />
+                    <span className='text-zinc-100'>{skill.title}</span>
                   </div>
                 ))}
               </div>
             </Card>
 
-            <Card
-              className="p-4 md:p-8"
-            >
+            <Card className='p-4 md:p-8'>
               <CardHeadline>{t('softSkills')}</CardHeadline>
-              <div className="flex flex-col gap-2">
+              <div className='flex flex-col gap-2'>
                 {softSkills.map((skill) => (
-                  <div className="flex gap-2 items-start" key={skill.id}>
-                    <ArrowRightIcon className="text-zinc-100 !stroke-2 !h-[20px] !w-[20px] shrink-0 mt-[1px]" />
-                    <span className="text-zinc-100">{skill.title}</span>
+                  <div className='flex items-start gap-2' key={skill.id}>
+                    <ArrowRightIcon className='mt-px !h-[20px] !w-[20px] shrink-0 !stroke-2 text-zinc-100' />
+                    <span className='text-zinc-100'>{skill.title}</span>
                   </div>
                 ))}
 
@@ -237,7 +297,6 @@ export default async function ProfilePage({
               </div>
             </Card>
           </div>
-
         </div>
       </div>
     </div>

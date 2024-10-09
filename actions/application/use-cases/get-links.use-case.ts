@@ -1,10 +1,13 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { LinksNotFoundError } from '../../entities/errors/links-not-found.error';
 import { Link, linkListSchema } from '../../entities/models/link';
 
-export function getLinksUseCase(): Effect.Effect<Array<Link>, LinksNotFoundError | ZodParseError> {
+export function getLinksUseCase(): Effect.Effect<
+  Array<Link>,
+  LinksNotFoundError | ZodParseError
+> {
   const repository = getInjection('IProfilesRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +21,9 @@ export function getLinksUseCase(): Effect.Effect<Array<Link>, LinksNotFoundError
     },
     catch(error: unknown) {
       return new LinksNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseLinksEffect = (links: unknown) =>
@@ -31,7 +34,7 @@ export function getLinksUseCase(): Effect.Effect<Array<Link>, LinksNotFoundError
       catch(_error: unknown) {
         return new ZodParseError('Links', {
           originalError: _error,
-          data: links
+          data: links,
         });
       },
     });

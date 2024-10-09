@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Tools: CollectionConfig = {
   slug: 'tools',
@@ -31,6 +31,6 @@ export const Tools: CollectionConfig = {
     },
   ],
   admin: {
-    useAsTitle: 'name'
+    useAsTitle: 'name',
   },
-}
+};

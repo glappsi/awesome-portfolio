@@ -1,6 +1,9 @@
-import { lexicalHTML } from '@payloadcms/richtext-lexical'
-import type { CollectionConfig } from 'payload'
-import { lexicalMarkdown, lexicalMarkdownHook } from '../payload/converter/markdown'
+import { lexicalHTML } from '@payloadcms/richtext-lexical';
+import type { CollectionConfig } from 'payload';
+import {
+  lexicalMarkdown,
+  lexicalMarkdownHook,
+} from '../payload/converter/markdown';
 
 export const BlogParagraphs: CollectionConfig = {
   slug: 'blog-paragraphs',
@@ -22,7 +25,7 @@ export const BlogParagraphs: CollectionConfig = {
         {
           label: 'Markdown',
           value: 'markdown',
-        }
+        },
       ],
       defaultValue: 'html',
       admin: {
@@ -36,4 +39,4 @@ export const BlogParagraphs: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
   },
-}
+};

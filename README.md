@@ -9,21 +9,19 @@ My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](h
 
 ## Running Locally
 
-
 ```sh-session
 git clone https://github.com/glappsi/glappa-dev
 cd glappa-dev
 ```
 
-
 Create a `.env` file similar to [`.env.example`](https://github.com/glappsi/glappa-dev/blob/main/.env.example).
 
 Then install dependencies and run the development server:
+
 ```sh-session
 npm install
 npm run dev
 ```
-
 
 ## Cloning / Forking
 

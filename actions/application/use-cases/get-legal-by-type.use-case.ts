@@ -1,10 +1,12 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Legal, LegalDto, legalSchema } from '../../entities/models/legal';
 import { LegalNotFoundError } from '../../entities/errors/legal-not-found.error';
 
-export function getLegalByTypeUseCase(type: LegalDto['type']): Effect.Effect<Legal, LegalNotFoundError | ZodParseError> {
+export function getLegalByTypeUseCase(
+  type: LegalDto['type'],
+): Effect.Effect<Legal, LegalNotFoundError | ZodParseError> {
   const repository = getInjection('ILegalsRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +20,9 @@ export function getLegalByTypeUseCase(type: LegalDto['type']): Effect.Effect<Leg
     },
     catch(error: unknown) {
       return new LegalNotFoundError(type, {
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseLegalEffect = (legal: unknown) =>
@@ -31,7 +33,7 @@ export function getLegalByTypeUseCase(type: LegalDto['type']): Effect.Effect<Leg
       catch(_error: unknown) {
         return new ZodParseError('Legals', {
           originalError: _error,
-          data: legal
+          data: legal,
         });
       },
     });

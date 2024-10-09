@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { Effect } from "effect";
+import { Effect } from 'effect';
 import { initializeContainer } from '../di/container';
 import { getProjectsController } from './interface-adapters/controllers/get-projects.controller';
 import { getBlogBySlugController } from './interface-adapters/controllers/get-blog-by-slug.controller';

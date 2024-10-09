@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import createGlobe, { COBEOptions, Marker } from "cobe";
-import { useCallback, useEffect, useRef, useState } from "react";
+import createGlobe, { COBEOptions, Marker } from 'cobe';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 const GLOBE_CONFIG: Omit<COBEOptions, 'markers'> = {
   width: 800,
@@ -23,7 +23,7 @@ const GLOBE_CONFIG: Omit<COBEOptions, 'markers'> = {
 
 export default function Globe({
   className,
-  markers
+  markers,
 }: {
   className?: string;
   markers?: Marker[];
@@ -38,7 +38,7 @@ export default function Globe({
   const updatePointerInteraction = (value: any) => {
     pointerInteracting.current = value;
     if (canvasRef.current) {
-      canvasRef.current.style.cursor = value ? "grabbing" : "grab";
+      canvasRef.current.style.cursor = value ? 'grabbing' : 'grab';
     }
   };
 
@@ -67,7 +67,7 @@ export default function Globe({
   };
 
   useEffect(() => {
-    window.addEventListener("resize", onResize);
+    window.addEventListener('resize', onResize);
     onResize();
 
     const globe = createGlobe(canvasRef.current!, {
@@ -78,20 +78,20 @@ export default function Globe({
       onRender,
     });
 
-    setTimeout(() => (canvasRef.current!.style.opacity = "1"));
+    setTimeout(() => (canvasRef.current!.style.opacity = '1'));
     return () => globe.destroy();
   }, []);
 
   return (
     <div
       className={cn(
-        "inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
+        'inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]',
         className,
       )}
     >
       <canvas
         className={cn(
-          "size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
+          'size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]',
         )}
         ref={canvasRef}
         onPointerDown={(e) =>

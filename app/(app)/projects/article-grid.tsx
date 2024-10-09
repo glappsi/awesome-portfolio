@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Image from "next/image"
+import Image from 'next/image';
 import { Project } from '@/actions/entities/models/project';
 import { Card } from '../components/card';
 import { useState } from 'react';
@@ -13,82 +13,119 @@ type Props = {
   projects: Array<Project>;
   views: Record<string, number>;
   isHighlight?: boolean;
-}
+};
 
-export const ArticleGrid: React.FC<Props> = ({ projects, views, isHighlight }) => {
+export const ArticleGrid: React.FC<Props> = ({
+  projects,
+  views,
+  isHighlight,
+}) => {
   const [highlightId, setHighlightId] = useState(0);
   const selection = useArticleFilterStore((state) => state.selection);
 
-  const filteredProjects = filter(projects, p => !selection || some(p.tools, (t: Tool) => t.name === selection));
-  const evenIndexed = filter(filteredProjects, (p: Project, index: number) => index % 2 === 0);
-  const oddIndexed = filter(filteredProjects, (p: Project, index: number) => index % 2 !== 0);
+  const filteredProjects = filter(
+    projects,
+    (p) => !selection || some(p.tools, (t: Tool) => t.name === selection),
+  );
+  const evenIndexed = filter(
+    filteredProjects,
+    (p: Project, index: number) => index % 2 === 0,
+  );
+  const oddIndexed = filter(
+    filteredProjects,
+    (p: Project, index: number) => index % 2 !== 0,
+  );
 
   return (
     <>
-    <div className="hidden lg:grid grid-cols-2 gap-8 mx-auto">
-      <div className="flex flex-col gap-8">
-        {(evenIndexed as Array<Project>).map((project) => (
-          <Card 
+      <div className='mx-auto hidden grid-cols-2 gap-8 lg:grid'>
+        <div className='flex flex-col gap-8'>
+          {(evenIndexed as Array<Project>).map((project) => (
+            <Card
+              key={project.id}
+              isHighlight={isHighlight && indexOf(projects, project) === 0}
+              onClick={() => setHighlightId(indexOf(projects, project))}
+              badge={
+                !!project.badge && (
+                  <Image
+                    src={project.badge!.url}
+                    alt={project.badge!.alt}
+                    height={30}
+                    width={30 * (project.badge!.width / project.badge!.height)}
+                  />
+                )
+              }
+              badgeTooltip={!!project.badge && project.badge!.alt}
+              badgeLight={
+                !!project.badge && !!project.badge!.needsLightBackground
+              }
+            >
+              <Article
+                project={project}
+                views={project.blog ? views[project.blog!.slug] : undefined}
+                isHighlight={highlightId === indexOf(projects, project)}
+              />
+            </Card>
+          ))}
+        </div>
+        <div className='flex flex-col gap-8'>
+          {(oddIndexed as Array<Project>).map((project) => (
+            <Card
+              key={project.id}
+              onClick={() => setHighlightId(indexOf(projects, project))}
+              badge={
+                !!project.badge && (
+                  <Image
+                    src={project.badge!.url}
+                    alt={project.badge!.alt}
+                    height={30}
+                    width={30 * (project.badge!.width / project.badge!.height)}
+                  />
+                )
+              }
+              badgeTooltip={!!project.badge && project.badge!.alt}
+              badgeLight={
+                !!project.badge && !!project.badge!.needsLightBackground
+              }
+            >
+              <Article
+                project={project}
+                views={project.blog ? views[project.blog!.slug] : undefined}
+                isHighlight={highlightId === indexOf(projects, project)}
+              />
+            </Card>
+          ))}
+        </div>
+      </div>
+      <div className='mx-auto flex flex-wrap gap-8 lg:hidden'>
+        {filteredProjects.map((project) => (
+          <Card
             key={project.id}
             isHighlight={isHighlight && indexOf(projects, project) === 0}
             onClick={() => setHighlightId(indexOf(projects, project))}
-            badge={!!project.badge && <Image
-              src={project.badge!.url}
-              alt={project.badge!.alt}
-              height={30}
-              width={30 * (project.badge!.width / project.badge!.height)}
-            />}
+            badge={
+              !!project.badge && (
+                <Image
+                  src={project.badge!.url}
+                  alt={project.badge!.alt}
+                  height={30}
+                  width={30 * (project.badge!.width / project.badge!.height)}
+                />
+              )
+            }
             badgeTooltip={!!project.badge && project.badge!.alt}
-            badgeLight={!!project.badge && !!project.badge!.needsLightBackground}>
+            badgeLight={
+              !!project.badge && !!project.badge!.needsLightBackground
+            }
+          >
             <Article
               project={project}
               views={project.blog ? views[project.blog!.slug] : undefined}
-              isHighlight={highlightId === indexOf(projects, project)} />
+              isHighlight={highlightId === indexOf(projects, project)}
+            />
           </Card>
         ))}
       </div>
-      <div className="flex flex-col gap-8">
-        {(oddIndexed as Array<Project>).map((project) => (
-          <Card 
-            key={project.id}
-            onClick={() => setHighlightId(indexOf(projects, project))}
-            badge={!!project.badge && <Image
-              src={project.badge!.url}
-              alt={project.badge!.alt}
-              height={30}
-              width={30 * (project.badge!.width / project.badge!.height)}
-            />}
-            badgeTooltip={!!project.badge && project.badge!.alt}
-            badgeLight={!!project.badge && !!project.badge!.needsLightBackground}>
-            <Article
-              project={project}
-              views={project.blog ? views[project.blog!.slug] : undefined}
-              isHighlight={highlightId === indexOf(projects, project)} />
-          </Card>
-        ))}
-      </div>
-    </div>
-    <div className="lg:hidden flex gap-8 flex-wrap mx-auto">
-      {filteredProjects.map((project) => (
-        <Card 
-          key={project.id}
-          isHighlight={isHighlight && indexOf(projects, project) === 0}
-          onClick={() => setHighlightId(indexOf(projects, project))}
-          badge={!!project.badge && <Image
-            src={project.badge!.url}
-            alt={project.badge!.alt}
-            height={30}
-            width={30 * (project.badge!.width / project.badge!.height)}
-          />}
-          badgeTooltip={!!project.badge && project.badge!.alt}
-          badgeLight={!!project.badge && !!project.badge!.needsLightBackground}>
-          <Article
-            project={project}
-            views={project.blog ? views[project.blog!.slug] : undefined}
-            isHighlight={highlightId === indexOf(projects, project)} />
-        </Card>
-      ))}
-    </div>
     </>
   );
-}
+};

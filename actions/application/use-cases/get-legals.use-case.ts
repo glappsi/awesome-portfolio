@@ -1,10 +1,13 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Legal, legalListSchema } from '../../entities/models/legal';
 import { LegalsNotFoundError } from '../../entities/errors/legals-not-found.error';
 
-export function getLegalsUseCase(): Effect.Effect<Array<Legal>, LegalsNotFoundError | ZodParseError> {
+export function getLegalsUseCase(): Effect.Effect<
+  Array<Legal>,
+  LegalsNotFoundError | ZodParseError
+> {
   const repository = getInjection('ILegalsRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +21,9 @@ export function getLegalsUseCase(): Effect.Effect<Array<Legal>, LegalsNotFoundEr
     },
     catch(error: unknown) {
       return new LegalsNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseLegalsEffect = (legals: unknown) =>
@@ -31,7 +34,7 @@ export function getLegalsUseCase(): Effect.Effect<Array<Legal>, LegalsNotFoundEr
       catch(_error: unknown) {
         return new ZodParseError('Legals', {
           originalError: _error,
-          data: legals
+          data: legals,
         });
       },
     });

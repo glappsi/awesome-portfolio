@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Links: CollectionConfig = {
   slug: 'links',
@@ -55,10 +55,10 @@ export const Links: CollectionConfig = {
     },
     {
       name: 'link',
-      type: 'text'
+      type: 'text',
     },
   ],
   admin: {
     useAsTitle: 'title',
   },
-}
+};

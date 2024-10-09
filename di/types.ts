@@ -5,17 +5,17 @@ import { IMessagesRepository } from '../actions/application/repositories/message
 import { ILegalsRepository } from '../actions/application/repositories/legals.repository.interface';
 
 export const DI_TYPES = {
-  IProjectsRepository: Symbol.for("IProjectsRepository"),
-  IBlogsRepository: Symbol.for("IBlogsRepository"),
-  IProfilesRepository: Symbol.for("IProfilesRepository"),
-  IMessagesRepository: Symbol.for("IMessagesRepository"),
-  ILegalsRepository: Symbol.for("ILegalsRepository"),
+  IProjectsRepository: Symbol.for('IProjectsRepository'),
+  IBlogsRepository: Symbol.for('IBlogsRepository'),
+  IProfilesRepository: Symbol.for('IProfilesRepository'),
+  IMessagesRepository: Symbol.for('IMessagesRepository'),
+  ILegalsRepository: Symbol.for('ILegalsRepository'),
 };
 
 export interface DI_RETURN_TYPES {
-  IProjectsRepository: IProjectsRepository,
-  IBlogsRepository: IBlogsRepository,
-  IProfilesRepository: IProfilesRepository,
-  IMessagesRepository: IMessagesRepository,
-  ILegalsRepository: ILegalsRepository,
+  IProjectsRepository: IProjectsRepository;
+  IBlogsRepository: IBlogsRepository;
+  IProfilesRepository: IProfilesRepository;
+  IMessagesRepository: IMessagesRepository;
+  ILegalsRepository: ILegalsRepository;
 }

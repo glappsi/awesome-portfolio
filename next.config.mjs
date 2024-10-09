@@ -1,13 +1,11 @@
-import { withPayload } from "@payloadcms/next/withPayload";
+import { withPayload } from '@payloadcms/next/withPayload';
 import createNextIntlPlugin from 'next-intl/plugin';
 
-const withNextIntl = createNextIntlPlugin(
-   './i18n/request.ts'
-);
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	pageExtensions: ["js", "jsx", "ts", "tsx"],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   experimental: {
     mdxRs: true,
   },
@@ -22,7 +20,7 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
-  }
+  },
 };
 
 export default withPayload(withNextIntl(nextConfig));

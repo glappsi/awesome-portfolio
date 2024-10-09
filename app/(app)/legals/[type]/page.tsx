@@ -11,8 +11,8 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const legals = await getLegals();
 
-  return map(legals, l => ({
-    type: l.type
+  return map(legals, (l) => ({
+    type: l.type,
   }));
 }
 
@@ -22,20 +22,17 @@ type Props = {
   }>;
 };
 
-export default async function LegalPage({
-  params
-}: Props) {
+export default async function LegalPage({ params }: Props) {
   const legal = await getLegalByType((await params).type);
 
   return (
-    <div className="min-h-screen pt-[var(--navbar-height)] prose prose-lg prose-gray max-w-none dark:prose-invert">
-      <Card 
-        className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
-        isFullscreen>
-        <DynamicContent
-          content={legal}
-        ></DynamicContent>
+    <div className='prose prose-lg prose-gray min-h-screen max-w-none pt-[var(--navbar-height)] dark:prose-invert'>
+      <Card
+        className='mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8'
+        isFullscreen
+      >
+        <DynamicContent content={legal}></DynamicContent>
       </Card>
     </div>
-  )
+  );
 }

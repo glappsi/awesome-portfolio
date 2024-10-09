@@ -1,39 +1,42 @@
 // storage-adapter-import-placeholder
-import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor, defaultEditorConfig, defaultEditorFeatures, LexicalEditorProps } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
-import { s3Storage } from '@payloadcms/storage-s3'
+import { postgresAdapter } from '@payloadcms/db-postgres';
+import {
+  lexicalEditor,
+  defaultEditorConfig,
+  defaultEditorFeatures,
+  LexicalEditorProps,
+} from '@payloadcms/richtext-lexical';
+import path from 'path';
+import { buildConfig } from 'payload';
+import { fileURLToPath } from 'url';
+import sharp from 'sharp';
+import { s3Storage } from '@payloadcms/storage-s3';
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Tools } from './collections/Tools'
-import { Categories } from './collections/Categories'
-import { BlogParagraphs } from './collections/BlogParagraphs'
-import { Blogs } from "./collections/Blogs"
-import { Projects } from './collections/Projects'
-import { Skills } from './collections/Skills'
-import { CareerSteps } from './collections/CareerSteps'
-import { Profiles } from './collections/Profiles'
-import { Links } from './collections/Links'
-import { Testimonials } from './collections/Testimonials'
-import { Messages } from './collections/Messages'
-import { availableLocales } from './i18n/utils'
-import { FAQs } from './collections/FAQs'
-import { Legals } from './collections/Legals'
+import { Users } from './collections/Users';
+import { Media } from './collections/Media';
+import { Tools } from './collections/Tools';
+import { Categories } from './collections/Categories';
+import { BlogParagraphs } from './collections/BlogParagraphs';
+import { Blogs } from './collections/Blogs';
+import { Projects } from './collections/Projects';
+import { Skills } from './collections/Skills';
+import { CareerSteps } from './collections/CareerSteps';
+import { Profiles } from './collections/Profiles';
+import { Links } from './collections/Links';
+import { Testimonials } from './collections/Testimonials';
+import { Messages } from './collections/Messages';
+import { availableLocales } from './i18n/utils';
+import { FAQs } from './collections/FAQs';
+import { Legals } from './collections/Legals';
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 const customEditorConfig: LexicalEditorProps = {};
 
 export const lexicalEditorConfig = {
   ...defaultEditorConfig,
-  features: [
-    ...defaultEditorFeatures,
-  ]
+  features: [...defaultEditorFeatures],
 };
 
 export default buildConfig({
@@ -43,7 +46,23 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Tools, Categories, BlogParagraphs, Blogs, Projects, Skills, CareerSteps, Profiles, Links, Testimonials, Messages, FAQs, Legals],
+  collections: [
+    Users,
+    Media,
+    Tools,
+    Categories,
+    BlogParagraphs,
+    Blogs,
+    Projects,
+    Skills,
+    CareerSteps,
+    Profiles,
+    Links,
+    Testimonials,
+    Messages,
+    FAQs,
+    Legals,
+  ],
   localization: {
     locales: [...availableLocales],
     defaultLocale: 'en',
@@ -74,8 +93,8 @@ export default buildConfig({
         },
         region: process.env.S3_REGION,
         endpoint: process.env.S3_ENDPOINT,
-        forcePathStyle: true
+        forcePathStyle: true,
       },
     }),
   ],
-})
+});

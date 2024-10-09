@@ -1,10 +1,13 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Skill, skillListSchema } from '../../entities/models/skill';
 import { SkillsNotFoundError } from '../../entities/errors/skills-not-found.error';
 
-export function getSkillsUseCase(): Effect.Effect<Array<Skill>, SkillsNotFoundError | ZodParseError> {
+export function getSkillsUseCase(): Effect.Effect<
+  Array<Skill>,
+  SkillsNotFoundError | ZodParseError
+> {
   const repository = getInjection('IProfilesRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +21,9 @@ export function getSkillsUseCase(): Effect.Effect<Array<Skill>, SkillsNotFoundEr
     },
     catch(error: unknown) {
       return new SkillsNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseSkillsEffect = (skills: unknown) =>
@@ -31,7 +34,7 @@ export function getSkillsUseCase(): Effect.Effect<Array<Skill>, SkillsNotFoundEr
       catch(_error: unknown) {
         return new ZodParseError('Skills', {
           originalError: _error,
-          data: skills
+          data: skills,
         });
       },
     });

@@ -8,7 +8,7 @@ export default getRequestConfig(async () => {
   // Use Negotiator to negotiate the locale based on the Accept-Language header
   // const negotiator = new Negotiator({ headers: Object.fromEntries((await requestHeaders).entries()) });
   // const preferredLocales = negotiator.languages([...availableLocales]) as TAvailableLocales;
-  
+
   const preferredLocales = [...availableLocales];
 
   // Choose the preferred locale or fallback to 'en' if no match is found

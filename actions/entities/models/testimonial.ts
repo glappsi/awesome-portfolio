@@ -5,13 +5,16 @@ export const testimonialSchema = z.object({
   quote: z.string(),
   author: z.string(),
   description: z.string(),
-  avatar: z.object({
-    url: z.string(),
-    alt: z.string(),
-    width: z.number(),
-    height: z.number(),
-    needsLightBackground: z.boolean().optional().nullable()
-  }).optional().nullable(),
+  avatar: z
+    .object({
+      url: z.string(),
+      alt: z.string(),
+      width: z.number(),
+      height: z.number(),
+      needsLightBackground: z.boolean().optional().nullable(),
+    })
+    .optional()
+    .nullable(),
 });
 export const testimonialListSchema = z.array(testimonialSchema);
 

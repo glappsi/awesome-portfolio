@@ -1,10 +1,10 @@
-import React from "react";
-import Particles from "./components/particles";
+import React from 'react';
+import Particles from './components/particles';
 import { getActiveProfile, getLinks } from '@/actions';
 import { NavigationDock } from './components/nav';
 import Image from 'next/image';
 
-export const revalidate = 60; 
+export const revalidate = 60;
 
 export default async function Home() {
   const profilePromise = getActiveProfile();
@@ -13,40 +13,36 @@ export default async function Home() {
   const [profile, links] = await Promise.all([profilePromise, linksPromise]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
-
+    <div className='flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black'>
       {profile.image && (
         <Image
           src={profile.image.url}
           alt={profile.image.alt}
           width={profile.image.width}
           height={profile.image.height}
-          className="h-[200px] w-[200px] mb-8 rounded-full border p-1"
+          className='mb-8 size-[200px] rounded-full border p-1'
         />
       )}
-      <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className='animate-glow hidden h-px w-screen animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block' />
       <Particles
-        className="absolute inset-0 -z-10 animate-fade-in"
+        className='absolute inset-0 -z-10 animate-fade-in'
         quantity={100}
       />
 
-      <h1 className="pb-8 px-0.5 z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
+      <h1 className='text-edge-outline z-10 animate-title cursor-default whitespace-nowrap bg-white bg-clip-text px-0.5 pb-8 font-display text-4xl text-transparent duration-1000 sm:text-6xl md:text-9xl'>
         {profile.name}
       </h1>
 
-      <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      {profile?.description && (<div className="md:my-8 px-4 lg:whitespace-pre text-center animate-fade-in">
-        <h2 className="text-sm text-zinc-500 ">
-        {profile?.description}
-        </h2>
-      </div>)}
+      <div className='animate-glow hidden h-px w-screen animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block' />
+      {profile?.description && (
+        <div className='animate-fade-in px-4 text-center md:my-8 lg:whitespace-pre'>
+          <h2 className='text-sm text-zinc-500'>{profile?.description}</h2>
+        </div>
+      )}
 
-      <nav className="animate-fade-in pt-8">
-        <NavigationDock 
-          profileSlug={profile.slug} 
-          links={links} />
+      <nav className='animate-fade-in pt-8'>
+        <NavigationDock profileSlug={profile.slug} links={links} />
       </nav>
     </div>
   );
-
 }

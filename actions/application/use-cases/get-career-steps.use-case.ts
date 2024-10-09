@@ -1,10 +1,16 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { CareerStepsNotFoundError } from '../../entities/errors/career-steps-not-found.error';
-import { CareerStep, careerStepListSchema } from '../../entities/models/career-step';
+import {
+  CareerStep,
+  careerStepListSchema,
+} from '../../entities/models/career-step';
 
-export function getCareerStepsUseCase(): Effect.Effect<Array<CareerStep>, CareerStepsNotFoundError | ZodParseError> {
+export function getCareerStepsUseCase(): Effect.Effect<
+  Array<CareerStep>,
+  CareerStepsNotFoundError | ZodParseError
+> {
   const repository = getInjection('IProfilesRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +24,9 @@ export function getCareerStepsUseCase(): Effect.Effect<Array<CareerStep>, Career
     },
     catch(error: unknown) {
       return new CareerStepsNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseCareerStepsEffect = (careerSteps: unknown) =>
@@ -31,7 +37,7 @@ export function getCareerStepsUseCase(): Effect.Effect<Array<CareerStep>, Career
       catch(_error: unknown) {
         return new ZodParseError('CareerSteps', {
           originalError: _error,
-          data: careerSteps
+          data: careerSteps,
         });
       },
     });

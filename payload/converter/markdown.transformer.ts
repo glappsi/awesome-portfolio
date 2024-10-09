@@ -4,8 +4,8 @@ import { UploadServerNode } from '@payloadcms/richtext-lexical';
 import { filter } from 'lodash';
 
 export const BUILD_UPLOAD_TRANSFORMER = async (nodes: any) => {
-  const uploadNodes = filter(nodes, n => n.type === 'upload');
-  const documents: {[key: string]: any} = {};
+  const uploadNodes = filter(nodes, (n) => n.type === 'upload');
+  const documents: { [key: string]: any } = {};
 
   const payload = await getPayloadHMR({ config });
   for (const node of uploadNodes) {
@@ -17,7 +17,7 @@ export const BUILD_UPLOAD_TRANSFORMER = async (nodes: any) => {
   }
 
   return {
-    type: "element",
+    type: 'element',
     dependencies: [UploadServerNode],
     export: (node: any) => {
       if (node.getType() !== 'upload') {
@@ -29,15 +29,15 @@ export const BUILD_UPLOAD_TRANSFORMER = async (nodes: any) => {
       if (!document) {
         return;
       }
-  
-      const url = (payload?.config?.serverURL || '') + document?.url
-  
+
+      const url = (payload?.config?.serverURL || '') + document?.url;
+
       if (!(document?.mimeType as string)?.startsWith('image')) {
         // Only images can be serialized as HTML
-        return ``
+        return ``;
       }
-  
+
       return `![${document?.filename}](${url})`;
     },
-  }
-}
+  };
+};

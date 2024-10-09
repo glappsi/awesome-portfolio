@@ -1,10 +1,15 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
-import { CreateMessageDto, createMessageSchema } from '../../entities/models/message';
+import {
+  CreateMessageDto,
+  createMessageSchema,
+} from '../../entities/models/message';
 import { MessageCouldNotBeCreatedError } from '../../entities/errors/message-could-not-be-created.error';
 
-export function createMessageUseCase(dto: CreateMessageDto): Effect.Effect<number, MessageCouldNotBeCreatedError | ZodParseError> {
+export function createMessageUseCase(
+  dto: CreateMessageDto,
+): Effect.Effect<number, MessageCouldNotBeCreatedError | ZodParseError> {
   const repository = getInjection('IMessagesRepository');
 
   const program = Effect.try({
@@ -14,7 +19,7 @@ export function createMessageUseCase(dto: CreateMessageDto): Effect.Effect<numbe
     catch(_error: unknown) {
       return new ZodParseError('Message', {
         originalError: _error,
-        data: dto
+        data: dto,
       });
     },
   });
@@ -31,9 +36,9 @@ export function createMessageUseCase(dto: CreateMessageDto): Effect.Effect<numbe
       },
       catch(error: unknown) {
         return new MessageCouldNotBeCreatedError({
-          originalError: error
-        })
-      }
+          originalError: error,
+        });
+      },
     });
 
   return program.pipe(Effect.flatMap(sendMessageEffect));

@@ -19,7 +19,7 @@ export class PayloadMessagesRepository implements IMessagesRepository {
     const result = await payload.create({
       collection: 'messages',
       locale,
-      data: dto
+      data: dto,
     });
 
     return result.id;

@@ -4,12 +4,12 @@ import { getFAQs, getProjects } from '@/actions';
 
 export function generateBlog(blog: Blog) {
   return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
     headline: blog.title,
     description: blog.summary,
     author: {
-      "@type": "Person",
+      '@type': 'Person',
       name: blog.author,
     },
     datePublished: blog.date.toISOString(),
@@ -18,9 +18,9 @@ export function generateBlog(blog: Blog) {
 
 export async function generateBlogs() {
   const projects = await getProjects();
-  const blogProjects = filter(projects, p => !!p.blog);
+  const blogProjects = filter(projects, (p) => !!p.blog);
 
-  return blogProjects.map(({blog}) => generateBlog(blog!));
+  return blogProjects.map(({ blog }) => generateBlog(blog!));
 }
 
 export async function generateFAQs() {
@@ -30,15 +30,15 @@ export async function generateFAQs() {
   }
 
   return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
   };
 }

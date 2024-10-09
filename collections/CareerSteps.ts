@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const CareerSteps: CollectionConfig = {
   slug: 'career-steps',
@@ -45,9 +45,9 @@ export const CareerSteps: CollectionConfig = {
       type: 'relationship',
       relationTo: 'projects',
       hasMany: true,
-    }
+    },
   ],
   admin: {
     useAsTitle: 'title',
   },
-}
+};

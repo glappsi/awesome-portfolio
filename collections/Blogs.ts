@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Blogs: CollectionConfig = {
   slug: 'blogs',
@@ -79,7 +79,7 @@ export const Blogs: CollectionConfig = {
         {
           label: 'Tech',
           value: 'tech',
-        }
+        },
       ],
       defaultValue: 'tech',
       admin: {
@@ -88,6 +88,6 @@ export const Blogs: CollectionConfig = {
     },
   ],
   admin: {
-    useAsTitle: 'slug'
-  }
-}
+    useAsTitle: 'slug',
+  },
+};

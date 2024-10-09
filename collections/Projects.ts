@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -54,7 +54,7 @@ export const Projects: CollectionConfig = {
         {
           label: 'Hobby',
           value: 'hobby',
-        }
+        },
       ],
       defaultValue: 'profession',
       admin: {
@@ -84,9 +84,9 @@ export const Projects: CollectionConfig = {
       type: 'relationship',
       relationTo: 'tools',
       hasMany: true,
-    }
+    },
   ],
   admin: {
     useAsTitle: 'title',
   },
-}
+};

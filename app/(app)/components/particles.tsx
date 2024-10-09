@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useRef, useEffect } from "react";
-import { useMousePosition } from "@/util/mouse";
+import React, { useRef, useEffect } from 'react';
+import { useMousePosition } from '@/util/mouse';
 
 interface ParticlesProps {
   className?: string;
@@ -12,7 +12,7 @@ interface ParticlesProps {
 }
 
 export default function Particles({
-  className = "",
+  className = '',
   quantity = 30,
   staticity = 50,
   ease = 50,
@@ -25,18 +25,18 @@ export default function Particles({
   const mousePosition = useMousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
-  const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  const dpr = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
 
   useEffect(() => {
     if (canvasRef.current) {
-      context.current = canvasRef.current.getContext("2d");
+      context.current = canvasRef.current.getContext('2d');
     }
     initCanvas();
     animate();
-    window.addEventListener("resize", initCanvas);
+    window.addEventListener('resize', initCanvas);
 
     return () => {
-      window.removeEventListener("resize", initCanvas);
+      window.removeEventListener('resize', initCanvas);
     };
   }, []);
 
@@ -227,7 +227,7 @@ export default function Particles({
   };
 
   return (
-    <div className={className} ref={canvasContainerRef} aria-hidden="true">
+    <div className={className} ref={canvasContainerRef} aria-hidden='true'>
       <canvas ref={canvasRef} />
     </div>
   );

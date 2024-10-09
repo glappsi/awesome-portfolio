@@ -21,8 +21,8 @@ export class PayloadBlogsRepository implements IBlogsRepository {
       locale,
       where: {
         slug: {
-          equals: slug
-        }
+          equals: slug,
+        },
       },
     });
 

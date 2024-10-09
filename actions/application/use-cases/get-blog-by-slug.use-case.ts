@@ -1,10 +1,12 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { BlogNotFoundError } from '../../entities/errors/blog-not-found.error';
 import { blogDetailSchema, BlogWithDetails } from '../../entities/models/blog';
 
-export function getBlogBySlugUseCase(slug: string): Effect.Effect<BlogWithDetails, BlogNotFoundError | ZodParseError> {
+export function getBlogBySlugUseCase(
+  slug: string,
+): Effect.Effect<BlogWithDetails, BlogNotFoundError | ZodParseError> {
   const repository = getInjection('IBlogsRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +20,9 @@ export function getBlogBySlugUseCase(slug: string): Effect.Effect<BlogWithDetail
     },
     catch(error: unknown) {
       return new BlogNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseBlogEffect = (blog: unknown) =>
@@ -31,7 +33,7 @@ export function getBlogBySlugUseCase(slug: string): Effect.Effect<BlogWithDetail
       catch(_error: unknown) {
         return new ZodParseError('BlogWithDetails', {
           originalError: _error,
-          data: blog
+          data: blog,
         });
       },
     });

@@ -10,11 +10,14 @@ export const linkSchema = z.object({
   showInNavigation: z.boolean().optional().nullable(),
   hideOnMobile: z.boolean().optional().nullable(),
   isExternal: z.boolean().optional().nullable(),
-  download: z.object({
-    url: z.string(),
-    filename: z.string(),
-    alt: z.string(),
-  }).optional().nullable(),
+  download: z
+    .object({
+      url: z.string(),
+      filename: z.string(),
+      alt: z.string(),
+    })
+    .optional()
+    .nullable(),
 });
 export const linkListSchema = z.array(linkSchema);
 

@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Messages: CollectionConfig = {
   slug: 'messages',
@@ -29,6 +29,6 @@ export const Messages: CollectionConfig = {
     ],
   },
   admin: {
-    useAsTitle: 'email'
-  }
-}
+    useAsTitle: 'email',
+  },
+};

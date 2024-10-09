@@ -9,12 +9,12 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const projects = await getProjects();
 
-  return map(filter(
-    projects,
-    p => !!p.blog
-  ), p => ({
-    slug: p.blog!.slug
-  }));
+  return map(
+    filter(projects, (p) => !!p.blog),
+    (p) => ({
+      slug: p.blog!.slug,
+    }),
+  );
 }
 
 type Props = {
@@ -23,9 +23,7 @@ type Props = {
   }>;
 };
 
-export default async function BlogPage({
-  params
-}: Props) {
+export default async function BlogPage({ params }: Props) {
   const blog = await getBlogBySlug((await params).slug);
 
   redirect(`./${blog.type}/${blog.slug}`);

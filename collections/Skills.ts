@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Skills: CollectionConfig = {
   slug: 'skills',
@@ -20,7 +20,7 @@ export const Skills: CollectionConfig = {
         {
           label: 'Soft',
           value: 'soft',
-        }
+        },
       ],
       defaultValue: 'profession',
       admin: {
@@ -48,6 +48,6 @@ export const Skills: CollectionConfig = {
     },
   ],
   admin: {
-    useAsTitle: 'title'
-  }
-}
+    useAsTitle: 'title',
+  },
+};

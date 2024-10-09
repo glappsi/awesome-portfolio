@@ -7,16 +7,22 @@ export const blogSchema = z.object({
   summary: z.string().optional().nullable(),
   slug: z.string(),
   author: z.string(),
-  authorImage: z.object({
-    url: z.string(),
-    alt: z.string(),
-  }).optional().nullable(),
-  thumbnail: z.object({
-    url: z.string(),
-    alt: z.string(),
-    width: z.number(),
-    height: z.number(),
-  }).optional().nullable(),
+  authorImage: z
+    .object({
+      url: z.string(),
+      alt: z.string(),
+    })
+    .optional()
+    .nullable(),
+  thumbnail: z
+    .object({
+      url: z.string(),
+      alt: z.string(),
+      width: z.number(),
+      height: z.number(),
+    })
+    .optional()
+    .nullable(),
   date: z.string().transform((str) => new Date(str)),
   published: z.boolean().optional().nullable(),
   type: z.string(),
@@ -24,19 +30,26 @@ export const blogSchema = z.object({
 
 export const blogDetailSchema = blogSchema.extend({
   links: linkListSchema.optional().nullable(),
-  gallery: z.array(z.object({
-    url: z.string(),
-    alt: z.string(),
-    width: z.number(),
-    height: z.number(),
-  })).optional().nullable(),
-  paragraphs: z.array(z.object({
-    content: z.any(),
-    markdown: z.string(),
-    html: z.string(),
-    render: z.enum(['html', 'markdown'])
-  }))
-})
+  gallery: z
+    .array(
+      z.object({
+        url: z.string(),
+        alt: z.string(),
+        width: z.number(),
+        height: z.number(),
+      }),
+    )
+    .optional()
+    .nullable(),
+  paragraphs: z.array(
+    z.object({
+      content: z.any(),
+      markdown: z.string(),
+      html: z.string(),
+      render: z.enum(['html', 'markdown']),
+    }),
+  ),
+});
 
 export type Blog = z.infer<typeof blogSchema>;
 export type BlogDto = z.input<typeof blogSchema>;

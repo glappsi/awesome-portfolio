@@ -26,9 +26,9 @@ export class PayloadProfilesRepository implements IProfilesRepository {
       locale,
       where: {
         active: {
-          equals: true
-        }
-      }
+          equals: true,
+        },
+      },
     });
 
     return blog.docs?.[0] as ProfileDto;
@@ -42,9 +42,9 @@ export class PayloadProfilesRepository implements IProfilesRepository {
       locale,
       where: {
         slug: {
-          equals: slug
-        }
-      }
+          equals: slug,
+        },
+      },
     });
 
     return blog.docs?.[0] as ProfileDto;
@@ -57,7 +57,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
       collection: 'skills',
       sort: 'order',
       limit: 0,
-      locale
+      locale,
     });
 
     return skills.docs as Array<SkillDto>;
@@ -69,7 +69,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const careerSteps = await payload.find({
       collection: 'career-steps',
       sort: '-start',
-      locale
+      locale,
     });
 
     return careerSteps.docs as Array<CareerStepDto>;
@@ -83,9 +83,9 @@ export class PayloadProfilesRepository implements IProfilesRepository {
       locale,
       where: {
         showInNavigation: {
-          equals: true
-        }
-      }
+          equals: true,
+        },
+      },
     });
 
     return links.docs as Array<LinkDto>;
@@ -96,7 +96,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const locale = await getSafeLocale();
     const skills = await payload.find({
       collection: 'testimonials',
-      locale
+      locale,
     });
 
     return skills.docs as Array<TestimonialDto>;
@@ -107,7 +107,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const locale = await getSafeLocale();
     const faqs = await payload.find({
       collection: 'faqs',
-      locale
+      locale,
     });
 
     return faqs.docs as Array<FAQDto>;

@@ -1,10 +1,16 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
-import { Testimonial, testimonialListSchema } from '../../entities/models/testimonial';
+import {
+  Testimonial,
+  testimonialListSchema,
+} from '../../entities/models/testimonial';
 import { TestimonialsNotFoundError } from '../../entities/errors/testimonials-not-found.error';
 
-export function getTestimonialsUseCase(): Effect.Effect<Array<Testimonial>, TestimonialsNotFoundError | ZodParseError> {
+export function getTestimonialsUseCase(): Effect.Effect<
+  Array<Testimonial>,
+  TestimonialsNotFoundError | ZodParseError
+> {
   const repository = getInjection('IProfilesRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +24,9 @@ export function getTestimonialsUseCase(): Effect.Effect<Array<Testimonial>, Test
     },
     catch(error: unknown) {
       return new TestimonialsNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseTestimonialsEffect = (testimonials: unknown) =>
@@ -31,7 +37,7 @@ export function getTestimonialsUseCase(): Effect.Effect<Array<Testimonial>, Test
       catch(_error: unknown) {
         return new ZodParseError('Testimonials', {
           originalError: _error,
-          data: testimonials
+          data: testimonials,
         });
       },
     });

@@ -1,10 +1,13 @@
-import { Effect } from "effect"
+import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Project, projectListSchema } from '../../entities/models/project';
 import { ProjectsNotFoundError } from '../../entities/errors/projects-not-found.error';
 
-export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotFoundError | ZodParseError> {
+export function getProjectsUseCase(): Effect.Effect<
+  Array<Project>,
+  ProjectsNotFoundError | ZodParseError
+> {
   const repository = getInjection('IProjectsRepository');
 
   const program = Effect.tryPromise({
@@ -18,9 +21,9 @@ export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotF
     },
     catch(error: unknown) {
       return new ProjectsNotFoundError({
-        originalError: error
-      })
-    }
+        originalError: error,
+      });
+    },
   });
 
   const parseProjectsEffect = (projects: unknown) =>
@@ -31,7 +34,7 @@ export function getProjectsUseCase(): Effect.Effect<Array<Project>, ProjectsNotF
       catch(_error: unknown) {
         return new ZodParseError('Projects', {
           originalError: _error,
-          data: projects
+          data: projects,
         });
       },
     });

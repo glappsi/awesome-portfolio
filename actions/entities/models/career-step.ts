@@ -7,12 +7,18 @@ export const careerStepSchema = z.object({
   title: z.string(),
   company: z.string(),
   description: z.string().optional(),
-  start: z.string().transform((str) => new Date(str)),  // Parse ISO string to Date
-  end: z.string().transform((str) => new Date(str)).optional().nullable(),
-  projects: z.array(z.object({
-    categories: z.array(categorySchema),
-    tools: z.array(toolSchema),
-  }))
+  start: z.string().transform((str) => new Date(str)), // Parse ISO string to Date
+  end: z
+    .string()
+    .transform((str) => new Date(str))
+    .optional()
+    .nullable(),
+  projects: z.array(
+    z.object({
+      categories: z.array(categorySchema),
+      tools: z.array(toolSchema),
+    }),
+  ),
 });
 export const careerStepListSchema = z.array(careerStepSchema);
 

@@ -15,5 +15,5 @@ export const FAQs: CollectionConfig = {
       required: true,
       localized: true,
     },
-  ]
+  ],
 };
