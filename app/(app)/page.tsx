@@ -28,7 +28,7 @@ export default async function Home() {
         quantity={100}
       />
 
-      <h1 className='text-edge-outline z-10 animate-title cursor-default whitespace-nowrap bg-white bg-clip-text px-0.5 pb-8 font-display text-4xl text-transparent duration-1000 sm:text-6xl md:text-9xl'>
+      <h1 className='text-edge-outline z-10 animate-title cursor-default whitespace-nowrap bg-white bg-clip-text px-0.5 pb-8 font-display text-4xl text-transparent duration-1000 sm:text-6xl md:text-8xl lg:text-9xl'>
         {profile.name}
       </h1>
 
