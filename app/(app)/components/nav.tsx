@@ -117,8 +117,12 @@ export const NavigationDock: React.FC<NavigationProps> = ({
           </Tooltip>
         </DockIcon>
         <Separator style={downloads?.length ? {} : { display: 'none' }} orientation='vertical' className='h-full' />
-        {downloads.map(({ download, title, icon, symbol }) => (
-          <DockIcon key={title}>
+        {downloads.map(({ download, hideOnMobile, title, icon, symbol }) => (
+          <DockIcon
+            key={title}
+            className={cn({
+              'hidden md:flex': hideOnMobile,
+            })}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
@@ -128,7 +132,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
                   aria-label={title}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-12 rounded-full',
+                    'size-12 min-w-min md:px-3 rounded-full',
                   )}
                 >
                   {symbol ? symbol : <Icon type={icon} className='size-4' />}
