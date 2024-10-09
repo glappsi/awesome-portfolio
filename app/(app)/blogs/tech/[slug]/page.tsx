@@ -110,7 +110,7 @@ export default async function BlogPage({ params }: Props) {
             </div>
           )}
           <Card
-            className='mx-auto max-w-full px-4 py-8 sm:px-6 md:mt-20 lg:mb-20 lg:max-w-3xl lg:px-8'
+            className='mx-auto max-w-full px-4 py-8 sm:px-6 lg:mt-20 lg:mb-20 lg:max-w-3xl lg:px-8'
             isFullscreen
           >
             <header className='mb-8 flex items-start justify-between'>

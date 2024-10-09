@@ -1,10 +1,9 @@
 'use client';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
-import { HomeIcon, ArchiveIcon, PersonIcon } from '@radix-ui/react-icons';
-import { cn } from '@/lib/utils';
+import { createMessage } from '@/actions';
+import { Link as TLink } from '@/actions/entities/models/link';
 import { buttonVariants } from '@/components/ui/button';
+import { Dock, DockIcon } from '@/components/ui/dock';
+import { Icon } from '@/components/ui/icon';
 import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
@@ -12,13 +11,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Dock, DockIcon } from '@/components/ui/dock';
+import { cn } from '@/lib/utils';
+import { ArchiveIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 import { filter } from 'lodash';
+import { ArrowLeft } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Icon } from '@/components/ui/icon';
-import { Link as TLink } from '@/actions/entities/models/link';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { createMessage } from '@/actions';
+import React, { useEffect, useRef, useState } from 'react';
 import { ContactButton } from './contact-form';
 
 const DATA = {
@@ -100,11 +100,20 @@ export const NavigationDock: React.FC<NavigationProps> = ({
             </Tooltip>
           </DockIcon>
         ))}
-        <ContactButton
-          className='hidden md:flex'
-          onSubmit={createMessage}
-          iconOnly
-        />
+        <DockIcon className='hidden md:flex'>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <ContactButton
+                className='max-w-full size-12 rounded-full'
+                onSubmit={createMessage}
+                iconOnly
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{t('contact')}</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
         <Separator orientation='vertical' className='h-full' />
         {downloads.map(({ download, title, icon, symbol }) => (
           <DockIcon key={title}>
@@ -152,11 +161,10 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
   return (
     <header ref={ref}>
       <div
-        className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur duration-200 ${
-          isIntersecting
-            ? 'border-transparent bg-zinc-900/0'
-            : 'bg-zinc-900/500 border-zinc-800'
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur duration-200 ${isIntersecting
+          ? 'border-transparent bg-zinc-900/0'
+          : 'bg-zinc-900/500 border-zinc-800'
+          }`}
       >
         <div className='container mx-auto flex flex-row-reverse items-center justify-between p-6'>
           <div className='flex justify-between gap-8'>

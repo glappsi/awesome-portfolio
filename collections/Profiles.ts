@@ -55,6 +55,17 @@ export const Profiles: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
     },
+    {
+      name: 'openForWork',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+    {
+      name: 'badge',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: false,
+    },
   ],
   admin: {
     useAsTitle: 'slug',

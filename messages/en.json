@@ -26,6 +26,10 @@
     "seo": {
       "title": "About me",
       "description": "Everything work related about me, my technical skills, career, contact and further links. Reach out to me :)"
+    },
+    "openForWork": {
+      "title": "Open For Work",
+      "description": "Got some interesting projects? Need some skilled developer or technical consultation? Let's get in contact!"
     }
   },
   "ProjectsPage": {
@@ -47,7 +51,8 @@
   "Navigation": {
     "home": "Home",
     "profile": "Profile",
-    "projects": "Projects"
+    "projects": "Projects",
+    "contact": "Message me"
   },
   "LegalsPage": {
     "privacy": "Privacy Policy",

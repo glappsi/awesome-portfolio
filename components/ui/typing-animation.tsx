@@ -28,13 +28,13 @@ export default function TypingAnimation({
   }, [duration, i]);
 
   return (
-    <h1
+    <p
       className={cn(
-        'text-center font-display tracking-[-0.02em] drop-shadow-sm',
+        'text-center tracking-[-0.02em] drop-shadow-sm',
         className,
       )}
     >
       {displayedText ? displayedText : ''}
-    </h1>
+    </p>
   );
 }

@@ -14,7 +14,15 @@ export const profileSchema = z.object({
     width: z.number(),
     height: z.number(),
   }),
+  badge: z.object({
+    url: z.string(),
+    alt: z.string(),
+    width: z.number(),
+    height: z.number(),
+    needsLightBackground: z.boolean().optional().nullable(),
+  }).optional().nullable(),
   aboutMe: z.string().optional().nullable(),
+  openForWork: z.boolean().optional().nullable()
 });
 
 export type Profile = z.infer<typeof profileSchema>;

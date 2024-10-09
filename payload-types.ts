@@ -249,6 +249,8 @@ export interface Profile {
   latitude?: number | null;
   aboutMe?: string | null;
   active?: boolean | null;
+  openForWork?: boolean | null;
+  badge?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }

@@ -1,7 +1,7 @@
+import { Skeleton } from '@/components/ui/skeleton';
+import { Eye } from 'lucide-react';
 import { Card } from '../../../components/card';
 import { Header } from './header';
-import { Eye } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
 
 export default async function BlogLoadingPage() {
   return (
@@ -9,7 +9,7 @@ export default async function BlogLoadingPage() {
       <Header />
 
       <Card
-        className='mx-auto max-w-full px-4 py-8 sm:px-6 md:mt-20 lg:mb-20 lg:max-w-3xl lg:px-8'
+        className='mx-auto max-w-full px-4 py-8 sm:px-6 lg:mt-20 lg:mb-20 lg:max-w-3xl lg:px-8'
         isFullscreen
       >
         <header className='mb-8 flex items-start justify-between'>

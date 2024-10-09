@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import React from 'react';
 import { BlogWithDetails } from '@/actions/entities/models/blog';
 import { Icon } from '@/components/ui/icon';
-import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import React from 'react';
 
 type Props = {
   blog?: BlogWithDetails;

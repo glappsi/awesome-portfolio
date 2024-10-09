@@ -31,7 +31,7 @@ export const CardBorder: React.FC<
         'group relative rounded-xl duration-700 hover:bg-zinc-800/10 md:gap-8',
         {
           'border border-zinc-600 hover:border-zinc-400/50': !isFullscreen,
-          'border-zinc-600 hover:border-zinc-400/50 md:border': !!isFullscreen,
+          'border-zinc-600 hover:border-zinc-400/50 lg:border': !!isFullscreen,
         },
       )}
     >
@@ -174,7 +174,7 @@ export const CardDescription: React.FC<
   return (
     <p
       className={clsx(
-        '-mt-4 mb-2 leading-6 text-zinc-400 duration-150 group-hover:text-zinc-300 md:mb-4',
+        'mb-2 leading-6 text-zinc-400 duration-150 group-hover:text-zinc-300 md:mb-4',
         className,
       )}
     >

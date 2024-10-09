@@ -4,6 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -12,19 +14,17 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useTranslations } from 'next-intl';
 import { FormSubmit } from '@/components/ui/form-button';
-import { Textarea } from '@/components/ui/textarea';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
-import { useState } from 'react';
-import confetti from 'canvas-confetti';
-import { CardHeadline } from './card';
-import clsx from 'clsx';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
+import confetti from 'canvas-confetti';
+import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { CardHeadline } from './card';
 
 export type SubmitHandler = (values: {
   email: string;
@@ -119,6 +119,7 @@ export function ContactButton({
               type={'PaperPlaneIcon'}
               className={clsx('size-4', {
                 'mr-2': !iconOnly,
+                'shrink-0': !!iconOnly,
               })}
             />
             {!iconOnly && t('sendMessage')}

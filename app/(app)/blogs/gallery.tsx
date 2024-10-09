@@ -1,3 +1,4 @@
+import BlurFade from '@/components/ui/blur-fade';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -28,19 +29,23 @@ export default function Gallery({ images, className }: Props) {
                   aspectRatio: `${+image.width}/${+image.height}`,
                 }}
               >
-                <Image
-                  src={image.url}
-                  alt={image.alt}
-                  width={image.width}
-                  height={image.height}
-                  style={{ objectFit: 'cover' }}
-                  sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
-                  className={`transition-transform duration-300 ease-in-out hover:scale-110`}
-                />
+                <BlurFade
+                  delay={0.25 + index * 0.05}
+                  inView>
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    style={{ objectFit: 'cover' }}
+                    sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
+                    className={`transition-transform duration-300 ease-in-out hover:scale-110`}
+                  />
+                </BlurFade>
               </div>
             </DialogTrigger>
             <DialogContent className='h-full max-h-[95vh] max-w-[95vw] p-0 md:max-h-[90vh] md:max-w-[90vw]'>
-              <div className='relative flex size-full items-center justify-center overflow-hidden'>
+              <BlurFade className='relative flex size-full items-center justify-center overflow-hidden' inView>
                 <Image
                   src={image.url}
                   alt={image.alt}
@@ -53,7 +58,7 @@ export default function Gallery({ images, className }: Props) {
                   }}
                   className={`grow w-auto h-auto`}
                 />
-              </div>
+              </BlurFade>
             </DialogContent>
           </Dialog>
         ))}
