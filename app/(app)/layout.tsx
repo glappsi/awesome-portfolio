@@ -1,11 +1,12 @@
-import '../../global.css';
-import { Inter } from 'next/font/google';
-import LocalFont from 'next/font/local';
+import { Toaster } from '@/components/ui/sonner';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
-import { Analytics } from './components/analytics';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
-import { Toaster } from '@/components/ui/sonner';
+import { Inter } from 'next/font/google';
+import LocalFont from 'next/font/local';
+import '../../global.css';
 import { Footer } from './components/footer';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -91,19 +92,18 @@ export default async function RootLayout({
       lang={locale}
       className={[inter.variable, calSans.variable].join(' ')}
     >
-      <head>
-        <Analytics />
-      </head>
       <body
-        className={`dark bg-black ${
-          process.env.NODE_ENV === 'development' ? 'debug-screens' : undefined
-        }`}
+        className={`dark bg-black ${process.env.NODE_ENV === 'development' ? 'debug-screens' : undefined
+          }`}
       >
         <NextIntlClientProvider messages={messages}>
           {children}
           <Footer />
           <Toaster />
         </NextIntlClientProvider>
+
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
