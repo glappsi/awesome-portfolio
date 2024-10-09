@@ -1,13 +1,13 @@
 'use client';
 
-import Image from 'next/image';
 import { Project } from '@/actions/entities/models/project';
-import { Card } from '../components/card';
-import { useState } from 'react';
-import { Article } from './article';
 import { filter, indexOf, some } from 'lodash';
-import { useArticleFilterStore } from './article-filter';
+import Image from 'next/image';
+import { useState } from 'react';
 import { Tool } from '../../../actions/entities/models/tool';
+import { Card } from '../components/card';
+import { Article } from './article';
+import { useArticleFilterStore } from './article-filter';
 
 type Props = {
   projects: Array<Project>;
@@ -30,20 +30,21 @@ export const ArticleGrid: React.FC<Props> = ({
   const evenIndexed = filter(
     filteredProjects,
     (p: Project, index: number) => index % 2 === 0,
-  );
+  ) as Array<Project>;
   const oddIndexed = filter(
     filteredProjects,
     (p: Project, index: number) => index % 2 !== 0,
-  );
+  ) as Array<Project>;
 
   return (
     <>
       <div className='mx-auto hidden grid-cols-2 gap-8 lg:grid'>
         <div className='flex flex-col gap-8'>
-          {(evenIndexed as Array<Project>).map((project) => (
+          {evenIndexed.map((project) => (
             <Card
               key={project.id}
               isHighlight={isHighlight && indexOf(projects, project) === 0}
+              isSelected={highlightId === indexOf(projects, project)}
               onClick={() => setHighlightId(indexOf(projects, project))}
               badge={
                 !!project.badge && (
@@ -69,10 +70,11 @@ export const ArticleGrid: React.FC<Props> = ({
           ))}
         </div>
         <div className='flex flex-col gap-8'>
-          {(oddIndexed as Array<Project>).map((project) => (
+          {oddIndexed.map((project) => (
             <Card
               key={project.id}
               onClick={() => setHighlightId(indexOf(projects, project))}
+              isSelected={highlightId === indexOf(projects, project)}
               badge={
                 !!project.badge && (
                   <Image
@@ -103,6 +105,7 @@ export const ArticleGrid: React.FC<Props> = ({
             key={project.id}
             isHighlight={isHighlight && indexOf(projects, project) === 0}
             onClick={() => setHighlightId(indexOf(projects, project))}
+            isSelected={highlightId === indexOf(projects, project)}
             badge={
               !!project.badge && (
                 <Image

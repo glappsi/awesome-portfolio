@@ -98,9 +98,11 @@ export function ContactForm({ onSubmit }: { onSubmit: SubmitHandler }) {
 export function ContactButton({
   className,
   iconOnly,
+  isHighlight,
   onSubmit,
 }: {
   onSubmit: SubmitHandler;
+  isHighlight?: boolean;
   iconOnly?: boolean;
   className?: string;
 }) {
@@ -112,7 +114,7 @@ export function ContactButton({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
-            variant={iconOnly ? 'ghost' : 'outline'}
+            variant={iconOnly ? 'ghost' : (isHighlight ? 'default' : 'outline')}
             className={cn('rounded-full', className)}
           >
             <Icon

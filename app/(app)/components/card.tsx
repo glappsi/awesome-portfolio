@@ -49,6 +49,7 @@ export const Card: React.FC<
     badgeLight?: boolean;
     isFullscreen?: boolean;
     isHighlight?: boolean;
+    isSelected?: boolean;
     onClick?: () => void;
   }
 > = ({
@@ -60,6 +61,7 @@ export const Card: React.FC<
   badgeLight,
   isFullscreen,
   isHighlight,
+  isSelected,
   onClick,
 }) => {
     const mouseX = useSpring(0, { stiffness: 500, damping: 100 });
@@ -87,7 +89,9 @@ export const Card: React.FC<
         isFullscreen={isFullscreen}
         onMouseMove={onMouseMove}
         onClick={onClick}
-        className={className}
+        className={cn(className, {
+          'cursor-pointer': !!onClick && !isSelected
+        })}
       >
         {!!background && (
           <div className='absolute inset-0 z-[-1] opacity-25'>{background}</div>

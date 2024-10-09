@@ -190,7 +190,7 @@ export default async function ProfilePage({ params }: Props) {
                 <Separator className="my-4 md:my-8" />
                 <CardSubHeadline className="!mb-1">{t('openForWork.title')}</CardSubHeadline>
                 <CardDescription>{t('openForWork.description')}</CardDescription>
-                <ContactButton onSubmit={createMessage} />
+                <ContactButton isHighlight onSubmit={createMessage} />
               </div>)}
             </Card>
 
