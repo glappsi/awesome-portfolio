@@ -268,7 +268,7 @@ export default async function ProfilePage({ params }: Props) {
             </NeonGradientCard>
           </div>
 
-          <div className='order-3 md:col-span-2 md:grid grid-cols-2 flex lg:flex flex-col gap-8'>
+          <div className='order-3 md:col-span-2 lg:col-span-1 md:grid grid-cols-2 flex lg:flex flex-col gap-8'>
             <Card
               className='overflow-hidden p-4 md:p-8'
               background={<IconCloud iconSlugs={skillTools} />}
