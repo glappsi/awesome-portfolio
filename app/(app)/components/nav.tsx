@@ -1,7 +1,7 @@
 'use client';
 import { createMessage } from '@/actions';
 import { Link as TLink } from '@/actions/entities/models/link';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Dock, DockIcon } from '@/components/ui/dock';
 import { Icon } from '@/components/ui/icon';
 import { Separator } from '@/components/ui/separator';
@@ -14,7 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { ArchiveIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 import { filter } from 'lodash';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -32,6 +32,7 @@ const DATA = {
 export type NavigationProps = {
   profileSlug: string;
   links: Array<TLink>;
+  closable?: boolean;
 };
 
 export const NavigationDock: React.FC<NavigationProps> = ({
@@ -60,13 +61,14 @@ export const NavigationDock: React.FC<NavigationProps> = ({
                   aria-label={t(item.label)}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-12 rounded-full',
+                    'size-12 min-w-min md:px-3 rounded-full',
                   )}
                 >
-                  <item.icon className='size-4' />
+                  <item.icon className='shrink-0 size-4 md:mr-2' />
+                  <span className="hidden md:block">{t(item.label)}</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent className='md:hidden'>
                 <p>{t(item.label)}</p>
               </TooltipContent>
             </Tooltip>
@@ -166,21 +168,27 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
           : 'bg-zinc-900/500 border-zinc-800'
           }`}
       >
-        <div className='container mx-auto flex flex-row-reverse items-center justify-between p-6'>
+        <div className={cn('container mx-auto flex items-center justify-between p-6', {
+          'flex-row-reverse': !props.closable
+        })}>
           <div className='flex justify-between gap-8'>
             <NavigationDock {...props} />
           </div>
 
-          <Link
-            href='#'
-            onClick={async () => {
-              await scrollToTop();
-              router.back();
-            }}
-            className='text-zinc-300 duration-200 hover:text-zinc-100'
-          >
-            <ArrowLeft className='size-6' />
-          </Link>
+          {props.closable
+            ? <Button variant="ghost" onClick={() => window.close()}>
+              <X className='size-6' />
+            </Button>
+            : <Link
+              href='#'
+              onClick={async () => {
+                await scrollToTop();
+                router.back();
+              }}
+              className='text-zinc-300 duration-200 hover:text-zinc-100'
+            >
+              <ArrowLeft className='size-6' />
+            </Link>}
         </div>
       </div>
     </header>

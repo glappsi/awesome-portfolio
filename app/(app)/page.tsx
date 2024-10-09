@@ -1,8 +1,7 @@
-import React from 'react';
-import Particles from './components/particles';
 import { getActiveProfile, getLinks } from '@/actions';
-import { NavigationDock } from './components/nav';
 import Image from 'next/image';
+import { NavigationDock } from './components/nav';
+import Particles from './components/particles';
 
 export const revalidate = 60;
 
@@ -36,7 +35,7 @@ export default async function Home() {
       <div className='animate-glow hidden h-px w-screen animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block' />
       {profile?.description && (
         <div className='animate-fade-in px-4 text-center md:my-8 lg:whitespace-pre'>
-          <h2 className='text-sm text-zinc-500'>{profile?.description}</h2>
+          <h2 className='text-zinc-500'>{profile?.description}</h2>
         </div>
       )}
 
