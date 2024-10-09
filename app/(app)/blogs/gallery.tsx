@@ -18,7 +18,7 @@ type Props = {
 export default function Gallery({ images, className }: Props) {
   return (
     <div className={clsx('mx-auto', className)}>
-      <div className='flex max-w-[100vw] flex-col items-center gap-2 overflow-x-auto overflow-y-auto bg-[hsl(var(--border))] md:flex-row'>
+      <div className='flex max-w-[100vw] flex-col items-center gap-2 overflow-x-auto overflow-y-hidden bg-[hsl(var(--border))] md:flex-row'>
         {images.map((image, index) => (
           <Dialog key={index}>
             <DialogTrigger asChild>
