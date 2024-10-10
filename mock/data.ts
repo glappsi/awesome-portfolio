@@ -24,7 +24,7 @@ export const generateImage = (width: number, height: number) => ({
 
 export const generateProfileDto = (): ProfileDto => ({
   id: 1,
-  name: '<NEEDS CONFIGURATION>',
+  name: '<NO CONFIG>',
   latitude: faker.location.latitude(),
   longitude: faker.location.longitude(),
   location: faker.location.city(),
@@ -200,7 +200,7 @@ export const generateLinkDto = (): LinkDto => ({
   icon: faker.helpers.arrayElement(IconKeys), // Assuming IconKeys contains valid icon enums
   link: faker.internet.url(),
   showInNavigation: true,
-  hideOnMobile: true,
+  hideOnMobile: false,
   isExternal: true,
   download: null,
 });
