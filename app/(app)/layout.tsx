@@ -19,6 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
       default: profile.name,
       template: `%s | ${profile.name}`,
     },
+    authors: {
+      name: profile.name,
+      url: `https://${process.env.APP_URL}`
+    },
     keywords: profile.keywords,
     description: profile.description,
     alternates: {
