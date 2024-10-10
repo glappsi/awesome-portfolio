@@ -175,9 +175,9 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
         <div className={cn('container mx-auto flex items-center justify-between p-6', {
           'flex-row-reverse': !props.closable
         })}>
-          <div className='flex justify-between gap-8'>
+          <nav className='flex justify-between gap-8'>
             <NavigationDock {...props} />
-          </div>
+          </nav>
 
           {props.closable
             ? <Button variant="ghost" onClick={() => window.close()}>
