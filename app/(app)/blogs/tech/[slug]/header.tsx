@@ -41,22 +41,27 @@ export const Header: React.FC<Props> = ({ blog, hideBorder }) => {
           </div>
 
           {!!blog && !!blog.links?.length && (
-            <div className='mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none'>
+            <div className='mx-auto mt-6 max-w-2xl lg:mx-0 lg:max-w-none'>
               <div className='grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10'>
                 {blog.links.map((link) =>
                   link.link ? (
-                    <Link target='_blank' key={link.title} href={link.link}>
-                      <Icon type={link.icon} className='size-4' /> {link.title}{' '}
+                    <Link
+                      className="flex items-center gap-2"
+                      target='_blank'
+                      key={link.title}
+                      href={link.link}>
+                      <Icon type={link.icon} className='shrink-0 size-4' /> {link.title}{' '}
                       <span aria-hidden='true'>&rarr;</span>
                     </Link>
                   ) : (
                     <Link
+                      className="flex items-center gap-2"
                       target='_blank'
                       key={link.title}
                       href={link.download!.url}
                       download={link.download!.filename}
                     >
-                      <Icon type={link.icon} className='size-4' /> {link.title}{' '}
+                      <Icon type={link.icon} className='shrink-0 size-4' /> {link.title}{' '}
                       <span aria-hidden='true'>&darr;</span>
                     </Link>
                   ),
