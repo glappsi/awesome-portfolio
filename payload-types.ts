@@ -163,6 +163,7 @@ export interface Blog {
   thumbnail?: (number | null) | Media;
   gallery?: (number | Media)[] | null;
   date: string;
+  views?: number | null;
   paragraphs?: (number | BlogParagraph)[] | null;
   links?: (number | Link)[] | null;
   type?: 'tech' | null;

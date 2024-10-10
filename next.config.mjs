@@ -3,6 +3,8 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
+const hostname = process.env.APP_URL || process.env.VERCEL_URL;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -11,11 +13,11 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
-      {
+      ...(hostname ? [{
         protocol: 'https',
-        hostname: process.env.APP_URL,
+        hostname,
         pathname: '/api/media/**',
-      },
+      }] : []),
       {
         protocol: 'https',
         hostname: 'placehold.co'

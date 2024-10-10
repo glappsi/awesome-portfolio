@@ -1,7 +1,6 @@
-import { getBlogBySlug, getProjects } from '@/actions';
+import { getBlogBySlug, getPageViewsForBlog, getProjects } from '@/actions';
 import { url } from '@/lib/env';
 import { generateBlog } from '@/lib/google-structured-data';
-import { Redis } from '@upstash/redis';
 import { filter, map, merge } from 'lodash';
 import { Eye } from 'lucide-react';
 import { Metadata } from 'next';
@@ -77,15 +76,12 @@ type Props = {
   }>;
 };
 
-const redis = Redis.fromEnv();
-
 export default async function BlogPage({ params }: Props) {
   const slug = (await params).slug;
   const blog = await getBlogBySlug(slug);
   const blogData = generateBlog(blog);
 
-  const views =
-    (await redis.get<number>(['pageviews', 'projects', slug].join(':'))) ?? 0;
+  const views = await getPageViewsForBlog(blog);
 
   return (
     <>

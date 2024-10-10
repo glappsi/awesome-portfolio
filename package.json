@@ -2,8 +2,19 @@
   "name": "glappa.dev",
   "version": "0.1.0",
   "private": true,
+  "author": "Florian Glappa",
+  "description": "Portfolio Website written by Florian Glappa. Dynamic content editable in a locally running instance of Payload CMS.",
+  "license": "Proprietary",
+  "homepage": "https://glappa.dev",
+  "keywords": [
+    "Florian Glappa",
+    "portfolio",
+    "website",
+    "payload-cms",
+    "nextjs"
+  ],
   "scripts": {
-    "license": "npx license-checker --relativeLicensePath | sed '/│  ├─ path: /d' | sed '/└─ licenseFile: /d' | sed '/│  └─ licenseFile: /d' | sed '/└─ path: /d' | sed '/│  └─ path: /d' | sed '/├─ path: /d' > LICENSES && npx license-checker --relativeLicensePath --json > third-party-licenses.json && node extract-licenses.js",
+    "g:license": "npx license-checker --relativeLicensePath | sed '/│  ├─ path: /d' | sed '/└─ licenseFile: /d' | sed '/│  └─ licenseFile: /d' | sed '/└─ path: /d' | sed '/│  └─ path: /d' | sed '/├─ path: /d' > LICENSES && npx license-checker --relativeLicensePath --json > third-party-licenses.json",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -14,12 +25,12 @@
     "@hookform/resolvers": "^3.9.0",
     "@next/mdx": "15.0.0-canary.171",
     "@payloadcms/db-postgres": "3.0.0-beta.109",
-    "@payloadcms/email-nodemailer": "^3.0.0-beta.109",
+    "@payloadcms/email-nodemailer": "3.0.0-beta.109",
     "@payloadcms/next": "3.0.0-beta.109",
     "@payloadcms/plugin-cloud": "3.0.0-beta.109",
     "@payloadcms/richtext-lexical": "3.0.0-beta.109",
     "@payloadcms/richtext-slate": "^3.0.0-beta.109",
-    "@payloadcms/storage-s3": "^3.0.0-beta.109",
+    "@payloadcms/storage-s3": "3.0.0-beta.109",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.2",
@@ -96,16 +107,5 @@
   },
   "overrides": {
     "react-is": "^19.0.0-rc-67fee58b-20240926"
-  },
-  "pnpm": {
-    "overrides": {
-      "@opentelemetry/api": "1.4.1",
-      "@opentelemetry/core": "1.13.0",
-      "@opentelemetry/exporter-trace-otlp-grpc": "0.39.1",
-      "@opentelemetry/resources": "1.13.0",
-      "@opentelemetry/sdk-trace-base": "1.13.0",
-      "@opentelemetry/sdk-trace-node": "1.13.0",
-      "@opentelemetry/semantic-conventions": "1.13.0"
-    }
   }
 }

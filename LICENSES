@@ -431,6 +431,9 @@
 │  ├─ publisher: Jacob Fletcher
 │  ├─ email: jacobsfletch@gmail.com
 │  ├─ url: https://jacobsfletch.com
+├─ @faker-js/faker@9.0.3
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/faker-js/faker
 ├─ @floating-ui/core@1.6.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/floating-ui/floating-ui
@@ -1291,6 +1294,12 @@
 │  ├─ repository: https://github.com/upstash/upstash-redis
 │  ├─ publisher: Andreas Thomas
 │  ├─ email: dev@chronark.com
+├─ @vercel/analytics@1.3.1
+│  ├─ licenses: MPL-2.0
+│  ├─ repository: https://github.com/vercel/analytics
+├─ @vercel/speed-insights@1.0.12
+│  ├─ licenses: Apache-2.0
+│  ├─ repository: https://github.com/vercel/speed-insights
 ├─ abbrev@1.1.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/abbrev-js
@@ -2543,6 +2552,7 @@
 ├─ glappa.dev@0.1.0
 │  ├─ licenses: UNLICENSED
 │  ├─ private: true
+│  ├─ publisher: Florian Glappa
 ├─ glob-parent@5.1.2
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/gulpjs/glob-parent
@@ -4829,6 +4839,8 @@
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/node-semver
 │  ├─ publisher: GitHub Inc.
+├─ server-only@0.0.1
+│  ├─ licenses: MIT
 ├─ set-function-length@1.2.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ljharb/set-function-length

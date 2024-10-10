@@ -1,11 +1,11 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
+import { Effect } from 'effect';
+import { MessageCouldNotBeCreatedError } from '../../entities/errors/message-could-not-be-created.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import {
   CreateMessageDto,
   createMessageSchema,
 } from '../../entities/models/message';
-import { MessageCouldNotBeCreatedError } from '../../entities/errors/message-could-not-be-created.error';
 
 export function createMessageUseCase(
   dto: CreateMessageDto,
@@ -18,7 +18,7 @@ export function createMessageUseCase(
     },
     catch(_error: unknown) {
       return new ZodParseError('Message', {
-        originalError: _error,
+        originalError: _error && JSON.stringify(_error, Object.getOwnPropertyNames(_error)),
         data: dto,
       });
     },
@@ -36,7 +36,7 @@ export function createMessageUseCase(
       },
       catch(error: unknown) {
         return new MessageCouldNotBeCreatedError({
-          originalError: error,
+          originalError: error && JSON.stringify(error, Object.getOwnPropertyNames(error)),
         });
       },
     });

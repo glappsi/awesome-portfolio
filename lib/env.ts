@@ -1,5 +1,13 @@
-if (!process.env.APP_URL) {
-  throw new Error('[ENV missing]: configure APP_URL');
+export const isDevelopment = process.env.NODE_ENV === 'development';
+export const isTesting = process.env.NODE_ENV === 'test';
+export const isProduction = process.env.NODE_ENV === 'production';
+export const isSandboxed = process.env.ENABLE_SANDBOX === '1';
+
+export const host = process.env.APP_URL || process.env.VERCEL_URL || (!isProduction ? 'localhost:3000' : undefined);
+export const isLocalhost = host?.includes('localhost');
+
+if (!host) {
+  throw new Error('[ENV missing]: configure APP_URL (hostname)');
 }
 
 if (!process.env.PAYLOAD_SECRET) {
@@ -10,26 +18,15 @@ if (!process.env.DATABASE_URI) {
   throw new Error('[ENV missing]: configure DATABASE_URI');
 }
 
-export const isDevelopment = process.env.NODE_ENV === 'development';
+export const protocol = isLocalhost ? 'http' : 'https';
 
-export const isTesting = process.env.NODE_ENV === 'test';
-
-export const useSandbox = process.env.ENABLE_SANDBOX === '1';
-
-export const appUrl = process.env.APP_URL;
-
-export const isLocal = process.env.APP_URL?.includes('localhost');
-
-export const protocol = isLocal ? 'http' : 'https';
-
-export const url = isLocal ? `${protocol}://${process.env.APP_URL}:3000` : `${protocol}://${process.env.APP_URL}`;
+export const url = isLocalhost ? `${protocol}://${host}` : `${protocol}://${host}`;
 
 export const payloadSecret = process.env.PAYLOAD_SECRET;
 
 export const databaseUri = process.env.DATABASE_URI;
 
-export const s3Configured = process.env.S3_BUCKET && process.env.S3_ACCESS_KEY_ID && process.env.S3_SECRET_ACCESS_KEY && process.env.S3_ENDPOINT;
-
+export const s3Enabled = !!(process.env.S3_BUCKET && process.env.S3_ACCESS_KEY_ID && process.env.S3_SECRET_ACCESS_KEY && process.env.S3_ENDPOINT);
 export const s3Config = {
   credentials: {
     accessKeyId: process.env.S3_ACCESS_KEY_ID!,
@@ -39,12 +36,11 @@ export const s3Config = {
   endpoint: process.env.S3_ENDPOINT,
   forcePathStyle: true,
 };
-
 export const s3Bucket = process.env.S3_BUCKET;
 
-export const useRemoteImages = process.env.REMOTE_IMAGES === '1';
+export const useRemoteImages = process.env.REMOTE_IMAGES === '1' && !isLocalhost;
 
-export const smtpEnabled = process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS;
+export const smtpEnabled = !!(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
 
 export const smtpTransportOptions = {
   host: process.env.SMTP_HOST,
@@ -59,6 +55,8 @@ if (smtpEnabled && !process.env.EMAIL_RECIPIENT) {
   console.warn('[ENV missing]: Skipping Email feature, configure EMAIL_RECIPIENT to send notifications.');
 }
 
-export const smtpFrom = process.env.EMAIL_FROM || `info@${appUrl}`;
-export const smtpFromName = process.env.EMAIL_FROM_NAME || appUrl;
+export const smtpFrom = process.env.EMAIL_FROM || `info@${host}`;
+export const smtpFromName = process.env.EMAIL_FROM_NAME || host;
 export const smtpRecipient = process.env.EMAIL_RECIPIENT;
+
+export const upstashEnabled = !!(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);

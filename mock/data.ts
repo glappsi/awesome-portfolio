@@ -10,7 +10,7 @@ import { Skill, SkillDto } from '@/actions/entities/models/skill';
 import { Testimonial, TestimonialDto } from '@/actions/entities/models/testimonial';
 import { ToolDto } from '@/actions/entities/models/tool';
 import { IconKeys } from '@/components/ui/icon';
-import { url, useSandbox } from '@/lib/env';
+import { isSandboxed, url } from '@/lib/env';
 import { faker } from '@faker-js/faker';
 import { Effect } from 'effect';
 
@@ -225,6 +225,7 @@ export const generateBlogDto = (): BlogDto => ({
   thumbnail: faker.datatype.boolean() ? generateImage(400, 400) : null,
   date: faker.date.past().toISOString(),
   published: true,
+  views: faker.number.int(),
   type: faker.helpers.arrayElement(['tech']),
 });
 export const generateBlog = (): Blog => ({
@@ -259,7 +260,7 @@ export const generateCreatedMessage = () => ({ id: generateCreatedMessageDto() }
 
 export const sandBoxPipe = <TResult>(data: () => TResult) => {
   return Effect.catchAll((error) => {
-    if (useSandbox) {
+    if (isSandboxed) {
       return Effect.succeed<TResult>(data());
     }
 

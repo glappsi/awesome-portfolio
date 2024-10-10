@@ -66,6 +66,14 @@ export const Blogs: CollectionConfig = {
       },
     },
     {
+      name: 'views',
+      type: 'number',
+      defaultValue: 0,
+      admin: {
+        disabled: true
+      }
+    },
+    {
       name: 'paragraphs',
       type: 'relationship',
       relationTo: 'blog-paragraphs',

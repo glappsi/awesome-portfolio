@@ -1,11 +1,11 @@
-import { injectable } from 'inversify';
+import { getSafeLocale } from '@/i18n/utils';
 import config from '@payload-config';
 import { getPayloadHMR } from '@payloadcms/next/utilities';
-import { ProjectDto } from '../../entities/models/project';
+import { injectable } from 'inversify';
+import { Blog } from '../../../payload-types';
 import { IProjectsRepository } from '../../application/repositories/projects.repository.interface';
 import { BlogDto } from '../../entities/models/blog';
-import { Blog } from '../../../payload-types';
-import { getSafeLocale } from '@/i18n/utils';
+import { ProjectDto } from '../../entities/models/project';
 
 @injectable()
 export class PayloadProjectsRepository implements IProjectsRepository {
@@ -13,7 +13,7 @@ export class PayloadProjectsRepository implements IProjectsRepository {
     return getPayloadHMR({ config });
   }
 
-  constructor() {}
+  constructor() { }
 
   async getProjects(): Promise<Array<ProjectDto>> {
     const payload = await this._getPayload();

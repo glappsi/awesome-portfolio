@@ -1,6 +1,6 @@
 import { getActiveProfile } from '@/actions';
 import { Toaster } from '@/components/ui/sonner';
-import { appUrl, isDevelopment, url } from '@/lib/env';
+import { host, isDevelopment, url } from '@/lib/env';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: profile.name,
       description: profile.description,
       url: url,
-      siteName: appUrl,
+      siteName: host,
       images: [
         {
           url: `${url}/seo_1024x1024.jpg`,

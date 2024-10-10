@@ -1,7 +1,7 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
-import { ZodParseError } from '../../entities/errors/zod-parse.error';
+import { Effect } from 'effect';
 import { ProfileNotFoundError } from '../../entities/errors/profile-not-found.error';
+import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Profile, profileSchema } from '../../entities/models/profile';
 
 export function getProfileBySlugUseCase(
@@ -20,7 +20,7 @@ export function getProfileBySlugUseCase(
     },
     catch(error: unknown) {
       return new ProfileNotFoundError({
-        originalError: error,
+        originalError: error && JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
     },
   });
@@ -32,7 +32,7 @@ export function getProfileBySlugUseCase(
       },
       catch(_error: unknown) {
         return new ZodParseError('Profile', {
-          originalError: _error,
+          originalError: _error && JSON.stringify(_error, Object.getOwnPropertyNames(_error)),
           data: profile,
         });
       },

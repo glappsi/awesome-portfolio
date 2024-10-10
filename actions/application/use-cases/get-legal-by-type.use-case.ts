@@ -1,8 +1,8 @@
-import { Effect } from 'effect';
 import { getInjection } from '@/di/container';
+import { Effect } from 'effect';
+import { LegalNotFoundError } from '../../entities/errors/legal-not-found.error';
 import { ZodParseError } from '../../entities/errors/zod-parse.error';
 import { Legal, LegalDto, legalSchema } from '../../entities/models/legal';
-import { LegalNotFoundError } from '../../entities/errors/legal-not-found.error';
 
 export function getLegalByTypeUseCase(
   type: LegalDto['type'],
@@ -20,7 +20,7 @@ export function getLegalByTypeUseCase(
     },
     catch(error: unknown) {
       return new LegalNotFoundError(type, {
-        originalError: error,
+        originalError: error && JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
     },
   });
@@ -32,7 +32,7 @@ export function getLegalByTypeUseCase(
       },
       catch(_error: unknown) {
         return new ZodParseError('Legals', {
-          originalError: _error,
+          originalError: _error && JSON.stringify(_error, Object.getOwnPropertyNames(_error)),
           data: legal,
         });
       },

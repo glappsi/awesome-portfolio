@@ -21,7 +21,7 @@ export function getLinksUseCase(): Effect.Effect<
     },
     catch(error: unknown) {
       return new LinksNotFoundError({
-        originalError: error,
+        originalError: error && JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
     },
   });
@@ -33,7 +33,7 @@ export function getLinksUseCase(): Effect.Effect<
       },
       catch(_error: unknown) {
         return new ZodParseError('Links', {
-          originalError: _error,
+          originalError: _error && JSON.stringify(_error, Object.getOwnPropertyNames(_error)),
           data: links,
         });
       },

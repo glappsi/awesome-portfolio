@@ -12,7 +12,7 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
 
-import { databaseUri, payloadSecret, s3Bucket, s3Config, s3Configured, smtpEnabled, smtpFrom, smtpFromName, smtpTransportOptions } from '@/lib/env';
+import { databaseUri, payloadSecret, s3Bucket, s3Config, s3Enabled, smtpEnabled, smtpFrom, smtpFromName, smtpTransportOptions } from '@/lib/env';
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
 import { BlogParagraphs } from './collections/BlogParagraphs';
 import { Blogs } from './collections/Blogs';
@@ -88,7 +88,7 @@ export default buildConfig({
     transportOptions: smtpTransportOptions
   }) : undefined,
   plugins: [
-    ...(s3Configured ? [s3Storage({
+    ...(s3Enabled ? [s3Storage({
       collections: {
         media: true,
       },

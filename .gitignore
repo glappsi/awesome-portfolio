@@ -39,3 +39,4 @@ next-env.d.ts
 third-party-licenses.json
 
 backup.sql
+prepare-licenses.js

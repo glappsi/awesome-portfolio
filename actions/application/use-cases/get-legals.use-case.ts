@@ -22,7 +22,7 @@ export function getLegalsUseCase(): Effect.Effect<
     },
     catch(error: unknown) {
       return new LegalsNotFoundError({
-        originalError: error,
+        originalError: error && JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
     },
   });
@@ -34,7 +34,7 @@ export function getLegalsUseCase(): Effect.Effect<
       },
       catch(_error: unknown) {
         return new ZodParseError('Legals', {
-          originalError: _error,
+          originalError: _error && JSON.stringify(_error, Object.getOwnPropertyNames(_error)),
           data: legals,
         });
       },

@@ -1,13 +1,11 @@
-import { getActiveProfile, getLinks, getProjects } from '@/actions';
+import { getActiveProfile, getLinks, getPageViews, getProjects } from '@/actions';
+import { Blog } from '@/actions/entities/models/blog';
 import { Project } from '@/actions/entities/models/project';
-import { Redis } from '@upstash/redis';
-import { countBy, filter, orderBy, uniqBy } from 'lodash';
+import { countBy, filter, map, orderBy, uniqBy } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import { Navigation } from '../components/nav';
 import { ArticleToolFilter } from './article-filter';
 import { ArticleGrid } from './article-grid';
-
-const redis = Redis.fromEnv();
 
 export const revalidate = 60;
 
@@ -25,20 +23,8 @@ export default async function ProjectsPage() {
     linksPromise,
   ]);
 
-  const blogProjects = filter(allProjects, (p) => !!p.blog);
-  const views = (
-    await redis.mget<number[]>(
-      ...blogProjects.map((p) =>
-        ['pageviews', 'projects', p.blog!.slug].join(':'),
-      ),
-    )
-  ).reduce(
-    (acc, v, i) => {
-      acc[blogProjects[i].blog!.slug] = v ?? 0;
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
+  const blogs = filter(map(allProjects, (p) => p.blog)) as Array<Blog>;
+  const views = await getPageViews(blogs);
 
   const publishedProjects = filter(
     allProjects,

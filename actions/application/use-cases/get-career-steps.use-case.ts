@@ -24,7 +24,7 @@ export function getCareerStepsUseCase(): Effect.Effect<
     },
     catch(error: unknown) {
       return new CareerStepsNotFoundError({
-        originalError: error,
+        originalError: error && JSON.stringify(error, Object.getOwnPropertyNames(error)),
       });
     },
   });
@@ -36,7 +36,7 @@ export function getCareerStepsUseCase(): Effect.Effect<
       },
       catch(_error: unknown) {
         return new ZodParseError('CareerSteps', {
-          originalError: _error,
+          originalError: _error && JSON.stringify(_error, Object.getOwnPropertyNames(_error)),
           data: careerSteps,
         });
       },
