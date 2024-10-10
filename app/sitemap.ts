@@ -1,4 +1,5 @@
 import { getActiveProfile, getProjects } from '@/actions';
+import { url } from '@/lib/app-url';
 import { filter } from 'lodash';
 import { MetadataRoute } from 'next';
 
@@ -9,23 +10,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/`,
+      url: `${url}/`,
       lastModified: new Date(),
     },
     {
-      url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/profiles/${profile.slug}`,
+      url: `${url}/profiles/${profile.slug}`,
       lastModified: new Date(),
     },
     {
-      url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/projects`,
+      url: `${url}/projects`,
       lastModified: new Date(),
     },
     ...blogProjects.map(({ blog }) => {
       return {
-        url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/blogs/${blog!.type}/${blog!.slug}`,
+        url: `${url}/blogs/${blog!.type}/${blog!.slug}`,
         lastModified: new Date(),
         images: blog!.thumbnail?.url
-          ? [`${process.env.APP_PROTOCOL}://${process.env.APP_URL}${blog!.thumbnail!.url}`]
+          ? [`${url}${blog!.thumbnail!.url}`]
           : undefined,
       };
     }),
