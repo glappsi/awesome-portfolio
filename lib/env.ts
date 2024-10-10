@@ -3,7 +3,7 @@ export const isTesting = process.env.NODE_ENV === 'test';
 export const isProduction = process.env.NODE_ENV === 'production';
 export const isSandboxed = process.env.ENABLE_SANDBOX === '1';
 
-export const host = process.env.APP_URL || process.env.VERCEL_URL || (!isProduction ? 'localhost:3000' : undefined);
+export const host = process.env.APP_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL || (!isProduction ? 'localhost:3000' : undefined);
 export const isLocalhost = host?.includes('localhost');
 
 if (!host) {
