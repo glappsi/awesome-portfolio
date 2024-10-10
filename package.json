@@ -21,6 +21,7 @@
     "lint": "next lint",
     "format": "prettier --check --write .",
     "commit": "cz",
+    "release": "npx semantic-release",
     "prepare": "husky"
   },
   "dependencies": {
