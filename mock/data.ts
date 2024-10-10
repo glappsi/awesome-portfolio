@@ -1,6 +1,7 @@
 import { Blog, BlogDto, BlogWithDetails, BlogWithDetailsDto } from '@/actions/entities/models/blog';
 import { CareerStep, CareerStepDto } from '@/actions/entities/models/career-step';
 import { CategoryDto } from '@/actions/entities/models/category';
+import { FAQ } from '@/actions/entities/models/faq';
 import { Legal, LegalDto } from '@/actions/entities/models/legal';
 import { Link, LinkDto } from '@/actions/entities/models/link';
 import { Profile, ProfileDto } from '@/actions/entities/models/profile';
@@ -9,9 +10,9 @@ import { Skill, SkillDto } from '@/actions/entities/models/skill';
 import { Testimonial, TestimonialDto } from '@/actions/entities/models/testimonial';
 import { ToolDto } from '@/actions/entities/models/tool';
 import { IconKeys } from '@/components/ui/icon';
+import { url } from '@/lib/app-url';
 import { faker } from '@faker-js/faker';
 import { Effect } from 'effect';
-import { FAQ } from '../actions/entities/models/faq';
 
 export const generateImage = (width: number, height: number) => ({
   url: `https://placehold.co/${width}x${height}/000000/FFFFFF/png?text=?`,
@@ -30,10 +31,10 @@ export const generateProfileDto = (): ProfileDto => ({
   keywords: faker.helpers.multiple(() => faker.word.noun(), {
     count: 5,
   }).join(','),
-  description: 'Configure your profile under http://localhost:3000/admin/collections/profiles/create',
+  description: `Configure your profile under ${url}/admin/collections/profiles/create`,
   slug: 'sandbox',
   image: generateImage(600, 600),
-  aboutMe: 'I need to be configured under http://localhost:3000/admin/collections/profiles/create'
+  aboutMe: `I need to be configured under ${url}/admin/collections/profiles/create`
 });
 export const generateProfile = (): Profile => generateProfileDto();
 

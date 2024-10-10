@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next';
 import { getActiveProfile, getProjects } from '@/actions';
 import { filter } from 'lodash';
+import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const profile = await getActiveProfile();
@@ -9,23 +9,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: `https://${process.env.APP_URL}/`,
+      url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/`,
       lastModified: new Date(),
     },
     {
-      url: `https://${process.env.APP_URL}/profiles/${profile.slug}`,
+      url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/profiles/${profile.slug}`,
       lastModified: new Date(),
     },
     {
-      url: `https://${process.env.APP_URL}/projects`,
+      url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/projects`,
       lastModified: new Date(),
     },
     ...blogProjects.map(({ blog }) => {
       return {
-        url: `https://${process.env.APP_URL}/blogs/${blog!.type}/${blog!.slug}`,
+        url: `${process.env.APP_PROTOCOL}://${process.env.APP_URL}/blogs/${blog!.type}/${blog!.slug}`,
         lastModified: new Date(),
         images: blog!.thumbnail?.url
-          ? [`https://${process.env.APP_URL}${blog!.thumbnail!.url}`]
+          ? [`${process.env.APP_PROTOCOL}://${process.env.APP_URL}${blog!.thumbnail!.url}`]
           : undefined,
       };
     }),

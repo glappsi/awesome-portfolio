@@ -1,4 +1,5 @@
 import { getProfileBySlug } from '@/actions';
+import { url } from '@/lib/app-url';
 import { generateFAQs } from '@/lib/google-structured-data';
 import { merge } from 'lodash';
 import { getTranslations } from 'next-intl/server';
@@ -20,12 +21,12 @@ export async function generateMetadata({
     title: t('seo.title'),
     description: t('seo.description'),
     alternates: {
-      canonical: `https://${process.env.APP_URL}/profiles/${profile.slug}`,
+      canonical: `${url}/profiles/${profile.slug}`,
     },
     openGraph: {
       title: t('seo.title'),
       description: t('seo.description'),
-      url: `https://${process.env.APP_URL}/profiles/${profile.slug}`,
+      url: `${url}/profiles/${profile.slug}`,
     },
   });
 }

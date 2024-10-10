@@ -1,5 +1,6 @@
 import { getActiveProfile } from '@/actions';
 import { Toaster } from '@/components/ui/sonner';
+import { url } from '@/lib/app-url';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
@@ -21,31 +22,31 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     authors: {
       name: profile.name,
-      url: `https://${process.env.APP_URL}`
+      url
     },
     keywords: profile.keywords,
     description: profile.description,
     alternates: {
-      canonical: `https://${process.env.APP_URL}`,
+      canonical: url,
     },
     openGraph: {
       title: profile.name,
       description: profile.description,
-      url: `https://${process.env.APP_URL}`,
+      url: url,
       siteName: process.env.APP_URL,
       images: [
         {
-          url: `https://${process.env.APP_URL}/seo_1024x1024.jpg`,
+          url: `${url}/seo_1024x1024.jpg`,
           width: 1024,
           height: 1024,
         },
         {
-          url: `https://${process.env.APP_URL}/seo_1024x576.jpg`,
+          url: `${url}/seo_1024x576.jpg`,
           width: 1024,
           height: 576,
         },
         {
-          url: `https://${process.env.APP_URL}/seo_576x1024.jpg`,
+          url: `${url}/seo_576x1024.jpg`,
           width: 576,
           height: 1024,
         },

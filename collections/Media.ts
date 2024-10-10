@@ -1,3 +1,4 @@
+import { url } from '@/lib/app-url';
 import type { CollectionConfig } from 'payload';
 
 export const Media: CollectionConfig = {
@@ -19,8 +20,8 @@ export const Media: CollectionConfig = {
   ],
   hooks: {
     afterRead: [async ({ doc }) => {
-      if (doc.url && process.env.APP_URL) {
-        doc.url = `https://${process.env.APP_URL}${doc.url}`;
+      if (doc.url && process.env.REMOTE_IMAGES) {
+        doc.url = `${url}${doc.url}`;
       }
       return doc;
     }],

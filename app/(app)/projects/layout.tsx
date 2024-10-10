@@ -1,8 +1,9 @@
-import { getTranslations } from 'next-intl/server';
-import { generateMetadata as generateBaseMetadata } from '../layout';
-import { merge } from 'lodash';
+import { url } from '@/lib/app-url';
 import { generateBlogs } from '@/lib/google-structured-data';
+import { merge } from 'lodash';
+import { getTranslations } from 'next-intl/server';
 import Script from 'next/script';
+import { generateMetadata as generateBaseMetadata } from '../layout';
 
 export async function generateMetadata() {
   const t = await getTranslations('ProjectsPage');
@@ -12,12 +13,12 @@ export async function generateMetadata() {
     title: t('seo.title'),
     description: t('seo.description'),
     alternates: {
-      canonical: `https://${process.env.APP_URL}/projects`,
+      canonical: `${url}/projects`,
     },
     openGraph: {
       title: t('seo.title'),
       description: t('seo.description'),
-      url: `https://${process.env.APP_URL}/projects`,
+      url: `${url}/projects`,
     },
   });
 }

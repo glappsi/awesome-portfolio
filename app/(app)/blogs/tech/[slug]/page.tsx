@@ -1,4 +1,5 @@
 import { getBlogBySlug, getProjects } from '@/actions';
+import { url } from '@/lib/app-url';
 import { generateBlog } from '@/lib/google-structured-data';
 import { Redis } from '@upstash/redis';
 import { filter, map, merge } from 'lodash';
@@ -28,12 +29,12 @@ export async function generateMetadata({
     description: blog.summary,
     keywords: blog.keywords,
     alternates: {
-      canonical: `https://${process.env.APP_URL}/blogs/${blog.type}/${blog.slug}`,
+      canonical: `${url}/blogs/${blog.type}/${blog.slug}`,
     },
     openGraph: {
       title: blog.title,
       description: blog.summary,
-      url: `https://${process.env.APP_URL}/blogs/${blog.type}/${blog.slug}`,
+      url: `${url}/blogs/${blog.type}/${blog.slug}`,
     },
   });
 
@@ -42,7 +43,7 @@ export async function generateMetadata({
       ...metadata.openGraph,
       images: [
         {
-          url: `https://${process.env.APP_URL}${blog.thumbnail.url}`,
+          url: `${url}${blog.thumbnail.url}`,
           width: blog.thumbnail.width,
           height: blog.thumbnail.height,
         },
