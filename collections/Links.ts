@@ -13,16 +13,25 @@ export const Links: CollectionConfig = {
       name: 'symbol',
       type: 'text',
       localized: true,
+      admin: {
+        description: 'Show in the navigation instead of an icon. Only for downloads.'
+      },
     },
     {
       name: 'showInNavigation',
       defaultValue: false,
       type: 'checkbox',
+      admin: {
+        description: 'Show this link or download in the navigation.'
+      },
     },
     {
       name: 'hideOnMobile',
       defaultValue: false,
       type: 'checkbox',
+      admin: {
+        description: 'Only relevant if showInNavigation is active, hidden in the mobile navigation if enabled.'
+      }
     },
     {
       name: 'isExternal',
@@ -56,6 +65,6 @@ export const Links: CollectionConfig = {
     },
   ],
   admin: {
-    useAsTitle: 'title',
+    useAsTitle: 'title'
   },
 };

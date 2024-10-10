@@ -103,7 +103,6 @@ export interface Tool {
   name: string;
   displayName: string;
   shortName?: string | null;
-  noIcon?: boolean | null;
   hideInTopSkills?: boolean | null;
   updatedAt: string;
   createdAt: string;

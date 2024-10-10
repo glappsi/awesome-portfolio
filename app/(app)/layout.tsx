@@ -84,6 +84,11 @@ const calSans = LocalFont({
   variable: '--font-calsans',
 });
 
+const devicon = LocalFont({
+  src: '../../node_modules/devicon/fonts/devicon.ttf',
+  variable: '--font-devicon',
+});
+
 export default async function RootLayout({
   children,
 }: {
@@ -98,7 +103,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={[inter.variable, calSans.variable].join(' ')}
+      className={[inter.variable, calSans.variable, devicon.variable].join(' ')}
     >
       <body
         className={`dark bg-black ${isDevelopment ? 'debug-screens' : undefined

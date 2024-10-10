@@ -18,6 +18,9 @@ export const Blogs: CollectionConfig = {
       name: 'keywords',
       type: 'text',
       localized: true,
+      admin: {
+        description: 'Only for SEO purposes.'
+      },
     },
     {
       name: 'slug',
@@ -30,6 +33,9 @@ export const Blogs: CollectionConfig = {
       name: 'published',
       defaultValue: false,
       type: 'checkbox',
+      admin: {
+        description: 'Only linked in the project details whhen published.'
+      },
     },
     {
       name: 'author',

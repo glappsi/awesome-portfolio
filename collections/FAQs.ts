@@ -16,4 +16,7 @@ export const FAQs: CollectionConfig = {
       localized: true,
     },
   ],
+  admin: {
+    description: 'This is used to render google structured data FAQs.'
+  }
 };

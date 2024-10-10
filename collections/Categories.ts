@@ -17,5 +17,6 @@ export const Categories: CollectionConfig = {
   ],
   admin: {
     useAsTitle: 'name',
+    description: 'Rendered in project details.'
   },
 };

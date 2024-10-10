@@ -16,6 +16,9 @@ export const Media: CollectionConfig = {
       name: 'needsLightBackground',
       defaultValue: false,
       type: 'checkbox',
+      admin: {
+        description: 'Relevant when used as a badge. The badge will color its background accordingly.'
+      },
     },
   ],
   hooks: {

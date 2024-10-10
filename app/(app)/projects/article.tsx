@@ -1,12 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import { Eye } from 'lucide-react';
 import { Project } from '@/actions/entities/models/project';
-import clsx from 'clsx';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import clsx from 'clsx';
+import { Eye } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { Devicons } from '../components/devicons';
 
 type Props = {
@@ -83,7 +83,7 @@ export const Article: React.FC<Props> = ({ project, isHighlight, views }) => {
             </div>
           </div>
 
-          {!!project.blog && (
+          {!!project.blog?.published && (
             <div className='flex justify-end'>
               <Link href={`/blogs/${project.blog?.type}/${project.blog?.slug}`}>
                 <Button className='mt-8' variant='secondary'>

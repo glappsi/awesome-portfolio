@@ -17,6 +17,9 @@ export const Projects: CollectionConfig = {
     {
       name: 'published',
       type: 'checkbox',
+      admin: {
+        description: 'Unpublished projects will be ignored.'
+      },
     },
     {
       name: 'highlight',
@@ -37,6 +40,7 @@ export const Projects: CollectionConfig = {
       name: 'end',
       type: 'date',
       admin: {
+        description: 'Projects will be sorted by end date descending. Empty end dates (project still running) will be first.',
         date: {
           pickerAppearance: 'monthOnly',
           displayFormat: 'MMMM yyyy',

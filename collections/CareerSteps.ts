@@ -45,6 +45,9 @@ export const CareerSteps: CollectionConfig = {
       type: 'relationship',
       relationTo: 'projects',
       hasMany: true,
+      admin: {
+        description: 'Mainly used to get the matching tools and categories for a career step.'
+      }
     },
   ],
   admin: {

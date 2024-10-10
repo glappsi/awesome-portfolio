@@ -1,18 +1,18 @@
+import { createHeadlessEditor } from '@lexical/headless';
+import {
+  $convertFromMarkdownString,
+  $convertToMarkdownString,
+  TRANSFORMERS,
+} from '@lexical/markdown';
 import {
   createServerFeature,
   getEnabledNodes,
   HTMLConverterFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
-import type { CollectionConfig, Field } from 'payload';
-import {
-  $convertFromMarkdownString,
-  $convertToMarkdownString,
-  TRANSFORMERS,
-} from '@lexical/markdown';
 import { LexicalEditor } from 'lexical';
-import { createHeadlessEditor } from '@lexical/headless';
 import { get, isEqual } from 'lodash';
+import type { CollectionConfig, Field } from 'payload';
 import { BUILD_UPLOAD_TRANSFORMER } from './markdown.transformer';
 
 export const MarkdownConverterFeature = createServerFeature({
@@ -44,12 +44,16 @@ export const lexicalMarkdown = (
           HTMLConverterFeature({}),
         ],
       }),
+      admin: {
+        description: 'This field will automatically fill the markdown section on save, if it was changed. Same goes for the HTML section.'
+      }
     },
     {
       name: markdownName,
       type: 'code',
       admin: {
         language: 'markdown',
+        description: 'This field will try to parse to the WYSIWYG control above, if it was changed. If it fails while parsing, the editor above won\'t change. It is advised to stick to one type of content editing.'
       },
     },
   ];

@@ -12,6 +12,9 @@ export const Profiles: CollectionConfig = {
       name: 'description',
       type: 'textarea',
       localized: true,
+      admin: {
+        description: 'Description on the intro page.'
+      },
     },
     {
       name: 'keywords',
@@ -35,6 +38,7 @@ export const Profiles: CollectionConfig = {
       name: 'longitude',
       type: 'number',
       admin: {
+        description: 'If the latitude or longitude are missing, the globe won\'t be shown.',
         step: 6,
       },
     },
@@ -47,6 +51,7 @@ export const Profiles: CollectionConfig = {
       name: 'latitude',
       type: 'number',
       admin: {
+        description: 'If the latitude or longitude are missing, the globe won\'t be shown.',
         step: 6,
       },
     },
@@ -54,16 +59,25 @@ export const Profiles: CollectionConfig = {
       name: 'aboutMe',
       type: 'textarea',
       localized: true,
+      admin: {
+        description: 'Description in profile tile on the about me page.'
+      },
     },
     {
       name: 'active',
       type: 'checkbox',
       defaultValue: false,
+      admin: {
+        description: 'Active profile will be rendered and linked onto the intro page. Also will be used as content for said intro page.'
+      },
     },
     {
       name: 'openForWork',
       type: 'checkbox',
       defaultValue: true,
+      admin: {
+        description: 'Renders a section in the about me pages profile tile with extra CTA for contact.'
+      }
     },
     {
       name: 'badge',
