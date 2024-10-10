@@ -1,6 +1,6 @@
 {
   "name": "glappa.dev",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "author": "Florian Glappa",
   "description": "Portfolio Website written by Florian Glappa. Dynamic content editable in a locally running instance of Payload CMS.",
