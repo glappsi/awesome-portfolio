@@ -15,6 +15,11 @@ export const Blogs: CollectionConfig = {
       localized: true,
     },
     {
+      name: 'keywords',
+      type: 'text',
+      localized: true,
+    },
+    {
       name: 'slug',
       type: 'text',
       unique: true,

@@ -155,6 +155,7 @@ export interface Blog {
   id: number;
   title: string;
   summary?: string | null;
+  keywords?: string | null;
   slug: string;
   published?: boolean | null;
   author: string;
@@ -242,6 +243,7 @@ export interface Profile {
   id: number;
   name: string;
   description?: string | null;
+  keywords?: string | null;
   slug: string;
   image?: (number | null) | Media;
   longitude?: number | null;

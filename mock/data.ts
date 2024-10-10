@@ -27,6 +27,9 @@ export const generateProfileDto = (): ProfileDto => ({
   latitude: faker.location.latitude(),
   longitude: faker.location.longitude(),
   location: faker.location.city(),
+  keywords: faker.helpers.multiple(() => faker.word.noun(), {
+    count: 5,
+  }).join(','),
   description: 'Configure your profile under http://localhost:3000/admin/collections/profiles/create',
   slug: 'sandbox',
   image: generateImage(600, 600),
@@ -212,6 +215,9 @@ export const generateBlogDto = (): BlogDto => ({
   id: faker.number.int(),
   title: faker.lorem.sentence(),
   summary: faker.datatype.boolean() ? faker.lorem.sentences() : null,
+  keywords: faker.helpers.multiple(() => faker.word.noun(), {
+    count: 5,
+  }).join(','),
   slug: 'mock-blog',
   author: faker.person.fullName(),
   authorImage: faker.datatype.boolean() ? generateImage(400, 400) : null,

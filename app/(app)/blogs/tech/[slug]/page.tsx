@@ -3,6 +3,7 @@ import { generateBlog } from '@/lib/google-structured-data';
 import { Redis } from '@upstash/redis';
 import { filter, map, merge } from 'lodash';
 import { Eye } from 'lucide-react';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Script from 'next/script';
 import { Card } from '../../../components/card';
@@ -22,9 +23,10 @@ export async function generateMetadata({
   const baseMetadata = await generateBaseMetadata();
   const blog = await getBlogBySlug((await params).slug);
 
-  const metadata = merge(baseMetadata, {
+  const metadata: Metadata = merge(baseMetadata, {
     title: blog.title,
     description: blog.summary,
+    keywords: blog.keywords,
     alternates: {
       canonical: `https://${process.env.APP_URL}/blogs/${blog.type}/${blog.slug}`,
     },

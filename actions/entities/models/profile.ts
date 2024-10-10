@@ -5,6 +5,7 @@ export const profileSchema = z.object({
   name: z.string(),
   description: z.string(),
   slug: z.string(),
+  keywords: z.string().optional().nullable(),
   latitude: z.number().optional(),
   longitude: z.number().optional(),
   location: z.string().optional().nullable(),

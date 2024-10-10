@@ -1,3 +1,4 @@
+import { getActiveProfile } from '@/actions';
 import { Toaster } from '@/components/ui/sonner';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -11,19 +12,21 @@ import { Footer } from './components/footer';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
+  const profile = await getActiveProfile();
 
   return {
     title: {
       default: 'glappa.dev',
       template: '%s | glappa.dev',
     },
-    description: 'Senior Web Developer and Frontend enthusiast',
+    keywords: profile.keywords,
+    description: profile.description,
     alternates: {
       canonical: `https://${process.env.APP_URL}`,
     },
     openGraph: {
       title: 'glappa.dev',
-      description: 'Senior Web Developer and Frontend enthusiast',
+      description: profile.description,
       url: `https://${process.env.APP_URL}`,
       siteName: 'glappa.dev',
       images: [

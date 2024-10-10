@@ -5,6 +5,7 @@ export const blogSchema = z.object({
   id: z.number(),
   title: z.string(),
   summary: z.string().optional().nullable(),
+  keywords: z.string().optional().nullable(),
   slug: z.string(),
   author: z.string(),
   authorImage: z
