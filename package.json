@@ -19,7 +19,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --check --write ."
+    "format": "prettier --check --write .",
+    "commit": "cz",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -83,8 +85,15 @@
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@faker-js/faker": "^9.0.3",
     "@opentelemetry/api": "1.6.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^12.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.1",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.15",
     "@types/negotiator": "^0.6.3",
@@ -93,19 +102,28 @@
     "@types/react-dom": "^18.2.13",
     "autoprefixer": "^10.4.16",
     "clipboardy": "^4.0.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.0.0-canary.171",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-tailwindcss": "^3.17.4",
+    "husky": "^9.1.6",
     "license-checker": "^25.0.1",
     "postcss": "^8.4.31",
     "postcss-nesting": "^12.0.1",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
+    "semantic-release": "^24.1.2",
     "tailwindcss": "^3.3.3",
     "tailwindcss-debug-screens": "^2.2.1"
   },
   "overrides": {
     "react-is": "^19.0.0-rc-67fee58b-20240926"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
