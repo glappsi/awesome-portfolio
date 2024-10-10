@@ -16,8 +16,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: 'glappa.dev',
-      template: '%s | glappa.dev',
+      default: profile.name,
+      template: `%s | ${profile.name}`,
     },
     keywords: profile.keywords,
     description: profile.description,
@@ -25,10 +25,10 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: `https://${process.env.APP_URL}`,
     },
     openGraph: {
-      title: 'glappa.dev',
+      title: profile.name,
       description: profile.description,
       url: `https://${process.env.APP_URL}`,
-      siteName: 'glappa.dev',
+      siteName: process.env.APP_URL,
       images: [
         {
           url: `https://${process.env.APP_URL}/seo_1024x1024.jpg`,
@@ -61,7 +61,7 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     twitter: {
-      title: 'Florian Glappa',
+      title: profile.name,
       card: 'summary_large_image',
     },
     icons: {
