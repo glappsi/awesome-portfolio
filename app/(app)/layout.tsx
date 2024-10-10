@@ -1,6 +1,6 @@
 import { getActiveProfile } from '@/actions';
 import { Toaster } from '@/components/ui/sonner';
-import { url } from '@/lib/app-url';
+import { appUrl, isDevelopment, url } from '@/lib/env';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Metadata } from 'next';
@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: profile.name,
       description: profile.description,
       url: url,
-      siteName: process.env.APP_URL,
+      siteName: appUrl,
       images: [
         {
           url: `${url}/seo_1024x1024.jpg`,
@@ -101,7 +101,7 @@ export default async function RootLayout({
       className={[inter.variable, calSans.variable].join(' ')}
     >
       <body
-        className={`dark bg-black ${process.env.NODE_ENV === 'development' ? 'debug-screens' : undefined
+        className={`dark bg-black ${isDevelopment ? 'debug-screens' : undefined
           }`}
       >
         <NextIntlClientProvider messages={messages}>

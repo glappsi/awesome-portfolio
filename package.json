@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@next/mdx": "15.0.0-canary.171",
     "@payloadcms/db-postgres": "3.0.0-beta.109",
+    "@payloadcms/email-nodemailer": "^3.0.0-beta.109",
     "@payloadcms/next": "3.0.0-beta.109",
     "@payloadcms/plugin-cloud": "3.0.0-beta.109",
     "@payloadcms/richtext-lexical": "3.0.0-beta.109",

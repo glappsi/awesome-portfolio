@@ -1,5 +1,5 @@
 import { getProfileBySlug } from '@/actions';
-import { url } from '@/lib/app-url';
+import { url } from '@/lib/env';
 import { generateFAQs } from '@/lib/google-structured-data';
 import { merge } from 'lodash';
 import { getTranslations } from 'next-intl/server';

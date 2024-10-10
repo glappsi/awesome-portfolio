@@ -1,4 +1,4 @@
-import { url } from '@/lib/app-url';
+import { url } from '@/lib/env';
 import { generateBlogs } from '@/lib/google-structured-data';
 import { merge } from 'lodash';
 import { getTranslations } from 'next-intl/server';

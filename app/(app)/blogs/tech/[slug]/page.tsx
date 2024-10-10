@@ -1,5 +1,5 @@
 import { getBlogBySlug, getProjects } from '@/actions';
-import { url } from '@/lib/app-url';
+import { url } from '@/lib/env';
 import { generateBlog } from '@/lib/google-structured-data';
 import { Redis } from '@upstash/redis';
 import { filter, map, merge } from 'lodash';

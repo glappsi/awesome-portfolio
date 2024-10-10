@@ -12,6 +12,8 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
 
+import { databaseUri, payloadSecret, s3Bucket, s3Config, s3Configured, smtpEnabled, smtpFrom, smtpFromName, smtpTransportOptions } from '@/lib/env';
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
 import { BlogParagraphs } from './collections/BlogParagraphs';
 import { Blogs } from './collections/Blogs';
 import { CareerSteps } from './collections/CareerSteps';
@@ -69,32 +71,29 @@ export default buildConfig({
     fallback: true,
   },
   editor: lexicalEditor(customEditorConfig),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: payloadSecret || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: databaseUri,
     },
   }),
   sharp,
+  email: smtpEnabled ? nodemailerAdapter({
+    defaultFromAddress: smtpFrom,
+    defaultFromName: smtpFromName,
+    // Nodemailer transportOptions
+    transportOptions: smtpTransportOptions
+  }) : undefined,
   plugins: [
-    // storage-adapter-placeholder
-    s3Storage({
+    ...(s3Configured ? [s3Storage({
       collections: {
         media: true,
       },
-      bucket: process.env.S3_BUCKET!,
-      config: {
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
-        },
-        region: process.env.S3_REGION,
-        endpoint: process.env.S3_ENDPOINT,
-        forcePathStyle: true,
-      },
-    }),
+      bucket: s3Bucket!,
+      config: s3Config,
+    })] : []),
   ],
 });

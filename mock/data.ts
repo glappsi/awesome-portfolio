@@ -10,7 +10,7 @@ import { Skill, SkillDto } from '@/actions/entities/models/skill';
 import { Testimonial, TestimonialDto } from '@/actions/entities/models/testimonial';
 import { ToolDto } from '@/actions/entities/models/tool';
 import { IconKeys } from '@/components/ui/icon';
-import { url } from '@/lib/app-url';
+import { url, useSandbox } from '@/lib/env';
 import { faker } from '@faker-js/faker';
 import { Effect } from 'effect';
 
@@ -259,7 +259,7 @@ export const generateCreatedMessage = () => ({ id: generateCreatedMessageDto() }
 
 export const sandBoxPipe = <TResult>(data: () => TResult) => {
   return Effect.catchAll((error) => {
-    if (process.env.ENVIRONMENT === 'sandbox') {
+    if (useSandbox) {
       return Effect.succeed<TResult>(data());
     }
 

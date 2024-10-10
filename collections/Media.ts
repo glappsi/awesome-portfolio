@@ -1,4 +1,4 @@
-import { url } from '@/lib/app-url';
+import { url, useRemoteImages } from '@/lib/env';
 import type { CollectionConfig } from 'payload';
 
 export const Media: CollectionConfig = {
@@ -20,7 +20,7 @@ export const Media: CollectionConfig = {
   ],
   hooks: {
     afterRead: [async ({ doc }) => {
-      if (doc.url && process.env.REMOTE_IMAGES) {
+      if (doc.url && useRemoteImages) {
         doc.url = `${url}${doc.url}`;
       }
       return doc;

@@ -1,4 +1,5 @@
 import { PayloadProjectsRepository } from '@/actions/infrastructure/repositories/payload.projects.repository';
+import { isTesting } from '@/lib/env';
 import { ContainerModule, interfaces } from 'inversify';
 import { MockBlogsRepository } from '../../actions/infrastructure/repositories/mock.blogs.repository';
 import { MockLegalsRepository } from '../../actions/infrastructure/repositories/mock.legals.repository';
@@ -12,7 +13,7 @@ import { PayloadProfilesRepository } from '../../actions/infrastructure/reposito
 import { DI_TYPES } from '../types';
 
 const initializeModule = (bind: interfaces.Bind) => {
-  if (process.env.ENVIRONMENT === 'testing') {
+  if (isTesting) {
     bind(DI_TYPES.IProjectsRepository).to(MockProjectsRepository);
     bind(DI_TYPES.IBlogsRepository).to(MockBlogsRepository);
     bind(DI_TYPES.IProfilesRepository).to(MockProfilesRepository);

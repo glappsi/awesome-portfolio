@@ -1,5 +1,5 @@
 import { getActiveProfile, getProjects } from '@/actions';
-import { url } from '@/lib/app-url';
+import { url } from '@/lib/env';
 import { filter } from 'lodash';
 import { MetadataRoute } from 'next';
 
