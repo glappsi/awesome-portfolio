@@ -150,7 +150,7 @@ export default async function ProfilePage({ params }: Props) {
                         </ul>
 
                         <Marquee style={{
-                          '--duration': `${tools.length * 10}s`
+                          '--duration': `${tools.length * 3}s`
                         } as CSSProperties} className='mt-4'>
                           <Devicons
                             tools={tools}
