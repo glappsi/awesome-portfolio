@@ -6,7 +6,7 @@ import { MetadataRoute } from 'next';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const profile = await getActiveProfile();
   const projects = await getProjects();
-  const blogProjects = filter(projects, (p) => !!p.blog);
+  const blogProjects = filter(projects, (p) => !!p.blog?.published);
 
   return [
     {

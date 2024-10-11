@@ -99,7 +99,7 @@ export const Card: React.FC<
         {!!badge && (
           <TooltipProvider>
             <Tooltip open={badgeTooltipOpen} onOpenChange={setIsBadgeTooltipOpen}>
-              <TooltipTrigger className='z-1 absolute right-5 top-[-22.5px] max-h-[45px]'>
+              <TooltipTrigger asChild className='z-1 absolute right-5 top-[-22.5px] max-h-[45px]'>
                 <ShimmerButton
                   className='max-h-[45px]'
                   background={badgeLight ? 'rgba(255, 255, 255, 1)' : undefined}

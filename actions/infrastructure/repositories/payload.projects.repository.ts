@@ -24,6 +24,11 @@ export class PayloadProjectsRepository implements IProjectsRepository {
       depth: 1,
       locale,
       sort: '-end',
+      where: {
+        published: {
+          equals: true
+        }
+      }
     });
     for (const project of projects?.docs) {
       if ((project.blog as BlogDto)?.authorImage) {

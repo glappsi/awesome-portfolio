@@ -7,15 +7,7 @@ export const host = process.env.APP_URL || process.env.VERCEL_PROJECT_PRODUCTION
 export const isLocalhost = host?.includes('localhost');
 
 if (!host) {
-  throw new Error('[ENV missing]: configure APP_URL (hostname)');
-}
-
-if (!process.env.PAYLOAD_SECRET) {
-  throw new Error('[ENV missing]: configure PAYLOAD_SECRET');
-}
-
-if (!process.env.DATABASE_URI) {
-  throw new Error('[ENV missing]: configure DATABASE_URI');
+  throw new Error('[ENV missing]: configure APP_URL (hostname). If you are building it locally, you can use localhost:3000.');
 }
 
 export const protocol = isLocalhost ? 'http' : 'https';
@@ -25,6 +17,12 @@ export const url = isLocalhost ? `${protocol}://${host}` : `${protocol}://${host
 export const payloadSecret = process.env.PAYLOAD_SECRET;
 
 export const databaseUri = process.env.DATABASE_URI;
+
+export const payloadEnabled = !!(process.env.DATABASE_URI && process.env.PAYLOAD_SECRET);
+
+if (!payloadEnabled) {
+  console.warn('[ENV missing]: DATABASE_URI and PAYLOAD_SECRET not configured. Running in test mode.')
+}
 
 export const s3Enabled = !!(process.env.S3_BUCKET && process.env.S3_ACCESS_KEY_ID && process.env.S3_SECRET_ACCESS_KEY && process.env.S3_ENDPOINT);
 export const s3Config = {

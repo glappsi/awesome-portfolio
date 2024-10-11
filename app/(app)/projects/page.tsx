@@ -17,19 +17,15 @@ export default async function ProjectsPage() {
   const linksPromise = getLinks();
   const allProjectsPromise = getProjects();
 
-  const [allProjects, profile, links] = await Promise.all([
+  const [publishedProjects, profile, links] = await Promise.all([
     allProjectsPromise,
     profilePromise,
     linksPromise,
   ]);
 
-  const blogs = filter(map(allProjects, (p) => p.blog)) as Array<Blog>;
+  const blogs = filter(map(publishedProjects, (p) => p.blog)) as Array<Blog>;
   const views = await getPageViews(blogs);
 
-  const publishedProjects = filter(
-    allProjects,
-    (p: Project) => p.published,
-  ) as Project[];
   const highlightProjects = filter(
     publishedProjects,
     (p: Project) => p.highlight,

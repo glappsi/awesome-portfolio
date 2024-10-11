@@ -1,5 +1,5 @@
 import { PayloadProjectsRepository } from '@/actions/infrastructure/repositories/payload.projects.repository';
-import { isTesting, upstashEnabled } from '@/lib/env';
+import { isTesting, payloadEnabled, upstashEnabled } from '@/lib/env';
 import { ContainerModule, interfaces } from 'inversify';
 import { MockBlogsRepository } from '../../actions/infrastructure/repositories/mock.blogs.repository';
 import { MockLegalsRepository } from '../../actions/infrastructure/repositories/mock.legals.repository';
@@ -16,12 +16,14 @@ import { UpstashPageViewRepository } from '../../actions/infrastructure/reposito
 import { PageViewService } from '../../actions/infrastructure/services/page-view.service';
 import { DI_TYPES } from '../types';
 
+const useTestingEnvironment = isTesting || !payloadEnabled;
+
 const initializeModule = (bind: interfaces.Bind) => {
   // General dependencies
   bind(DI_TYPES.IPageViewService).to(PageViewService);
 
   // Testing dependencies
-  if (isTesting) {
+  if (useTestingEnvironment) {
     bind(DI_TYPES.IProjectsRepository).to(MockProjectsRepository);
     bind(DI_TYPES.IBlogsRepository).to(MockBlogsRepository);
     bind(DI_TYPES.IProfilesRepository).to(MockProfilesRepository);
