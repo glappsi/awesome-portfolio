@@ -70,10 +70,16 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
     },
     icons: {
-      icon: {
+      icon: [{
         url: '/favicon.png',
         type: 'image/png'
-      },
+      }, {
+        url: '/favicon.svg',
+        type: 'image/svg+xml'
+      }, {
+        url: '/favicon.ico',
+        type: 'image/x-icon'
+      }],
       shortcut: {
         url: '/favicon.png',
         type: 'image/png'
