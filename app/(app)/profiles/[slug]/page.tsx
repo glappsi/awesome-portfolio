@@ -24,10 +24,11 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { ArrowRightIcon, DotFilledIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
-import { filter, flatMap, uniq } from 'lodash';
+import { filter, flatMap, uniq, uniqBy } from 'lodash';
 import { getFormatter, getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CSSProperties } from 'react';
 import { NeonGradientCard } from '../../../../components/ui/neon-gradient-card';
 import { Card, CardDescription, CardHeadline, CardSubHeadline } from '../../components/card';
 import { ContactButton } from '../../components/contact-form';
@@ -100,65 +101,68 @@ export default async function ProfilePage({ params }: Props) {
             <Card className='p-4 md:p-8'>
               <CardHeadline>{t('career')}</CardHeadline>
               <Accordion type='single' collapsible className='w-full'>
-                {careerSteps.map((step, index) => (
-                  <AccordionItem
-                    key={step.id}
-                    className={clsx({
-                      '!border-0': index === careerSteps.length - 1,
-                    })}
-                    value={`item-${index}`}
-                  >
-                    <AccordionTrigger
-                      className={clsx(
-                        {
-                          '!pt-0': index === 0,
-                          '[&[data-state=closed]]:pb-0':
-                            index === careerSteps.length - 1,
-                        },
-                        '!no-underline',
-                      )}
+                {careerSteps.map((step, index) => {
+                  const tools = uniqBy(flatMap(step.projects, (p) => p.tools), (t) => t.name);
+                  return (
+                    <AccordionItem
+                      key={step.id}
+                      className={clsx({
+                        '!border-0': index === careerSteps.length - 1,
+                      })}
+                      value={`item-${index}`}
                     >
-                      <div className='text-left'>
-                        <h3 className='text-zinc-100'>{step.title}</h3>
-                        <span className='text-zinc-400'>
-                          {step.company},{' '}
-                          {format.dateTime(step.start, {
-                            year: 'numeric',
-                            month: 'short',
-                          })}{' '}
-                          -{' '}
-                          {step.end
-                            ? format.dateTime(step.end, {
+                      <AccordionTrigger
+                        className={clsx(
+                          {
+                            '!pt-0': index === 0,
+                            '[&[data-state=closed]]:pb-0':
+                              index === careerSteps.length - 1,
+                          },
+                          '!no-underline',
+                        )}
+                      >
+                        <div className='text-left'>
+                          <h3 className='text-zinc-100'>{step.title}</h3>
+                          <span className='text-zinc-400'>
+                            {step.company},{' '}
+                            {format.dateTime(step.start, {
                               year: 'numeric',
                               month: 'short',
-                            })
-                            : t('today')}
-                        </span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className='whitespace-break-spaces text-zinc-100'>
-                        {step.description?.split('\n').map((line, index) => (
-                          <li key={index} className='flex gap-2'>
-                            <DotFilledIcon className='!h-[20px] !w-[20px] shrink-0' />
-                            <span>{line}</span>
-                          </li>
-                        ))}
-                      </ul>
+                            })}{' '}
+                            -{' '}
+                            {step.end
+                              ? format.dateTime(step.end, {
+                                year: 'numeric',
+                                month: 'short',
+                              })
+                              : t('today')}
+                          </span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ul className='whitespace-break-spaces text-zinc-100'>
+                          {step.description?.split('\n').map((line, index) => (
+                            <li key={index} className='flex gap-2'>
+                              <DotFilledIcon className='!h-[20px] !w-[20px] shrink-0' />
+                              <span>{line}</span>
+                            </li>
+                          ))}
+                        </ul>
 
-                      <Marquee className='mt-4'>
-                        <Devicons
-                          tools={flatMap(careerSteps, (cs) =>
-                            flatMap(cs.projects, (p) => p.tools),
-                          )}
-                          variant='colored'
-                          withTooltips
-                          asCard
-                        />
-                      </Marquee>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
+                        <Marquee style={{
+                          '--duration': `${tools.length * 10}s`
+                        } as CSSProperties} className='mt-4'>
+                          <Devicons
+                            tools={tools}
+                            variant='colored'
+                            withTooltips
+                            asCard
+                          />
+                        </Marquee>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )
+                })}
               </Accordion>
             </Card>
 

@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { CSSProperties } from 'react';
 
 interface MarqueeProps {
   className?: string;
@@ -8,6 +9,7 @@ interface MarqueeProps {
   vertical?: boolean;
   repeat?: number;
   delay?: string;
+  style?: CSSProperties;
   [key: string]: any;
 }
 
@@ -19,6 +21,7 @@ export default function Marquee({
   vertical = false,
   repeat = 4,
   delay,
+  style,
   ...props
 }: MarqueeProps) {
   return (
@@ -33,6 +36,7 @@ export default function Marquee({
         },
         className,
       )}
+      style={style}
     >
       {Array(repeat)
         .fill(0)
