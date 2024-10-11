@@ -5,7 +5,7 @@ import { incrementPageViewsForSlugUseCase } from '../../application/use-cases/in
 export function incrementPageViewsForSlugController(slug: string, ip?: string): Effect.Effect<
   void
 > {
-  const service = getInjection('IPageViewService');
+  const service = getInjection('IHashingService');
 
   return Effect.promise(async () => {
     return await service.hashIp(ip);

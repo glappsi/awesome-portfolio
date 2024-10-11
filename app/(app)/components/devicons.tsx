@@ -31,13 +31,17 @@ export function getVersion(name: string, props: Pick<Props, 'withWordmark'>) {
     return;
   }
 
-  const hasPlain = icon.versions?.font?.some(f => f.includes(`plain${props.withWordmark ? '-wordmark' : ''}`));
-  if (hasPlain) {
+  const plainName = props.withWordmark ? 'plain-wordmark' : 'plain';
+  const hasPlain = icon.versions?.font?.some(f => f == plainName);
+  const hasPlainAlias = icon.aliases?.some(a => a.alias === plainName);
+  if (hasPlain || hasPlainAlias) {
     return 'plain';
   }
 
-  const hasOriginal = icon!.versions?.font?.some(f => f.includes(`original${props.withWordmark ? '-wordmark' : ''}`));
-  if (hasOriginal) {
+  const originalName = props.withWordmark ? 'original-wordmark' : 'original';
+  const hasOriginal = icon.versions?.font?.some(f => f == originalName);
+  const hasOriginalAlias = icon.aliases?.some(a => a.alias === originalName);
+  if (hasOriginal || hasOriginalAlias) {
     return 'original';
   }
 }

@@ -4,7 +4,7 @@ import { ILegalsRepository } from '../actions/application/repositories/legals.re
 import { IMessagesRepository } from '../actions/application/repositories/messages.repository.interface';
 import { IPageViewRepository } from '../actions/application/repositories/page-view.repository.interface';
 import { IProfilesRepository } from '../actions/application/repositories/profiles.repository.interface';
-import { IPageViewService } from '../actions/application/services/page-view.service.interface';
+import { IHashingService } from '../actions/application/services/hashing.service.interface';
 
 export const DI_TYPES = {
   IProjectsRepository: Symbol.for('IProjectsRepository'),
@@ -13,7 +13,7 @@ export const DI_TYPES = {
   IMessagesRepository: Symbol.for('IMessagesRepository'),
   ILegalsRepository: Symbol.for('ILegalsRepository'),
   IPageViewRepository: Symbol.for('IPageViewRepository'),
-  IPageViewService: Symbol.for('IPageViewService'),
+  IHashingService: Symbol.for('IHashingService'),
 };
 
 export interface DI_RETURN_TYPES {
@@ -23,5 +23,5 @@ export interface DI_RETURN_TYPES {
   IMessagesRepository: IMessagesRepository;
   ILegalsRepository: ILegalsRepository;
   IPageViewRepository: IPageViewRepository;
-  IPageViewService: IPageViewService;
+  IHashingService: IHashingService;
 }

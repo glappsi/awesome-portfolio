@@ -1,14 +1,14 @@
-import { injectable } from 'inversify';
+import { getSafeLocale } from '@/i18n/utils';
 import config from '@payload-config';
 import { getPayloadHMR } from '@payloadcms/next/utilities';
+import { injectable } from 'inversify';
 import { IProfilesRepository } from '../../application/repositories/profiles.repository.interface';
 import { CareerStepDto } from '../../entities/models/career-step';
+import { FAQDto } from '../../entities/models/faq';
+import { LinkDto } from '../../entities/models/link';
 import { ProfileDto } from '../../entities/models/profile';
 import { SkillDto } from '../../entities/models/skill';
-import { LinkDto } from '../../entities/models/link';
 import { TestimonialDto } from '../../entities/models/testimonial';
-import { getSafeLocale } from '@/i18n/utils';
-import { FAQDto } from '../../entities/models/faq';
 
 @injectable()
 export class PayloadProfilesRepository implements IProfilesRepository {
@@ -16,7 +16,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     return getPayloadHMR({ config });
   }
 
-  constructor() {}
+  constructor() { }
 
   async getActiveProfile(): Promise<ProfileDto> {
     const payload = await this._getPayload();
@@ -68,7 +68,7 @@ export class PayloadProfilesRepository implements IProfilesRepository {
     const locale = await getSafeLocale();
     const careerSteps = await payload.find({
       collection: 'career-steps',
-      sort: '-start',
+      sort: '-end',
       locale,
     });
 

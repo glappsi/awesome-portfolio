@@ -13,14 +13,14 @@ import { PayloadMessagesRepository } from '../../actions/infrastructure/reposito
 import { PayloadPageViewRepository } from '../../actions/infrastructure/repositories/payload.page-view.repository';
 import { PayloadProfilesRepository } from '../../actions/infrastructure/repositories/payload.profiles.repository';
 import { UpstashPageViewRepository } from '../../actions/infrastructure/repositories/upstash.page-view.repository';
-import { PageViewService } from '../../actions/infrastructure/services/page-view.service';
+import { NativeHashingService } from '../../actions/infrastructure/services/native.hashing.service';
 import { DI_TYPES } from '../types';
 
 const useTestingEnvironment = isTesting || !payloadEnabled;
 
 const initializeModule = (bind: interfaces.Bind) => {
   // General dependencies
-  bind(DI_TYPES.IPageViewService).to(PageViewService);
+  bind(DI_TYPES.IHashingService).to(NativeHashingService);
 
   // Testing dependencies
   if (useTestingEnvironment) {

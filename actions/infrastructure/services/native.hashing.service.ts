@@ -1,9 +1,13 @@
 import { injectable } from 'inversify';
-import { IPageViewService } from '../../application/services/page-view.service.interface';
+import { IHashingService } from '../../application/services/hashing.service.interface';
 
 @injectable()
-export class PageViewService implements IPageViewService {
+export class NativeHashingService implements IHashingService {
   async hashIp(ip?: string): Promise<string | undefined> {
+    if (!ip) {
+      return;
+    }
+
     const buf = await crypto.subtle.digest(
       "SHA-256",
       new TextEncoder().encode(ip),
