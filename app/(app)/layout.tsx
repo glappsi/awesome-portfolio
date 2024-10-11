@@ -70,8 +70,20 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
     },
     icons: {
-      shortcut: '/favicon.png',
+      icon: {
+        url: '/favicon.png',
+        type: 'image/png'
+      },
+      shortcut: {
+        url: '/favicon.png',
+        type: 'image/png'
+      },
+      apple: {
+        url: '/favicon.png',
+        type: 'image/png'
+      },
     },
+    manifest: `${url}/site.webmanifest`
   };
 }
 const inter = Inter({
