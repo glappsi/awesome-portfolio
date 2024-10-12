@@ -14,7 +14,8 @@ type Props = {
 export default function Gallery({ images, className }: Props) {
   return (
     <div className={clsx('mx-auto', className)}>
-      <div className='grid max-w-[100vw] grid-cols-2 flex-col items-center gap-2 overflow-x-auto overflow-y-hidden bg-[hsl(var(--border))] md:grid-cols-3 md:flex-row lg:flex'>
+      <div
+        className='grid max-w-[100vw] grid-cols-2 flex-col items-center gap-2 overflow-x-auto overflow-y-hidden bg-[hsl(var(--border))] md:grid-cols-3 md:flex-row lg:flex'>
         {images.map((image, index) => (
           <Dialog key={index}>
             <DialogTrigger asChild>
@@ -32,25 +33,34 @@ export default function Gallery({ images, className }: Props) {
                   inView>
                   <ResponsiveImage
                     media={image}
-                    style={{ objectFit: 'cover' }}
+                    imageStyle={{ objectFit: 'cover' }}
                     className={`transition-transform duration-300 ease-in-out hover:scale-110`}
+                    imageClassName='w-full'
+                    withLoading
                   />
                 </BlurFade>
               </div>
             </DialogTrigger>
-            <DialogContent className='h-full max-h-[95vh] max-w-[95vw] p-0 md:max-h-[90vh] md:max-w-[90vw]'>
-              <BlurFade className='relative flex size-full items-center justify-center overflow-hidden' inView>
+            <DialogContent className='h-full max-h-[95vh] max-w-[95vw] p-0 lg:max-h-[90vh] lg:max-w-[90vw]'>
+              <BlurFade className='flex size-full items-center justify-center' inView>
                 <ResponsiveImage
                   media={image}
-                  sizes='95vw'
                   style={{
-                    '--gallery-item-max-width-mobile': `min(100%,${(image.mobile?.width || image.width)}px)`,
-                    '--gallery-item-max-heigh-mobile': `min(100%,${(image.mobile?.height || image.height)}px)`,
-                    '--gallery-item-max-width-desktop': `min(100%,${image.width}px)`,
-                    '--gallery-item-max-heigh-desktop': `min(100%,${image.height}px)`,
+                    '--gallery-item-max-width-mobile': `min(95vw,${(image.mobile?.width || image.width)}px)`,
+                    '--gallery-item-max-height-mobile': `min(95vh,${(image.mobile?.height || image.height)}px)`,
+                    '--gallery-item-max-width-desktop': `min(90vh,${image.width}px)`,
+                    '--gallery-item-max-height-desktop': `min(90vh,${image.height}px)`,
+                    '--gallery-item-aspect-ratio': `${+(image.mobile?.width || image.width)}/${+(image.mobile?.height || image.height)}`,
+                    '--gallery-item-aspect-ratio-desktop': `${+image.width}/${+image.height}`,
                   } as CSSProperties}
-                  className='size-auto grow'
-                  imageClassName='m-auto border-8 max-w-[--gallery-item-max-width-mobile] max-h-[--gallery-item-max-width-mobile] lg:min-w-[--gallery-item-max-width-desktop] lg:min-h-[--gallery-item-max-width-desktop]'
+                  className='flex size-full max-h-[95vh] max-w-[95vw] items-center justify-center p-0 lg:max-h-[90vh] lg:max-w-[90vw]'
+                  imageClassName={cn('object-contain m-auto border-8', {
+                    'w-full h-auto max-h-full': (image.mobile?.width || image.width) > (image.mobile?.height || image.height),
+                    'lg:w-full lg:h-auto lg:max-h-full': (image.width) > (image.height),
+                    'h-full w-auto max-w-full': (image.mobile?.width || image.width) < (image.mobile?.height || image.height),
+                    'lg:h-full lg:w-auto lg:max-w-full': (image.width) < (image.height),
+                  })}
+                  withLoading
                 />
               </BlurFade>
             </DialogContent>
