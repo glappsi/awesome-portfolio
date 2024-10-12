@@ -1,7 +1,7 @@
 import { getActiveProfile, getLinks } from '@/actions';
-import Image from 'next/image';
 import { NavigationDock } from './components/nav';
 import Particles from './components/particles';
+import { ResponsiveImage } from './components/responsive-image';
 
 export const revalidate = 60;
 
@@ -14,12 +14,10 @@ export default async function Home() {
   return (
     <div className='flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black'>
       {profile.image && (
-        <Image
-          src={profile.image.url}
-          alt={profile.image.alt}
-          width={profile.image.width}
-          height={profile.image.height}
-          className='mb-8 size-[200px] rounded-full border p-1'
+        <ResponsiveImage
+          media={profile.image}
+          className='mb-8'
+          imageClassName='size-[200px] rounded-full border p-1'
         />
       )}
       <div className='animate-glow hidden h-px w-screen animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block' />

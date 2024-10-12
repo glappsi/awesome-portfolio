@@ -4,10 +4,10 @@ import { generateBlog } from '@/lib/google-structured-data';
 import { filter, map, merge } from 'lodash';
 import { Eye } from 'lucide-react';
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Script from 'next/script';
 import { Card } from '../../../components/card';
 import { DynamicContent } from '../../../components/content';
+import { ResponsiveImage } from '../../../components/responsive-image';
 import { generateMetadata as generateBaseMetadata } from '../../../layout';
 import Gallery from '../../gallery';
 import { ReportView } from '../../view';
@@ -101,27 +101,27 @@ export default async function BlogPage({ params }: Props) {
 
         <div className='flex flex-col-reverse lg:flex-col'>
           {!!blog.gallery?.length && (
-            <div className='w-full lg:border-b-8'>
+            <div className='w-full border-t-8 lg:border-b-8 lg:border-t-0'>
               <Gallery
-                className='pt-2 lg:mb-0 lg:max-w-min lg:py-0'
+                className='lg:mb-0 lg:max-w-min lg:py-0'
                 images={blog.gallery}
               />
             </div>
           )}
           <Card
-            className='mx-auto max-w-full px-4 py-8 sm:px-6 lg:mt-20 lg:mb-20 lg:max-w-3xl lg:px-8'
+            className='mx-auto max-w-full px-4 py-8 sm:px-6 lg:my-20 lg:max-w-3xl lg:px-8'
             isFullscreen
           >
             <header className='mb-8 flex items-start justify-between'>
               <h1 className='seo-hidden'>{blog.title}</h1>
               <div className='flex items-center'>
                 {blog.authorImage && (
-                  <Image
-                    src={blog.authorImage.url}
-                    alt={blog.authorImage.alt}
+                  <ResponsiveImage
+                    media={blog.authorImage!}
                     width={48}
                     height={48}
-                    className='mr-4 rounded-full'
+                    className='mr-4'
+                    imageClassName='p-[1px] border rounded-full'
                   />
                 )}
                 <div>

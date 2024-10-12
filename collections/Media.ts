@@ -13,6 +13,12 @@ export const Media: CollectionConfig = {
       required: true,
     },
     {
+      name: 'mobile',
+      type: 'upload',
+      relationTo: 'media',
+      hasMany: false
+    },
+    {
       name: 'needsLightBackground',
       defaultValue: false,
       type: 'checkbox',

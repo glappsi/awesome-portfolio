@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { mediaSchema } from './media';
 
 export const profileSchema = z.object({
   id: z.number(),
@@ -9,19 +10,8 @@ export const profileSchema = z.object({
   latitude: z.number().optional(),
   longitude: z.number().optional(),
   location: z.string().optional().nullable(),
-  image: z.object({
-    url: z.string(),
-    alt: z.string(),
-    width: z.number(),
-    height: z.number(),
-  }),
-  badge: z.object({
-    url: z.string(),
-    alt: z.string(),
-    width: z.number(),
-    height: z.number(),
-    needsLightBackground: z.boolean().optional().nullable(),
-  }).optional().nullable(),
+  image: mediaSchema,
+  badge: mediaSchema.optional().nullable(),
   aboutMe: z.string().optional().nullable(),
   openForWork: z.boolean().optional().nullable()
 });

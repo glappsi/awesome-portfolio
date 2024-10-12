@@ -1,5 +1,6 @@
-import { z } from 'zod';
 import { IconKeys, IconType } from '@/components/ui/icon';
+import { z } from 'zod';
+import { mediaSchema } from './media';
 
 export const linkSchema = z.object({
   id: z.number(),
@@ -10,12 +11,7 @@ export const linkSchema = z.object({
   showInNavigation: z.boolean().optional().nullable(),
   hideOnMobile: z.boolean().optional().nullable(),
   isExternal: z.boolean().optional().nullable(),
-  download: z
-    .object({
-      url: z.string(),
-      filename: z.string(),
-      alt: z.string(),
-    })
+  download: mediaSchema
     .optional()
     .nullable(),
 });
