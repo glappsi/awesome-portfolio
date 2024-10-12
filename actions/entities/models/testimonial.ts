@@ -1,18 +1,12 @@
 import { z } from 'zod';
+import { mediaSchema } from './media';
 
 export const testimonialSchema = z.object({
   id: z.number(),
   quote: z.string(),
   author: z.string(),
   description: z.string(),
-  avatar: z
-    .object({
-      url: z.string(),
-      alt: z.string(),
-      width: z.number(),
-      height: z.number(),
-      needsLightBackground: z.boolean().optional().nullable(),
-    })
+  avatar: mediaSchema
     .optional()
     .nullable(),
 });

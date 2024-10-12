@@ -81,6 +81,7 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  mobile?: (number | null) | Media;
   needsLightBackground?: boolean | null;
   updatedAt: string;
   createdAt: string;

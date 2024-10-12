@@ -4,6 +4,7 @@ import { CategoryDto } from '@/actions/entities/models/category';
 import { FAQ } from '@/actions/entities/models/faq';
 import { Legal, LegalDto } from '@/actions/entities/models/legal';
 import { Link, LinkDto } from '@/actions/entities/models/link';
+import { Media } from '@/actions/entities/models/media';
 import { Profile, ProfileDto } from '@/actions/entities/models/profile';
 import { Project, ProjectDto } from '@/actions/entities/models/project';
 import { Skill, SkillDto } from '@/actions/entities/models/skill';
@@ -14,12 +15,14 @@ import { isSandboxed, url } from '@/lib/env';
 import { faker } from '@faker-js/faker';
 import { Effect } from 'effect';
 
-export const generateImage = (width: number, height: number) => ({
+export const generateImage = (width: number, height: number, withMobile?: boolean): Media => ({
   url: `https://placehold.co/${width}x${height}/000000/FFFFFF/png?text=?`,
   alt: faker.lorem.words(3),
   width: width,
   height: height,
+  filename: `${width}x${height}.png`,
   needsLightBackground: false,
+  mobile: withMobile ? generateImage(height, width) : undefined
 });
 
 export const generateProfileDto = (): ProfileDto => ({
@@ -241,7 +244,7 @@ const generateParagraph = () => ({
 export const generateBlogDetailDto = (): BlogWithDetailsDto => ({
   ...generateBlogDto(),
   links: [],
-  gallery: faker.helpers.multiple(() => generateImage(1000, 1000), {
+  gallery: faker.helpers.multiple(() => generateImage(1280, 720, true), {
     count: 8,
   }),
   paragraphs: faker.helpers.multiple(generateParagraph, {

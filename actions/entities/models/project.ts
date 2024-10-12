@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { categorySchema } from './category';
-import { toolSchema } from './tool';
 import { blogSchema } from './blog';
+import { categorySchema } from './category';
+import { mediaSchema } from './media';
+import { toolSchema } from './tool';
 
 export const projectSchema = z.object({
   id: z.number(),
@@ -16,14 +17,7 @@ export const projectSchema = z.object({
   published: z.boolean().optional().nullable(),
   highlight: z.boolean().optional().nullable(),
   type: z.enum(['profession', 'hobby']),
-  badge: z
-    .object({
-      url: z.string(),
-      alt: z.string(),
-      width: z.number(),
-      height: z.number(),
-      needsLightBackground: z.boolean().optional().nullable(),
-    })
+  badge: mediaSchema
     .optional()
     .nullable(),
   blog: blogSchema.optional().nullable(),

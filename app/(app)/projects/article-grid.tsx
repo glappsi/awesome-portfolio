@@ -2,10 +2,10 @@
 
 import { Project } from '@/actions/entities/models/project';
 import { filter, indexOf, some } from 'lodash';
-import Image from 'next/image';
 import { useState } from 'react';
 import { Tool } from '../../../actions/entities/models/tool';
 import { Card } from '../components/card';
+import { ResponsiveImage } from '../components/responsive-image';
 import { Article } from './article';
 import { useArticleFilterStore } from './article-filter';
 
@@ -48,9 +48,8 @@ export const ArticleGrid: React.FC<Props> = ({
               onClick={() => setHighlightId(indexOf(projects, project))}
               badge={
                 !!project.badge && (
-                  <Image
-                    src={project.badge!.url}
-                    alt={project.badge!.alt}
+                  <ResponsiveImage
+                    media={project.badge!}
                     height={30}
                     width={30 * (project.badge!.width / project.badge!.height)}
                   />
@@ -77,9 +76,8 @@ export const ArticleGrid: React.FC<Props> = ({
               isSelected={highlightId === indexOf(projects, project)}
               badge={
                 !!project.badge && (
-                  <Image
-                    src={project.badge!.url}
-                    alt={project.badge!.alt}
+                  <ResponsiveImage
+                    media={project.badge!}
                     height={30}
                     width={30 * (project.badge!.width / project.badge!.height)}
                   />
@@ -108,9 +106,8 @@ export const ArticleGrid: React.FC<Props> = ({
             isSelected={highlightId === indexOf(projects, project)}
             badge={
               !!project.badge && (
-                <Image
-                  src={project.badge!.url}
-                  alt={project.badge!.alt}
+                <ResponsiveImage
+                  media={project.badge!}
                   height={30}
                   width={30 * (project.badge!.width / project.badge!.height)}
                 />

@@ -26,7 +26,6 @@ import { ArrowRightIcon, DotFilledIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 import { filter, flatMap, uniq, uniqBy } from 'lodash';
 import { getFormatter, getTranslations } from 'next-intl/server';
-import Image from 'next/image';
 import Link from 'next/link';
 import { CSSProperties } from 'react';
 import { NeonGradientCard } from '../../../../components/ui/neon-gradient-card';
@@ -34,6 +33,7 @@ import { Card, CardDescription, CardHeadline, CardSubHeadline } from '../../comp
 import { ContactButton } from '../../components/contact-form';
 import { Devicons } from '../../components/devicons';
 import { Navigation } from '../../components/nav';
+import { ResponsiveImage } from '../../components/responsive-image';
 import { SkillChart } from './skill-chart';
 import TestimonialShuffle from './testimonial';
 
@@ -96,8 +96,8 @@ export default async function ProfilePage({ params }: Props) {
     <div className='relative pb-16'>
       <Navigation profileSlug={profile.slug} links={links} />
       <div className='mx-auto max-w-7xl space-y-8 px-6 pt-[var(--navbar-height)] md:space-y-16 lg:px-8 lg:pt-32'>
-        <div className='mx-auto gap-8 flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3'>
-          <div className='order-2 lg:order-1 flex flex-col gap-8'>
+        <div className='mx-auto flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3'>
+          <div className='order-2 flex flex-col gap-8 lg:order-1'>
             <Card className='p-4 md:p-8'>
               <CardHeadline>{t('career')}</CardHeadline>
               <Accordion type='single' collapsible className='w-full'>
@@ -172,18 +172,16 @@ export default async function ProfilePage({ params }: Props) {
             </Card>
           </div>
 
-          <div className='order-1 lg:order-2 flex flex-col gap-8'>
+          <div className='order-1 flex flex-col gap-8 lg:order-2'>
             <Card
               isHighlight={!!profile.openForWork}
               badge={profile.badge?.url}
               badgeLight={!!profile.badge?.needsLightBackground}
               className='p-4 text-center md:p-8'>
-              <Image
-                src={profile.image.url}
-                alt={profile.image.alt}
-                width={profile.image.width}
-                height={profile.image.height}
-                className='m-auto mb-4 size-[100px] rounded-full border p-1 md:mb-8'
+              <ResponsiveImage
+                media={profile.image}
+                className='mb-4 md:mb-8'
+                imageClassName='m-auto rounded-full size-[100px] border p-1'
               />
               <CardHeadline className='mb-8'>{profile.name}</CardHeadline>
               {!!profile.aboutMe && (
@@ -272,7 +270,7 @@ export default async function ProfilePage({ params }: Props) {
             </NeonGradientCard>
           </div>
 
-          <div className='order-3 md:col-span-2 lg:col-span-1 md:grid grid-cols-2 flex lg:flex flex-col gap-8'>
+          <div className='order-3 flex grid-cols-2 flex-col gap-8 md:col-span-2 md:grid lg:col-span-1 lg:flex'>
             <Card
               className='overflow-hidden p-4 md:p-8'
               background={<IconCloud iconSlugs={skillTools} />}
