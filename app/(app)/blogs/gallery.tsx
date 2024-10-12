@@ -14,12 +14,12 @@ type Props = {
 export default function Gallery({ images, className }: Props) {
   return (
     <div className={clsx('mx-auto', className)}>
-      <div className='grid max-w-[100vw] grid-cols-2 flex-col items-center gap-2 overflow-x-auto overflow-y-hidden bg-[hsl(var(--border))] md:flex-row lg:flex'>
+      <div className='grid max-w-[100vw] grid-cols-2 flex-col items-center gap-2 overflow-x-auto overflow-y-hidden bg-[hsl(var(--border))] md:grid-cols-3 md:flex-row lg:flex'>
         {images.map((image, index) => (
           <Dialog key={index}>
             <DialogTrigger asChild>
               <div
-                className={cn(`relative aspect-[var(--gallery-item-aspect-ratio)] w-full max-w-full shrink-0 cursor-pointer rounded-lg shadow-md transition-shadow duration-300 ease-in-out hover:shadow-xl md:h-[300px] lg:aspect-[var(--gallery-item-aspect-ratio-desktop)] lg:w-auto`, {
+                className={cn(`relative aspect-[var(--gallery-item-aspect-ratio)] w-full max-w-full shrink-0 cursor-pointer rounded-lg shadow-md transition-shadow duration-300 ease-in-out hover:shadow-xl lg:h-[300px] lg:aspect-[var(--gallery-item-aspect-ratio-desktop)] lg:w-auto`, {
                   'col-span-2 md:col-span-3': (image.mobile?.width || image.width) > (image.mobile?.height || image.height),
                 })}
                 style={{
@@ -50,7 +50,7 @@ export default function Gallery({ images, className }: Props) {
                     '--gallery-item-max-heigh-desktop': `min(100%,${image.height}px)`,
                   } as CSSProperties}
                   className='size-auto grow'
-                  imageClassName='border-8 max-w-[--gallery-item-max-width-mobile] max-h-[--gallery-item-max-width-mobile] lg:min-w-[--gallery-item-max-width-desktop] lg:min-h-[--gallery-item-max-width-desktop]'
+                  imageClassName='m-auto border-8 max-w-[--gallery-item-max-width-mobile] max-h-[--gallery-item-max-width-mobile] lg:min-w-[--gallery-item-max-width-desktop] lg:min-h-[--gallery-item-max-width-desktop]'
                 />
               </BlurFade>
             </DialogContent>

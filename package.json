@@ -16,6 +16,7 @@
   "scripts": {
     "g:license": "npx license-checker --relativeLicensePath | sed '/│  ├─ path: /d' | sed '/└─ licenseFile: /d' | sed '/│  └─ licenseFile: /d' | sed '/└─ path: /d' | sed '/│  └─ path: /d' | sed '/├─ path: /d' > LICENSES && npx license-checker --relativeLicensePath --json > third-party-licenses.json",
     "dev": "next dev",
+    "test": "NODE_ENV=test next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
