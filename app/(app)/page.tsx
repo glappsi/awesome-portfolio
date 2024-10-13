@@ -21,6 +21,7 @@ export default async function Home() {
             height="auto"
             className='mb-8'
             imageClassName='size-[200px] rounded-full border p-1'
+            priority
           />
         </>
       )}

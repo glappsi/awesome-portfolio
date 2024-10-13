@@ -184,6 +184,7 @@ export default async function ProfilePage({ params }: Props) {
                 height="auto"
                 className='mb-4 md:mb-8'
                 imageClassName='m-auto rounded-full size-[100px] object-cover border p-1'
+                priority
               />
               <CardHeadline className='mb-8'>{profile.name}</CardHeadline>
               {!!profile.aboutMe && (

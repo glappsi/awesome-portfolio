@@ -17,6 +17,8 @@ type Props = {
   sizes?: string;
   width?: number | string | ResponsiveSize;
   height?: number | string | ResponsiveSize;
+  priority?: boolean;
+  fill?: boolean;
   className?: string;
   imageClassName?: string;
   style?: CSSProperties;
@@ -44,6 +46,8 @@ export const ResponsiveImage = ({
   sizes,
   width,
   height,
+  priority,
+  fill,
   style,
   imageStyle,
   className,
@@ -62,9 +66,13 @@ export const ResponsiveImage = ({
       props: { srcSet: desktop, ...rest },
     } = getImageProps({
       ...common,
-      width: typeof desktopWidthResolved === 'number' ? desktopWidthResolved : media.width,
-      height: typeof desktopHeightResolved === 'number' ? desktopHeightResolved : media.height,
+      ...(!fill ? {
+        width: typeof desktopWidthResolved === 'number' ? desktopWidthResolved : media.width,
+        height: typeof desktopHeightResolved === 'number' ? desktopHeightResolved : media.height,
+      } : {}),
       src: media.url,
+      priority,
+      fill,
     });
 
     return (
@@ -99,18 +107,27 @@ export const ResponsiveImage = ({
     props: { srcSet: desktop, ...desktopRest },
   } = getImageProps({
     ...common,
-    width: typeof desktopWidthResolved === 'number' ? desktopWidthResolved : media.width,
-    height: typeof desktopHeightResolved === 'number' ? desktopHeightResolved : media.height,
+    ...(!fill ? {
+      width: typeof desktopWidthResolved === 'number' ? desktopWidthResolved : media.width,
+      height: typeof desktopHeightResolved === 'number' ? desktopHeightResolved : media.height,
+    } : {}),
     src: media.url,
+    priority,
+    fill,
   });
   const {
     props: { srcSet: mobile, ...rest },
   } = getImageProps({
     ...common,
-    width: typeof mobileWidthResolved === 'number' ? mobileWidthResolved : media.mobile.width,
-    height: typeof mobileHeightResolved === 'number' ? mobileHeightResolved : media.mobile.height,
-    src: media.mobile.url
-  })
+    ...(!fill ? {
+      width: typeof mobileWidthResolved === 'number' ? mobileWidthResolved : media.mobile.width,
+      height: typeof mobileHeightResolved === 'number' ? mobileHeightResolved : media.mobile.height,
+    } : {}),
+    src: media.mobile.url,
+    priority,
+    fill,
+  });
+
   return (
     <picture className={cn('block', className)} style={style}>
       <source
