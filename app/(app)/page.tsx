@@ -14,11 +14,15 @@ export default async function Home() {
   return (
     <div className='flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black'>
       {profile.image && (
-        <ResponsiveImage
-          media={profile.image}
-          className='mb-8'
-          imageClassName='size-[200px] rounded-full border p-1'
-        />
+        <>
+          <ResponsiveImage
+            media={profile.image}
+            width={200}
+            height="auto"
+            className='mb-8'
+            imageClassName='size-[200px] rounded-full border p-1'
+          />
+        </>
       )}
       <div className='animate-glow hidden h-px w-screen animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block' />
       <Particles

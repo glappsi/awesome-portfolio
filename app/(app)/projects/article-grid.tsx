@@ -51,7 +51,7 @@ export const ArticleGrid: React.FC<Props> = ({
                   <ResponsiveImage
                     media={project.badge!}
                     height={30}
-                    width={30 * (project.badge!.width / project.badge!.height)}
+                    width="auto"
                   />
                 )
               }
@@ -79,7 +79,7 @@ export const ArticleGrid: React.FC<Props> = ({
                   <ResponsiveImage
                     media={project.badge!}
                     height={30}
-                    width={30 * (project.badge!.width / project.badge!.height)}
+                    width="auto"
                   />
                 )
               }
@@ -109,7 +109,7 @@ export const ArticleGrid: React.FC<Props> = ({
                 <ResponsiveImage
                   media={project.badge!}
                   height={30}
-                  width={30 * (project.badge!.width / project.badge!.height)}
+                  width="auto"
                 />
               )
             }
