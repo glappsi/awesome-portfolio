@@ -119,9 +119,9 @@ export default async function BlogPage({ params }: Props) {
                   <ResponsiveImage
                     media={blog.authorImage!}
                     width={48}
-                    height={48}
+                    height="auto"
                     className='mr-4'
-                    imageClassName='p-[1px] border rounded-full'
+                    imageClassName='p-[1px] size-[48px] object-cover border rounded-full'
                   />
                 )}
                 <div>

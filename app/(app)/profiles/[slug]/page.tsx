@@ -180,8 +180,10 @@ export default async function ProfilePage({ params }: Props) {
               className='p-4 text-center md:p-8'>
               <ResponsiveImage
                 media={profile.image}
+                width={100}
+                height="auto"
                 className='mb-4 md:mb-8'
-                imageClassName='m-auto rounded-full size-[100px] border p-1'
+                imageClassName='m-auto rounded-full size-[100px] object-cover border p-1'
               />
               <CardHeadline className='mb-8'>{profile.name}</CardHeadline>
               {!!profile.aboutMe && (

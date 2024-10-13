@@ -34,6 +34,12 @@ export default function Gallery({ images, className }: Props) {
                   <ResponsiveImage
                     media={image}
                     imageStyle={{ objectFit: 'cover' }}
+                    height={{
+                      desktop: 300,
+                    }}
+                    width={{
+                      desktop: 'auto'
+                    }}
                     className={`transition-transform duration-300 ease-in-out hover:scale-110`}
                     imageClassName='w-full'
                     withLoading
