@@ -1,5 +1,5 @@
 import { getActiveProfile, getProjects } from '@/actions';
-import { url } from '@/lib/env';
+import { url, useRemoteImages } from '@/lib/env';
 import { filter } from 'lodash';
 import { MetadataRoute } from 'next';
 
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${url}/blogs/${blog!.type}/${blog!.slug}`,
         lastModified: new Date(),
         images: blog!.thumbnail?.url
-          ? [`${url}${blog!.thumbnail!.url}`]
+          ? [useRemoteImages ? blog!.thumbnail!.url : `${url}${blog!.thumbnail!.url}`]
           : undefined,
       };
     }),
