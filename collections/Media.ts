@@ -30,7 +30,7 @@ export const Media: CollectionConfig = {
   hooks: {
     afterRead: [async ({ doc }) => {
       if (doc.url && useRemoteImages) {
-        doc.url = `${url}${doc.url}?v=2`;
+        doc.url = `${url}${doc.url}`;
       }
       return doc;
     }],
