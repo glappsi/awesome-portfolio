@@ -38,6 +38,4 @@ const nextConfig = {
   },
 };
 
-console.log(JSON.stringify(nextConfig, null, 2));
-
 export default withPayload(withNextIntl(nextConfig));
