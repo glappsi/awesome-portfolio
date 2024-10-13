@@ -1,6 +1,7 @@
 import { Media } from '@/actions/entities/models/media';
 import BlurFade from '@/components/ui/blur-fade';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import GridPattern from '@/components/ui/grid-pattern';
 import { cn } from '@/lib/utils';
 import clsx from 'clsx';
 import { CSSProperties } from 'react';
@@ -48,6 +49,13 @@ export default function Gallery({ images, className }: Props) {
               </div>
             </DialogTrigger>
             <DialogContent className='h-full max-h-[95vh] max-w-[95vw] p-0 lg:max-h-[90vh] lg:max-w-[90vw]'>
+              <GridPattern
+                width={40}
+                height={40}
+                className='z-0'
+                x={-1}
+                y={-1}
+              />
               <BlurFade className='flex size-full items-center justify-center' inView>
                 <ResponsiveImage
                   media={image}
@@ -60,12 +68,13 @@ export default function Gallery({ images, className }: Props) {
                     '--gallery-item-aspect-ratio-desktop': `${+image.width}/${+image.height}`,
                   } as CSSProperties}
                   className='flex size-full max-h-[95vh] max-w-[95vw] items-center justify-center p-0 lg:max-h-[90vh] lg:max-w-[90vw]'
-                  imageClassName={cn('object-contain m-auto border-8', {
+                  imageClassName={cn('object-contain m-auto', {
                     'w-full h-auto max-h-full': (image.mobile?.width || image.width) > (image.mobile?.height || image.height),
                     'lg:w-full lg:h-auto lg:max-h-full': (image.width) > (image.height),
                     'h-full w-auto max-w-full': (image.mobile?.width || image.width) < (image.mobile?.height || image.height),
                     'lg:h-full lg:w-auto lg:max-w-full': (image.width) < (image.height),
                   })}
+                  fill
                   withLoading
                 />
               </BlurFade>
