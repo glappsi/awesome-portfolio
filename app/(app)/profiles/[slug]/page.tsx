@@ -21,6 +21,7 @@ import { Icon } from '@/components/ui/icon';
 import IconCloud from '@/components/ui/icon-cloud';
 import Marquee from '@/components/ui/marquee';
 import { Separator } from '@/components/ui/separator';
+import { bannerUrl } from '@/lib/env';
 import { cn } from '@/lib/utils';
 import { ArrowRightIcon, DotFilledIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
@@ -94,7 +95,7 @@ export default async function ProfilePage({ params }: Props) {
 
   return (
     <div className='relative pb-16'>
-      <Navigation profileSlug={profile.slug} links={links} />
+      <Navigation bannerUrl={bannerUrl} profileSlug={profile.slug} links={links} />
       <div className='mx-auto max-w-7xl space-y-8 px-6 pt-[var(--navbar-height)] md:space-y-16 lg:px-8 lg:pt-32'>
         <div className='mx-auto flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3'>
           <div className='order-2 flex flex-col gap-8 lg:order-1'>
