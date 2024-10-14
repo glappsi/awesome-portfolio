@@ -1,7 +1,9 @@
 <div align="center">
-    <a href="https://glappa.dev"><h1 align="center">glappa.dev</h1></a>
+    <h1 align="center">Awesome Portfolio Template</h1>
 
-My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=glappa.dev), [Payload CMS](https://payloadcms.com/) and deployed to [Vercel](https://vercel.com/).
+Awesome Portfolio Template, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=glappa.dev), [Payload CMS](https://payloadcms.com/) and optimized for [Vercel](https://vercel.com/).
+
+See and example under: [https://glappa.dev](https://glappa.dev)
 
 </div>
 
@@ -9,12 +11,7 @@ My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](h
 
 ## Running Locally
 
-```sh-session
-git clone https://github.com/glappsi/glappa-dev
-cd glappa-dev
-```
-
-Create a `.env.local` file similar to [`.env.example`](https://github.com/glappsi/glappa-dev/blob/main/.env.example).
+Create a `.env.local` file similar to [`.env.example`](.env.example).
 
 Then install dependencies and run the development server:
 
@@ -25,4 +22,6 @@ npm run dev
 
 ## Cloning / Forking
 
-Please remove all of my personal information (projects, images, etc.) before deploying your own version of this site.
+Create a database and S3, locally or in the cloud, e.g. on Supabase. Add the configuration to you `.env.local`.
+
+Change the content in the locally running CMS, under [http://localhost:3000/admin](http://localhost:3000/admin)

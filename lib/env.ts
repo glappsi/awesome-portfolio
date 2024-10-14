@@ -1,3 +1,5 @@
+console.log('[Startup]: If you are running this for the first time, please have a look into the README.md.');
+
 export const isDevelopment = process.env.NODE_ENV === 'development';
 export const isTesting = process.env.NODE_ENV === 'test';
 export const isProduction = process.env.NODE_ENV === 'production';
