@@ -89,7 +89,7 @@ export async function generateMetadata(): Promise<Metadata> {
         type: 'image/png'
       },
     },
-    manifest: `${url}/site.webmanifest`
+    manifest: `${url}/manifest.webmanifest`
   };
 }
 const inter = Inter({
