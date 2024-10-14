@@ -11,7 +11,7 @@ import { Skill, SkillDto } from '@/actions/entities/models/skill';
 import { Testimonial, TestimonialDto } from '@/actions/entities/models/testimonial';
 import { ToolDto } from '@/actions/entities/models/tool';
 import { IconKeys } from '@/components/ui/icon';
-import { isSandboxed, url } from '@/lib/env';
+import { isSandboxed, payloadEnabled, url } from '@/lib/env';
 import { faker } from '@faker-js/faker';
 import { Effect } from 'effect';
 
@@ -34,7 +34,7 @@ export const generateProfileDto = (): ProfileDto => ({
   keywords: faker.helpers.multiple(() => faker.word.noun(), {
     count: 5,
   }).join(','),
-  description: `Configure your profile under ${url}/admin/collections/profiles/create`,
+  description: payloadEnabled ? `Configure your profile under ${url}/admin/collections/profiles/create` : `Setup a database & S3 (e.g. on Supabase) and add their connection to your .env.local. \nConfigure your profile under ${url}/admin/collections/profiles/create`,
   slug: 'sandbox',
   image: generateImage(600, 600),
   aboutMe: `I need to be configured under ${url}/admin/collections/profiles/create`
