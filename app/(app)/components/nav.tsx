@@ -55,7 +55,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
     <TooltipProvider>
       <Dock direction='middle'>
         {DATA.navbar(profileSlug).map((item) => (
-          <DockIcon key={item.label}>
+          <DockIcon square={false} key={item.label}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
@@ -63,7 +63,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
                   aria-label={t(item.label)}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-12 min-w-min md:px-3 rounded-full',
+                    'size-12 md:w-auto min-w-min md:px-3 rounded-full',
                   )}
                 >
                   <item.icon className='size-4 shrink-0 md:mr-2' />
@@ -122,6 +122,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
         {downloads.map(({ download, hideOnMobile, title, icon, symbol }) => (
           <DockIcon
             key={title}
+            square={!!symbol && symbol?.length > 2}
             className={cn({
               'hidden md:flex': hideOnMobile,
             })}>
@@ -134,7 +135,9 @@ export const NavigationDock: React.FC<NavigationProps> = ({
                   aria-label={title}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-12 min-w-min md:px-3 rounded-full',
+                    'size-12 min-w-min md:px-3 rounded-full', {
+                    'md:w-auto': !!symbol && symbol?.length > 2
+                  }
                   )}
                 >
                   {symbol ? symbol : <Icon type={icon} className='size-4' />}

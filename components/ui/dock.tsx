@@ -70,18 +70,19 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
 Dock.displayName = 'Dock';
 
 export interface DockIconProps {
-  size?: number;
   magnification?: number;
   distance?: number;
   mouseX?: any;
   className?: string;
   children?: React.ReactNode;
   props?: PropsWithChildren;
+  square?: boolean;
 }
 
 const DockIcon = ({
   distance = DEFAULT_DISTANCE,
   mouseX,
+  square = true,
   className,
   children,
   ...props
@@ -111,7 +112,9 @@ const DockIcon = ({
       ref={ref}
       style={{ paddingLeft: padding, paddingRight: padding }}
       className={cn(
-        'flex aspect-square cursor-pointer items-center justify-center rounded-full',
+        'flex aspect-square cursor-pointer items-center justify-center rounded-full', {
+        'md:aspect-auto md:shrink-0': !square,
+      },
         className,
       )}
       {...props}

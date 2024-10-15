@@ -26,10 +26,10 @@ export function Banner({
     <div className={cn("transition-[top] absolute top-0 w-full border-b border-zinc-800 text-zinc-100", {
       '!absolute top-[-60px]': !isVisible
     }, className)}>
-      <div className="container mx-auto flex items-center justify-between px-6 py-2 ">
+      <div className="container mx-auto flex items-center justify-between px-6 py-2">
         <b className="text-sm">{t('title')}</b>
 
-        <Link href={url} target='_blank'>
+        <Link className='flex shrink-0' href={url} target='_blank'>
           <RainbowButton className='h-[30px] px-[20px]'>{t('cta')}</RainbowButton>
         </Link>
       </div>
