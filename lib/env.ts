@@ -60,3 +60,5 @@ export const smtpFromName = process.env.EMAIL_FROM_NAME || host;
 export const smtpRecipient = process.env.EMAIL_RECIPIENT;
 
 export const upstashEnabled = !!(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
+
+export const bannerUrl = process.env.BANNER_URL;

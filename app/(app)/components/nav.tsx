@@ -19,6 +19,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
+import { Banner } from './banner';
 import { ContactButton } from './contact-form';
 
 const DATA = {
@@ -33,6 +34,7 @@ export type NavigationProps = {
   profileSlug: string;
   links: Array<TLink>;
   closable?: boolean;
+  bannerUrl?: string;
 };
 
 export const NavigationDock: React.FC<NavigationProps> = ({
@@ -53,7 +55,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
     <TooltipProvider>
       <Dock direction='middle'>
         {DATA.navbar(profileSlug).map((item) => (
-          <DockIcon key={item.label}>
+          <DockIcon square={false} key={item.label}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
@@ -61,10 +63,10 @@ export const NavigationDock: React.FC<NavigationProps> = ({
                   aria-label={t(item.label)}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-12 min-w-min md:px-3 rounded-full',
+                    'size-12 md:w-auto min-w-min md:px-3 rounded-full',
                   )}
                 >
-                  <item.icon className='shrink-0 size-4 md:mr-2' />
+                  <item.icon className='size-4 shrink-0 md:mr-2' />
                   <span className="hidden md:block">{t(item.label)}</span>
                 </Link>
               </TooltipTrigger>
@@ -106,7 +108,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
           <Tooltip>
             <TooltipTrigger asChild>
               <ContactButton
-                className='max-w-full size-12 rounded-full'
+                className='size-12 max-w-full rounded-full'
                 onSubmit={createMessage}
                 iconOnly
               />
@@ -120,6 +122,7 @@ export const NavigationDock: React.FC<NavigationProps> = ({
         {downloads.map(({ download, hideOnMobile, title, icon, symbol }) => (
           <DockIcon
             key={title}
+            square={!!symbol && symbol?.length > 2}
             className={cn({
               'hidden md:flex': hideOnMobile,
             })}>
@@ -132,7 +135,9 @@ export const NavigationDock: React.FC<NavigationProps> = ({
                   aria-label={title}
                   className={cn(
                     buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'size-12 min-w-min md:px-3 rounded-full',
+                    'size-12 min-w-min md:px-3 rounded-full', {
+                    'md:w-auto': !!symbol && symbol?.length > 2
+                  }
                   )}
                 >
                   {symbol ? symbol : <Icon type={icon} className='size-4' />}
@@ -169,9 +174,10 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
       <div
         className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur duration-200 ${isIntersecting
           ? 'border-transparent bg-zinc-900/0'
-          : 'bg-zinc-900/500 border-zinc-800'
+          : 'border-zinc-800 bg-zinc-900/50'
           }`}
       >
+        {props.bannerUrl && <Banner className="relative" url={props.bannerUrl} />}
         <div className={cn('container mx-auto flex items-center justify-between p-6', {
           'flex-row-reverse': !props.closable
         })}>

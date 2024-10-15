@@ -58,6 +58,10 @@
     "privacy": "Privacy Policy",
     "imprint": "Imprint"
   },
+  "Banner": {
+    "title": "Do you like this portfolio? Want to get one yourself?",
+    "cta": "I want it!"
+  },
   "form": {
     "loading": "Loading..."
   }

@@ -1,6 +1,7 @@
 import { getActiveProfile, getLinks, getPageViews, getProjects } from '@/actions';
 import { Blog } from '@/actions/entities/models/blog';
 import { Project } from '@/actions/entities/models/project';
+import { bannerUrl } from '@/lib/env';
 import { countBy, filter, map, orderBy, uniqBy } from 'lodash';
 import { getTranslations } from 'next-intl/server';
 import { Navigation } from '../components/nav';
@@ -49,9 +50,9 @@ export default async function ProjectsPage() {
 
   return (
     <div className='relative pb-16'>
-      <Navigation profileSlug={profile.slug} links={links} />
+      <Navigation bannerUrl={bannerUrl} profileSlug={profile.slug} links={links} />
       <div className='mx-auto max-w-7xl space-y-8 px-6 pt-[var(--navbar-height)] md:space-y-16 lg:px-8 lg:pt-32'>
-        <div className='mx-auto lg:max-w-2xl lg:mx-0'>
+        <div className='mx-auto lg:mx-0 lg:max-w-2xl'>
           <h2 className='text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl'>
             {t('title')}
           </h2>

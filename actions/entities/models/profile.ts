@@ -13,7 +13,7 @@ export const profileSchema = z.object({
   image: mediaSchema,
   badge: mediaSchema.optional().nullable(),
   aboutMe: z.string().optional().nullable(),
-  openForWork: z.boolean().optional().nullable()
+  openForWork: z.boolean().optional().nullable(),
 });
 
 export type Profile = z.infer<typeof profileSchema>;
