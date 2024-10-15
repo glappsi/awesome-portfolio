@@ -18,8 +18,13 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     icons: [
       {
         src: '/favicon.ico',
-        sizes: 'any',
+        sizes: '48x48',
         type: 'image/x-icon',
+      },
+      {
+        src: '/favicon.png',
+        sizes: '144x144',
+        type: 'image/png',
       },
       {
         src: "/android-chrome-192x192.png",
