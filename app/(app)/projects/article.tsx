@@ -86,7 +86,7 @@ export const Article: React.FC<Props> = ({ project, isHighlight, views }) => {
           {!!project.blog?.published && (
             <div className='flex justify-end'>
               <Link href={`/blogs/${project.blog?.type}/${project.blog?.slug}`}>
-                <Button className='mt-8' variant='secondary'>
+                <Button className='mt-4 md:mt-8' variant='secondary'>
                   {t('readMore')}&nbsp;<span aria-hidden='true'>&rarr;</span>
                 </Button>
               </Link>
