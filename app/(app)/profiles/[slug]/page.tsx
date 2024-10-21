@@ -86,12 +86,21 @@ export default async function ProfilePage({ params }: Props) {
 
   const contact = filter(
     links,
-    (l) => !!l.link && l.showInNavigation,
+    (l) => !!l.link && l.showInNavigation && l.isExternal,
   ) as TLink[];
   const downloads = filter(
     links,
     (l) => !!l.download && l.showInNavigation,
   ) as TLink[];
+  const furtherLinks = [{
+    link: '/projects',
+    title: t('myProjects'),
+    icon: 'ArchiveIcon'
+  }, ...filter(
+    links,
+    (l) => !!l.link && l.showInNavigation && !l.isExternal,
+  )
+  ] as TLink[]
 
   return (
     <div className='relative pb-16'>
@@ -259,17 +268,18 @@ export default async function ProfilePage({ params }: Props) {
                     {t('download', { media: title })}
                   </Link>
                 ))}
-                <Link
-                  href='/projects'
-                  aria-label='projects'
+                {furtherLinks.map(({ link, title, icon }) => (<Link
+                  key={link}
+                  href={link!}
+                  aria-label={title}
                   className={cn(
                     buttonVariants({ variant: 'outline' }),
                     'rounded-full',
                   )}
                 >
-                  <Icon type={'ArchiveIcon'} className='mr-2 size-4' />
-                  {t('myProjects')}
-                </Link>
+                  <Icon type={icon} className='mr-2 size-4' />
+                  {title}
+                </Link>))}
               </div>
             </NeonGradientCard>
           </div>

@@ -1,7 +1,7 @@
-import { getBlogBySlug, getPageViewsForBlog, getProjects } from '@/actions';
+import { getBlogBySlug, getBlogsByType, getPageViewsForBlog } from '@/actions';
 import { url } from '@/lib/env';
 import { generateBlog } from '@/lib/google-structured-data';
-import { filter, map, merge } from 'lodash';
+import { map, merge } from 'lodash';
 import { Eye } from 'lucide-react';
 import { Metadata } from 'next';
 import Script from 'next/script';
@@ -60,12 +60,12 @@ export const dynamicParams = false;
 export const dynamic = 'force-static';
 
 export async function generateStaticParams() {
-  const projects = await getProjects();
+  const blogs = await getBlogsByType('tech');
 
   return map(
-    filter(projects, (p) => !!p.blog),
-    (p) => ({
-      slug: p.blog!.slug,
+    blogs,
+    (b) => ({
+      slug: b.slug,
     }),
   );
 }

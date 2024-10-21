@@ -1,14 +1,16 @@
 'use server';
 
-import { generateBlogDetail, generateCareerSteps, generateCreatedMessage, generateFAQs, generateLegal, generateLegals, generateLinks, generateProfile, generateProjects, generateSkills, generateTestimonials, sandBoxPipe } from '@/mock/data';
+import { generateBlogDetail, generateBlogs, generateCareerSteps, generateCreatedMessage, generateFAQs, generateLegal, generateLegals, generateLinks, generateProfile, generateProjects, generateSkills, generateTestimonials, sandBoxPipe } from '@/mock/data';
 import { Effect } from 'effect';
 import { initializeContainer } from '../di/container';
-import { Blog } from './entities/models/blog';
+import { Blog, BlogDto } from './entities/models/blog';
 import { LegalDto } from './entities/models/legal';
 import { CreateMessageDto } from './entities/models/message';
 import { createMessageController } from './interface-adapters/controllers/create-message.controller';
 import { getActiveProfileController } from './interface-adapters/controllers/get-active-profile.controller';
 import { getBlogBySlugController } from './interface-adapters/controllers/get-blog-by-slug.controller';
+import { getBlogsByTypeController } from './interface-adapters/controllers/get-blogs-by-type.controller';
+import { getBlogsController } from './interface-adapters/controllers/get-blogs.controller';
 import { getCareerStepsController } from './interface-adapters/controllers/get-career-steps.controller';
 import { getFAQsController } from './interface-adapters/controllers/get-faqs.controller';
 import { getLegalByTypeController } from './interface-adapters/controllers/get-legal-by-type.controller';
@@ -35,6 +37,20 @@ export async function getProjects() {
   return await Effect.runPromise(
     getProjectsController()
       .pipe(sandBoxPipe(generateProjects))
+  );
+}
+
+export async function getBlogs() {
+  return await Effect.runPromise(
+    getBlogsController()
+      .pipe(sandBoxPipe(generateBlogs))
+  );
+}
+
+export async function getBlogsByType(type: BlogDto['type']) {
+  return await Effect.runPromise(
+    getBlogsByTypeController(type)
+      .pipe(sandBoxPipe(generateBlogs))
   );
 }
 

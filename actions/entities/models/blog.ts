@@ -39,6 +39,8 @@ export const blogDetailSchema = blogSchema.extend({
   ),
 });
 
+export const blogListSchema = z.array(blogSchema);
+
 export type Blog = z.infer<typeof blogSchema>;
 export type BlogDto = z.input<typeof blogSchema>;
 export type BlogWithDetails = z.infer<typeof blogDetailSchema>;
