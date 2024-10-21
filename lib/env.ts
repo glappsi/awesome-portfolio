@@ -3,7 +3,7 @@ console.log('[Startup]: If you are running this for the first time, please have 
 export const isDevelopment = process.env.NODE_ENV === 'development';
 export const isTesting = process.env.NODE_ENV === 'test';
 export const isProduction = process.env.NODE_ENV === 'production';
-export const isSandboxed = process.env.ENABLE_SANDBOX === '1';
+export const isSandboxed = process.env.DISABLE_SANDBOX !== '1';
 
 export const host = process.env.APP_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL || (!isProduction ? 'localhost:3000' : undefined);
 export const isLocalhost = host?.includes('localhost');
