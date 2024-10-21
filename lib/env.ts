@@ -18,7 +18,13 @@ export const url = isLocalhost ? `${protocol}://${host}` : `${protocol}://${host
 
 export const payloadSecret = process.env.PAYLOAD_SECRET;
 
-export const databaseUri = process.env.POSTGRES_URL;
+function removeParams(postgresUrl: string) {
+  console.warn('[POSTGRES_URL]: unsafe ssl handling, remove this (env.ts) and use a real certificate on production environments.');
+  const url = new URL(postgresUrl);
+  url.search = ''; // Remove the search parameters
+  return url.toString();
+}
+export const databaseUri = process.env.POSTGRES_URL ? removeParams(process.env.POSTGRES_URL) : process.env.POSTGRES_URL;
 
 export const payloadEnabled = !!(process.env.POSTGRES_URL && process.env.PAYLOAD_SECRET);
 

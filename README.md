@@ -1,3 +1,5 @@
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fglappsi%2Fawesome-portfolio&env=PAYLOAD_SECRET&envDescription=Define%20an%20database%20URI%20and%20Payload%20secret%20for%20Payload%20to%20spin%20up.%20More%20in%20the%20.env%20files.&envLink=https%3A%2F%2Fgithub.com%2Fglappsi%2Fawesome-portfolio%2Fblob%2Fmain%2F.env.example&demo-title=Awesome%20Developer%20Portfolio&demo-description=A%20modern%2C%20responsive%20developer%20portfolio%20built%20with%20Next.Js%2C%20having%20an%20integrated%20Payload%20CMS.&demo-url=https%3A%2F%2Fportfolio-template-eight-gray.vercel.app&demo-image=https%3A%2F%2Fportfolio-template-eight-gray.vercel.app%2Fdemo.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6,oac_V3R1GIpkoJorr6fqyiwdhl17&skippable-integrations=1)
+
 <div align="center">
     <h1 align="center">Awesome Portfolio Template</h1>
 
@@ -26,4 +28,3 @@ Change the content in the locally running CMS, under [http://localhost:3000/admi
 
 ## Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fglappsi%2Fawesome-portfolio&env=PAYLOAD_SECRET&envDescription=Define%20an%20database%20URI%20and%20Payload%20secret%20for%20Payload%20to%20spin%20up.%20More%20in%20the%20.env%20files.&envLink=https%3A%2F%2Fgithub.com%2Fglappsi%2Fawesome-portfolio%2Fblob%2Fmain%2F.env.example&demo-title=Awesome%20Developer%20Portfolio&demo-description=A%20modern%2C%20responsive%20developer%20portfolio%20built%20with%20Next.Js%2C%20having%20an%20integrated%20Payload%20CMS.&demo-url=https%3A%2F%2Fportfolio-template-eight-gray.vercel.app&demo-image=https%3A%2F%2Fportfolio-template-eight-gray.vercel.app%2Fdemo.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6,oac_V3R1GIpkoJorr6fqyiwdhl17&skippable-integrations=1)
