@@ -18,7 +18,8 @@ export class PayloadBlogsRepository implements IBlogsRepository {
     const locale = await getSafeLocale();
     const blog = await payload.find({
       collection: 'blogs',
-      locale
+      locale,
+      limit: 0
     });
 
     return blog.docs as Array<BlogDto>;
@@ -30,6 +31,7 @@ export class PayloadBlogsRepository implements IBlogsRepository {
     const blog = await payload.find({
       collection: 'blogs',
       locale,
+      limit: 0,
       where: {
         type: {
           equals: type,
