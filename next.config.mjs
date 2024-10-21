@@ -4,7 +4,7 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const hostname = process.env.APP_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL;
-const payloadEnabled = !!(process.env.DATABASE_URI && process.env.PAYLOAD_SECRET);
+const payloadEnabled = !!(process.env.POSTGRES_URL && process.env.PAYLOAD_SECRET);
 /** @type {import('next').NextConfig} */
 const payloadConfig = !payloadEnabled ? {
   rewrites: () => ([{
