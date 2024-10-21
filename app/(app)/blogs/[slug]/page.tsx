@@ -1,5 +1,5 @@
-import { getBlogBySlug, getProjects } from '@/actions';
-import { filter, map } from 'lodash';
+import { getBlogBySlug, getBlogs } from '@/actions';
+import { map } from 'lodash';
 import { redirect } from 'next/navigation';
 
 export const revalidate = 60;
@@ -7,12 +7,12 @@ export const revalidate = 60;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const projects = await getProjects();
+  const blogs = await getBlogs();
 
   return map(
-    filter(projects, (p) => !!p.blog),
-    (p) => ({
-      slug: p.blog!.slug,
+    blogs,
+    (b) => ({
+      slug: b.slug,
     }),
   );
 }

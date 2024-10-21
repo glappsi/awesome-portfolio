@@ -235,6 +235,13 @@ export const generateBlog = (): Blog => ({
   ...generateBlogDto(),
   date: faker.date.past(),
 });
+export const generateBlogDtos = () => faker.helpers.multiple(generateBlogDto, {
+  count: 5,
+});
+export const generateBlogs = () => faker.helpers.multiple(generateBlog, {
+  count: 5,
+});
+
 const generateParagraph = () => ({
   content: faker.lorem.paragraph(),
   markdown: faker.lorem.paragraph(),
