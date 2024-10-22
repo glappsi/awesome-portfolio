@@ -1,13 +1,14 @@
 <div align="center">
     <h1 align="center">Awesome Portfolio Template</h1>
 
-Awesome Portfolio Template, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=glappa.dev), [Payload CMS](https://payloadcms.com/) and optimized for [Vercel](https://vercel.com/).
+Awesome Portfolio Template, built with [Next.js 15](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=glappa.dev), [Payload CMS 3](https://payloadcms.com/) and optimized for [Vercel](https://vercel.com/).
 
 See and example under: [https://glappa.dev](https://glappa.dev)
 
 </div>
 
 # **Development**
+Run and deploy your Next.Js 15 + Payload CMS 3 portfolio.
 
 ## **Running Locally**
 
