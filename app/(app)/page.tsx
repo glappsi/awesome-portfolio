@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <>
-      {bannerUrl && <Banner url={bannerUrl} />}
+      <Banner url={bannerUrl} />
       <div className='flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black'>
         {profile.image && (
           <>

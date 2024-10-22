@@ -177,7 +177,7 @@ export const Navigation: React.FC<NavigationProps> = (props) => {
           : 'border-zinc-800 bg-zinc-900/50'
           }`}
       >
-        {props.bannerUrl && <Banner className="relative" url={props.bannerUrl} />}
+        <Banner className="relative" url={props.bannerUrl} />
         <div className={cn('container mx-auto flex items-center justify-between p-6', {
           'flex-row-reverse': !props.closable
         })}>

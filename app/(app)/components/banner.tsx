@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useTranslations } from 'next-intl';
@@ -7,7 +8,7 @@ import { RainbowButton } from '../../../components/ui/rainbow-button';
 import { cn } from '../../../lib/utils';
 
 type Props = {
-  url: string;
+  url?: string;
   className?: string;
 }
 
@@ -29,9 +30,32 @@ export function Banner({
       <div className="container mx-auto flex items-center justify-between px-6 py-2">
         <b className="text-sm">{t('title')}</b>
 
-        <Link className='flex shrink-0' href={url} target='_blank'>
+        {!!url && <Link className='flex shrink-0' href={url} target='_blank'>
           <RainbowButton className='h-[30px] px-[20px]'>{t('cta')}</RainbowButton>
-        </Link>
+        </Link>}
+
+        <a
+          href="https://www.buymeacoffee.com/glapps"
+          target="_blank">
+          <img
+            src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+            alt="Buy Me A Coffee"
+            style={{ height: 35, width: 126.6 }} />
+        </a>
+        <script
+          type="text/javascript"
+          src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+          data-name="bmc-button"
+          data-slug="glapps"
+          data-color="#FFDD00"
+          data-emoji=""
+          data-font="Cookie"
+          data-text="Buy me a coffee"
+          data-outline-color="#000000"
+          data-font-color="#000000"
+          data-coffee-color="#ffffff"
+          async>
+        </script>
       </div>
     </div>
   )

@@ -12,9 +12,15 @@ By purchasing this software, you are granted a limited, non-exclusive, non-trans
 
 ### Permitted Use:
 
-- You are allowed to use the Software for private or personal projects for free.
-- You are allowed to use the Software for commercial projects **only if you have legally purchased it**.
+- You are allowed to use the Software for private or personal projects for free, with **attribution required**.
+- You are allowed to use the Software for commercial projects **only if you have legally purchased it**. No attribution is required for the paid version.
 - You are allowed to modify the Software to suit your needs for use within your own projects.
+
+### Attribution Requirement (Free Version Only):
+
+- If you use the Software for private or personal projects without purchasing it, you must provide appropriate credit to Florian Glappa. This includes:
+  - Displaying the creator’s name ("Florian Glappa") and a link to the original work (if applicable) in a visible and appropriate manner in your project.
+  - Clearly indicating any changes made if the Software has been modified.
 
 ### Restrictions:
 
@@ -24,6 +30,7 @@ By purchasing this software, you are granted a limited, non-exclusive, non-trans
 - Any unauthorized commercial use or distribution of the Software, including but not limited to sharing, uploading to public repositories, or using it for profit without a valid purchase, is strictly prohibited.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
 ---
 
